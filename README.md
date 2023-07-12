@@ -1,4 +1,4 @@
-#📢 BLACKROKs nftCollection here to stay 📢
+#📢 BLACKROKs nftCollection here to slay 📢
 
 "Are you tired of seeing low-quality copypasta NFT collections flooding the trending section of OpenSea every time Blackrock Fund makes headlines in the crypto world? Well, I certainly was! That's why I took matters into my own hands and created something truly remarkable.
 
