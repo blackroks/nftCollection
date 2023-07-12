@@ -8,8 +8,6 @@ While others were busy copy-pasting mundane digital assets, I meticulously curat
 
 So now, whenever new Blackrock Fund news hits the market, you won't be bothered by uninspired copypastas. Instead, you'll be thrilled to see my exclusive Cute & Cool Rocks Collection making waves across the media and social platforms. These NFTs are the true representation of creativity and passion.
 
-![Larry approves](https://raw.githubusercontent.com/blackroks/images/main/finkThumbUp.png?raw=true)
-
 Don't miss your chance to be part of this groundbreaking movement. Each rock in the collection is a masterpiece, handcrafted with love and care. Collect them, trade them, and show off your impeccable taste to the world.
 
 Join me on this exhilarating journey, where we redefine the NFT landscape with art that stands out, sparks joy, and leaves a lasting impression. Let's revolutionize the way we appreciate and showcase digital assets!
@@ -17,3 +15,5 @@ Join me on this exhilarating journey, where we redefine the NFT landscape with a
 Visit our website [SOON TO BE available] today to explore the Cute & Cool Rocks Collection. Don't let another uninspiring copypasta ruin your day. Choose quality, choose creativity, and choose the Cute & Cool Rocks Collection!"
 
 #BLACKROKs #NFTRevolution #QualityOverCopypasta
+
+![Larry approves](https://raw.githubusercontent.com/blackroks/images/main/finkThumbUp.png?raw=true)
