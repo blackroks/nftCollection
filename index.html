@@ -33,7 +33,6 @@
 </style>
 </head>
 <body>
-    <h2 id="text">vibrate working</h2>
 <canvas id="myCanvas"></canvas>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
@@ -86,7 +85,7 @@
   canvas.addEventListener('touchstart', function(event) {
     var touch = event.touches[0];
     if (isInsideCircle(touch.clientX, touch.clientY)) {
-        window.Telegram.WebApp.impactOccurred("light")
+        window.Telegram.WebApp.impactOccurred(light)
       isCircleTouched = true;
       drawCircle();
       const text = "+1"; // The text to show
