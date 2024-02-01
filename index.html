@@ -3,20 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Full-Screen Canvas with Circle</title>
+<title>Canvas Interaction</title>
 <style>
   body, html {
     margin: 0;
     padding: 0;
-    overflow: hidden; /* Prevents scrollbars from appearing */
-    touch-action: none; /* Prevents touch scrolling on supported browsers */
-    position: fixed; /* Prevents scrolling on iOS devices */
+    overflow: hidden;
+    touch-action: none;
+    position: fixed;
     width: 100%;
     height: 100%;
   }
   #myCanvas {
     background-color: pink;
-    display: block; /* Removes the default margin */
+    display: block;
+  }
+  .fade-out-text {
+    position: absolute;
+    animation: fadeOutMoveUp 2s forwards;
+  }
+  @keyframes fadeOutMoveUp {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-100px);
+    }
   }
 </style>
 </head>
@@ -25,72 +39,59 @@
 <script>
   var canvas = document.getElementById('myCanvas');
   var ctx = canvas.getContext('2d');
-  var centerX, centerY, radius = 50; // Circle properties
-  var isCircleTouched = false; // State to track if the circle is touched
+  var centerX, centerY, radius = 50;
+  var isCircleTouched = false;
 
-  // Function to resize the canvas to fill the browser window
   function resizeCanvas() {
-    var width = window.innerWidth;
-    var height = window.innerHeight;
-
-    // Use visualViewport API if available for mobile browsers
-    if (window.visualViewport) {
-      width = window.visualViewport.width;
-      height = window.visualViewport.height;
-    }
-
-    canvas.width = width;
-    canvas.height = height;
-
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
     centerX = canvas.width / 2;
     centerY = canvas.height / 2;
-
     drawCircle();
   }
 
-  // Function to draw the circle
   function drawCircle() {
-    // Clear the canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-    ctx.fillStyle = isCircleTouched ? 'blue' : 'white'; // Change color based on touch
-    ctx.fill();
-    ctx.lineWidth = 5;
-    ctx.strokeStyle = '#003300';
+    ctx.clearRect(0, 0, canvas.    ctx.strokeStyle = '#003300';
     ctx.stroke();
   }
 
-  // Function to check if the touch point is inside the circle
   function isInsideCircle(touchX, touchY) {
     var dx = touchX - centerX;
     var dy = touchY - centerY;
     return dx * dx + dy * dy <= radius * radius;
   }
 
-  // Event listener for touchstart
+  function createFadingText(x, y, text) {
+    var textElement = document.createElement('div');
+    textElement.classList.add('fade-out-text');
+    textElement.style.left = x + 'px';
+    textElement.style.top = y + 'px';
+    textElement.textContent = text;
+    document.body.appendChild(textElement);
+
+    // Remove the element after the animation is complete
+    setTimeout(function() {
+      document.body.removeChild(textElement);
+    }, 2000);
+  }
+
   canvas.addEventListener('touchstart', function(event) {
     var touch = event.touches[0];
     if (isInsideCircle(touch.clientX, touch.clientY)) {
       isCircleTouched = true;
       drawCircle();
+    } else {
+      createFadingText(touch.clientX, touch.clientY, 'Touched!');
     }
   }, { passive: false });
 
-  // Event listener for touchend
   canvas.addEventListener('touchend', function(event) {
     isCircleTouched = false;
     drawCircle();
   }, { passive: false });
 
-  // Resize the canvas to fill the screen when the window is resized
   window.addEventListener('resize', resizeCanvas, false);
-
-  // Resize the canvas to fill the screen when the orientation changes
   window.addEventListener('orientationchange', resizeCanvas, false);
-
-  // Initial call to set up the canvas
   resizeCanvas();
 </script>
 </body>
