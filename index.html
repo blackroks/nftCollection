@@ -60,7 +60,7 @@
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+    ctx.arc(centerX, centerY, radius, 0, 3 * Math.PI, false);
     ctx.fillStyle = isCircleTouched ? 'blue' : 'white'; // Change color based on touch
     ctx.fill();
     ctx.lineWidth = 5;
@@ -82,7 +82,7 @@
       isCircleTouched = true;
       drawCircle();
       const text = "You clicked here!"; // The text to show
-      createTextAtPosition(event.clientX, event.clientY, text);
+      createTextAtPosition(touch.clientX, touch.clientY, text);
     }
   }, { passive: false });
 
