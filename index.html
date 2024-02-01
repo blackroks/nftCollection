@@ -126,7 +126,8 @@
     floatingText.classList.add('fade-text');
     let randx = Math.floor(Math.random()*10)
     randx = Math.round(5-10);
-    floatingText.style.left = `${x+randx}px`;
+    x = x + randx
+    floatingText.style.left = `${x}px`;
     floatingText.style.top = `${y}px`;
 
     // Append the text to the body
