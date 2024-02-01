@@ -31,7 +31,7 @@
 <script>
   var canvas = document.getElementById('myCanvas');
   var ctx = canvas.getContext('2d');
-  var centerX, centerY, radius = 50; // Circle properties
+  var centerX, centerY, radius = window.innerWidth/3; // Circle properties
   var isCircleTouched = false; // State to track if the circle is touched
 
   // Function to resize the canvas to fill the browser window
@@ -60,7 +60,7 @@
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, 0, 3 * Math.PI, false);
+    ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
     ctx.fillStyle = isCircleTouched ? 'blue' : 'white'; // Change color based on touch
     ctx.fill();
     ctx.lineWidth = 5;
@@ -86,10 +86,11 @@
 
   // Event listener for touchend
   canvas.addEventListener('touchend', function(event) {
+    var touch = event.touches[0];
     isCircleTouched = false;
     drawCircle();
     const text = "You clicked here!"; // The text to show
-      createTextAtPosition(touch.clientX, touch.clientY, text);
+    createTextAtPosition(touch.clientX, touch.clientY, text);
   }, { passive: false });
 
   // Resize the canvas to fill the screen when the window is resized
