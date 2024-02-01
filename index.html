@@ -29,7 +29,8 @@
 <body>
 <canvas id="myCanvas"></canvas>
 <script>
-    const canVibrate = window.navigator.vibrate
+//     const canVibrate = window.navigator.vibrate
+// if (canVibrate) window.navigator.vibrate(100)
   var canvas = document.getElementById('myCanvas');
   var ctx = canvas.getContext('2d');
   var centerX, centerY, radius = window.innerWidth/3; // Circle properties
@@ -80,10 +81,9 @@
   canvas.addEventListener('touchstart', function(event) {
     var touch = event.touches[0];
     if (isInsideCircle(touch.clientX, touch.clientY)) {
-    window.navigator.vibrate(100)
       isCircleTouched = true;
       drawCircle();
-      const text = "You clicked here!+"; // The text to show
+      const text = "+1"; // The text to show
      createTextAtPosition(touch.clientX, touch.clientY, text);
     }
   }, { passive: false });
