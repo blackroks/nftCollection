@@ -87,7 +87,7 @@
     var touch = event.touches[0];
     if (isInsideCircle(touch.clientX, touch.clientY)) {
 
-        window.Telegram.WebApp.HapticFeedback.impactOccurred("ridig")
+        window.Telegram.WebApp.HapticFeedback.selectionChanged()
 
       isCircleTouched = true;
       drawCircle();
