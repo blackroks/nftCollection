@@ -1,15 +1,79 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="refresh" content="0; URL='https://github.com/blackroks/nftCollection'" />
-    <style>
-      body {
-        background-color: black;
-        color: white;
-      }
-    </style>
-  </head>
-  <body>
-    <p>Please wait while you are redirected to github readMe page...</p>
-  </body>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Full-Screen Canvas with Circle</title>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevents scrollbars from appearing */
+    touch-action: none; /* Prevents touch scrolling on supported browsers */
+    position: fixed; /* Prevents scrolling on iOS devices */
+    width: 100%;
+    height: 100%;
+  }
+  #myCanvas {
+    background-color: pink;
+    display: block; /* Removes the default margin */
+  }
+</style>
+</head>
+<body>
+<canvas id="myCanvas"></canvas>
+<script>
+  // Function to resize the canvas to fill the browser window
+  function resizeCanvas() {
+    var canvas = document.getElementById('myCanvas');
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+
+    // Use visualViewport API if available for mobile browsers
+    if (window.visualViewport) {
+      width = window.visualViewport.width;
+      height = window.visualViewport.height;
+    }
+
+    canvas.width = width;
+    canvas.height = height;
+
+    var ctx = canvas.getContext('2d');
+
+    // Clear the canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw the circle in the middle
+    var centerX = canvas.width / 2;
+    var centerY = canvas.height / 2;
+    var radius = 50; // Radius of the circle
+
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+    ctx.fillStyle = 'white'; // Color of the circle
+    ctx.fill();
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = '#003300';
+    ctx.stroke();
+  }
+
+  // Prevent default touch behavior
+  function preventTouchScroll(event) {
+    event.preventDefault();
+  }
+
+  // Add event listeners to prevent touch actions
+  document.addEventListener('touchmove', preventTouchScroll, { passive: false });
+  document.addEventListener('touchstart', preventTouchScroll, { passive: false });
+
+  // Resize the canvas to fill the screen when the window is resized
+  window.addEventListener('resize', resizeCanvas, false);
+
+  // Resize the canvas to fill the screen when the orientation changes
+  window.addEventListener('orientationchange', resizeCanvas, false);
+
+  // Initial call to set up the canvas
+  resizeCanvas();
+</script>
+</body>
 </html>
