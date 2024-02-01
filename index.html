@@ -7,7 +7,6 @@
 <title>Full-Screen Canvas with Circle</title>
 <style>
   body, html {
-    color: rgb(204, 226, 226);
     margin: 0;
     padding: 0;
     overflow: hidden; /* Prevents scrollbars from appearing */
@@ -25,6 +24,7 @@
     display: block; /* Removes the default margin */
   }
   #text{
+    color: rgb(21, 21, 21);
     position: absolute;
   }
   .fade-text {
@@ -33,7 +33,7 @@
     transition: opacity 0.5s, transform 0.5s;
     opacity: 1;
     font-size: 30px;
-    color: rgb(10, 111, 111);
+    color: rgb(0, 0, 0);
     font-weight: bold;
   }
 </style>
@@ -154,6 +154,12 @@
     event.preventDefault();
   });
 
+
+    // Prevent scrolling on touch devices
+    document.addEventListener('touchmove', function(event) {
+    event.preventDefault();
+  }, { passive: false });
+
   // Initial call to set up the canvas
   addEventListener("load", (event) => {
     //viewportHeight
@@ -162,6 +168,8 @@
   let introtext = "d3clicker.engine "+ window.Telegram.WebApp.platform + " v." + window.Telegram.WebApp.version
     document.getElementById("text").textContent = introtext
 
+   // isVersionAtLeast(6.1)
+   window.Telegram.WebApp.ready()
   setTimeout(() => {
     window.Telegram.WebApp.expand()
     }, 500);
