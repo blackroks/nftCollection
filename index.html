@@ -18,6 +18,12 @@
     background-color: pink;
     display: block;
   }
+  .fade-text {
+    position: absolute;
+    pointer-events: none;
+    transition: opacity 2s, transform 2s;
+    opacity: 1;
+  }
 </style>
 </head>
 <body>
@@ -79,6 +85,7 @@
     var touch = event.touches[0];
     if (isInsideCircle(touch.clientX, touch.clientY)) {
       addText(touch.clientX, touch.clientY, 'Touched!');
+      createTextAtPosition(event.clientX, event.clientY, "clicked");
       drawCircle();
     }
   }, { passive: false });
@@ -92,6 +99,95 @@
 
   resizeCanvas();
   setInterval(drawCircle, 50); // Redraw the canvas every 50ms to animate the text
+
+   // Function to create the text and animate it
+   function createTextAtPosition(x, y, text) {
+    const floatingText = document.createElement('div');
+    floatingText.textContent = text;
+    floatingText.classList.add('fade-text');
+    floatingText.style.left = `${x}px`;
+    floatingText.style.top = `${y}px`;
+
+    // Append the text to the body
+    document.body.appendChild(floatingText);
+
+    // Start the animation
+    setTimeout(() => {
+      floatingText.style.opacity = '0';
+      floatingText.style.transform = 'translateY(-100px)';
+    }, 0);
+
+    // Remove the element after the animation is done
+    setTimeout(() => {
+      floatingText.remove();
+    }, 2000);
+  }
+
+  // Event listener for the mouse click
+  document.body.addEventListener('click', function(event) {
+    const text = "You clicked here!"; // The text to show
+    createTextAtPosition(event.clientX, event.clientY, text);
+  });
 </script>
 </body>
 </html>
+
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Click and Fade Text</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background: #f3f3f3;
+  }
+  .fade-text {
+    position: absolute;
+    pointer-events: none;
+    transition: opacity 2s, transform 2s;
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+
+<script>
+  // Function to create the text and animate it
+  function createTextAtPosition(x, y, text) {
+    const floatingText = document.createElement('div');
+    floatingText.textContent = text;
+    floatingText.classList.add('fade-text');
+    floatingText.style.left = `${x}px`;
+    floatingText.style.top = `${y}px`;
+
+    // Append the text to the body
+    document.body.appendChild(floatingText);
+
+    // Start the animation
+    setTimeout(() => {
+      floatingText.style.opacity = '0';
+      floatingText.style.transform = 'translateY(-100px)';
+    }, 0);
+
+    // Remove the element after the animation is done
+    setTimeout(() => {
+      floatingText.remove();
+    }, 2000);
+  }
+
+  // Event listener for the mouse click
+  document.body.addEventListener('click', function(event) {
+    const text = "You clicked here!"; // The text to show
+    createTextAtPosition(event.clientX, event.clientY, text);
+  });
+</script>
+
+</body>
+</html> -->
