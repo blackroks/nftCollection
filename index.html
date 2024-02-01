@@ -30,6 +30,7 @@
     opacity: 1;
     font-size: 30px;
     color: rgb(10, 111, 111);
+    font-weight: bold;
   }
 </style>
 </head>
@@ -124,8 +125,8 @@
     const floatingText = document.createElement('div');
     floatingText.textContent = text;
     floatingText.classList.add('fade-text');
-    let randx = Math.floor(Math.random()*100)
-    randx = Math.round(50-randx)
+    let randx = Math.floor(Math.random()*60)
+    randx = Math.round(20-randx)
     x = x + randx
     floatingText.style.left = `${x}px`;
     floatingText.style.top = `${y}px`;
