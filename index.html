@@ -26,7 +26,7 @@
   .fade-text {
     position: absolute;
     pointer-events: none;
-    transition: opacity 2s, transform 0.3s;
+    transition: opacity 0.5s, transform 0.5s;
     opacity: 1;
     font-size: 30px;
     color: rgb(10, 111, 111);
@@ -124,6 +124,8 @@
     const floatingText = document.createElement('div');
     floatingText.textContent = text;
     floatingText.classList.add('fade-text');
+    let randx = Math.floor(Math.random()*10)
+    randx = Math.round(5-10);
     floatingText.style.left = `${x}px`;
     floatingText.style.top = `${y}px`;
 
@@ -139,7 +141,7 @@
     // Remove the element after the animation is done
     setTimeout(() => {
       floatingText.remove();
-    }, 2000);
+    }, 500);
   }
 
   document.addEventListener('contextmenu', function(event) {
