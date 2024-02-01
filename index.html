@@ -86,6 +86,9 @@
   canvas.addEventListener('touchstart', function(event) {
     var touch = event.touches[0];
     if (isInsideCircle(touch.clientX, touch.clientY)) {
+
+        window.Telegram.WebApp.HapticFeedback.impactOccurred("light")
+
       isCircleTouched = true;
       drawCircle();
       const text = "+1"; // The text to show
@@ -146,7 +149,9 @@
   // Initial call to set up the canvas
   addEventListener("load", (event) => {
 
-    window.Telegram.WebApp.isExpanded = true;
+    window.Telegram.WebApp.expand()
+    //viewportHeight
+    // window.Telegram.WebApp.HapticFeedback
   resizeCanvas();
 
   });
