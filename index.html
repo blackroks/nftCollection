@@ -27,6 +27,7 @@
 </style>
 </head>
 <body>
+    <h2 id="text">vibrate working</h2>
 <canvas id="myCanvas"></canvas>
 <script>
 //     const canVibrate = window.navigator.vibrate
@@ -79,6 +80,14 @@
 
   // Event listener for touchstart
   canvas.addEventListener('touchstart', function(event) {
+
+    if ("vibrate" in navigator) {
+    // Vibrate the device for 50 milliseconds
+    navigator.vibrate(50);
+  }else{
+    document.getElementById("text").textContent = "vib not working :("
+  }
+
     var touch = event.touches[0];
     if (isInsideCircle(touch.clientX, touch.clientY)) {
       isCircleTouched = true;
