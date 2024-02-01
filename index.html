@@ -35,9 +35,8 @@
 <body>
     <h2 id="text">vibrate working</h2>
 <canvas id="myCanvas"></canvas>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
-//     const canVibrate = window.navigator.vibrate
-// if (canVibrate) window.navigator.vibrate(100)
   var canvas = document.getElementById('myCanvas');
   var ctx = canvas.getContext('2d');
   var centerX, centerY, radius = window.innerWidth/3; // Circle properties
@@ -67,7 +66,6 @@
   function drawCircle() {
     // Clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
     ctx.fillStyle = isCircleTouched ? 'blue' : 'white'; // Change color based on touch
@@ -86,16 +84,9 @@
 
   // Event listener for touchstart
   canvas.addEventListener('touchstart', function(event) {
-
-    if ("vibrate" in navigator) {
-    // Vibrate the device for 50 milliseconds
-    navigator.vibrate(50);
-  }else{
-    document.getElementById("text").textContent = "vib not working :("
-  }
-
     var touch = event.touches[0];
     if (isInsideCircle(touch.clientX, touch.clientY)) {
+        window.Telegram.WebApp.impactOccurred("light")
       isCircleTouched = true;
       drawCircle();
       const text = "+1"; // The text to show
