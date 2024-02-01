@@ -126,7 +126,7 @@
     floatingText.classList.add('fade-text');
     let randx = Math.floor(Math.random()*10)
     randx = Math.round(5-10);
-    floatingText.style.left = `${x}px`;
+    floatingText.style.left = `${x+randx}px`;
     floatingText.style.top = `${y}px`;
 
     // Append the text to the body
@@ -135,7 +135,7 @@
     // Start the animation
     setTimeout(() => {
       floatingText.style.opacity = '0';
-      floatingText.style.transform = 'translateY(-100px)';
+      floatingText.style.transform = 'translateY(-200px)';
     }, 0);
 
     // Remove the element after the animation is done
