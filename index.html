@@ -80,7 +80,7 @@
   canvas.addEventListener('touchstart', function(event) {
     var touch = event.touches[0];
     if (isInsideCircle(touch.clientX, touch.clientY)) {
-    if (canVibrate) window.navigator.vibrate(100)
+    window.navigator.vibrate(100)
       isCircleTouched = true;
       drawCircle();
       const text = "You clicked here!"; // The text to show
