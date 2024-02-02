@@ -232,7 +232,7 @@ image.onerror = function() {
     //dynamic bar
     let percerageBar = game.energy/game.maxEnergy;
     let barwidth =  (window.innerWidth - 192)*percerageBar
-    if(percerageBar > 0.5){
+    if(percerageBar > 0.7){
         ctx.drawImage(image, 188, 256, 16,64,     96 , window.innerHeight-(window.innerHeight/6) , barwidth ,64);
     }else if(percerageBar > 0.2){
         ctx.drawImage(image, 204, 256, 16,64,     96 , window.innerHeight-(window.innerHeight/6) , barwidth ,64);
@@ -242,6 +242,13 @@ image.onerror = function() {
     
   }
 
+  setTimeout(() => {
+    
+    if(game.energy < game.maxEnergy){
+        game.energy = Math.round(game.energy+1)
+    }
+    
+    }, 1000);
 
   function step() {
     // UpdateUI();
