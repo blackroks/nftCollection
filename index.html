@@ -228,9 +228,9 @@ image.onerror = function() {
     //footer info
 
  
-    ctx.drawImage(image, 0, 256, 64,64, 64, window.innerHeight-(window.innerHeight/6) , 64,64);
-    ctx.drawImage(image, 64, 256, 64,64, window.innerWidth - 128, window.innerHeight-(window.innerHeight/6) , 64,64);
-    ctx.drawImage(image, 171, 256, 16,64, 128, window.innerHeight-(window.innerHeight/6) , window.innerWidth - 256 ,64);
+    ctx.drawImage(image, 0, 256, 64,64,        32, window.innerHeight-(window.innerHeight/6) , 64,64);
+    ctx.drawImage(image, 64, 256, 64,64,      window.innerWidth - 96, window.innerHeight-(window.innerHeight/6) , 64,64);
+    ctx.drawImage(image, 171, 256, 16,64,     96 , window.innerHeight-(window.innerHeight/6) , window.innerWidth - 192 ,64);
     //score
     let displayedScore = Number(document.getElementById("scoreUI").textContent)
     if(game.score > displayedScore){
