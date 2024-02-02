@@ -227,6 +227,8 @@ image.onerror = function() {
     if(game.score > displayedScore){
         displayedScore++;
         document.getElementById("scoreUI").textContent = Math.round(displayedScore);
+    }else{
+        document.getElementById("scoreUI").textContent = Math.round(game.score); 
     }
     window.requestAnimationFrame(step);
   }
