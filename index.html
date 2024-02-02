@@ -107,13 +107,13 @@ image.onerror = function() {
   function drawCircle() {
     // Clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-    ctx.fillStyle = isCircleTouched ? "rgba(0, 0, 0, 0.5)" : 'white'; // Change color based on touch
-    ctx.fill();
-    ctx.lineWidth = 5;
-    ctx.strokeStyle = '#003300';
-    ctx.stroke();
+    // ctx.beginPath();
+    // ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+    // ctx.fillStyle = isCircleTouched ? "rgba(0, 0, 0, 0.5)" : 'white'; // Change color based on touch
+    // ctx.fill();
+    // ctx.lineWidth = 5;
+    // ctx.strokeStyle = '#003300';
+    // ctx.stroke();
     if(isCircleTouched){
         ctx.drawImage(image,  256,0, 256,256, centerX-(window.innerWidth/3), centerY-(window.innerWidth/3), (window.innerWidth/3)*2, (window.innerWidth/3)*2);
     }else{
