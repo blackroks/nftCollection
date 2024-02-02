@@ -171,6 +171,7 @@ image.onerror = function() {
   canvas.addEventListener('touchstart', function(event) {
     var touch = event.touches[0];
     if (isInsideCircle(touch.clientX, touch.clientY)) {
+        if(game.energy < 1)return;
       window.Telegram.WebApp.HapticFeedback.selectionChanged()
       isCircleTouched = true;
       drawCircle();
