@@ -6,7 +6,18 @@
 
 <title>Full-Screen Canvas with Circle</title>
 <style>
+        /* Define the custom font using @font-face */
+        @font-face {
+        font-family: 'EgyptFont';
+        src: url('https://github.com/blackroks/nftCollection/raw/main/images/egypt.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    /* Apply the custom font to the body or specific elements */
+
   body, html {
+    font-family: 'EgyptFont', sans-serif;
     margin: 0;
     padding: 0;
     overflow: hidden; /* Prevents scrollbars from appearing */
@@ -33,13 +44,21 @@
     transition: opacity 0.5s, transform 0.5s;
     opacity: 1;
     font-size: 30px;
-    color: rgb(0, 0, 0);
+    color: rgb(203, 185, 185);
     font-weight: bold;
+  }
+  #scoreUI{
+    font-size: 60px;
+    color: rgb(238, 239, 252);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    text-align: center;
   }
 </style>
 </head>
 <body>
-<h5 id="text"></h5>
+<h1 id="scoreUI"> SCORE </h1>
 <canvas id="myCanvas"></canvas>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
