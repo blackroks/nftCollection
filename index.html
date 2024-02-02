@@ -234,11 +234,11 @@ image.onerror = function() {
     let percerageBar = game.energy/game.maxEnergy;
     let barwidth =  (window.innerWidth - 192)*percerageBar
     if(percerageBar > 0.7){
-        ctx.drawImage(image, 188, 256, 10,64,     96 , window.innerHeight-(window.innerHeight/6) , barwidth ,64);
+        ctx.drawImage(image, 188, 256, 10,32,     96 , window.innerHeight-(window.innerHeight/6) , barwidth ,64);
     }else if(percerageBar > 0.2){
-        ctx.drawImage(image, 204, 256, 10,64,     96 , window.innerHeight-(window.innerHeight/6) , barwidth ,64);
+        ctx.drawImage(image, 204, 256, 10,32,     96 , window.innerHeight-(window.innerHeight/6) , barwidth ,64);
     }else{
-        ctx.drawImage(image, 220, 256, 10,64,     96 , window.innerHeight-(window.innerHeight/6) , barwidth ,64);
+        ctx.drawImage(image, 220, 256, 10,32,     96 , window.innerHeight-(window.innerHeight/6) , barwidth ,64);
     }
     
   }
