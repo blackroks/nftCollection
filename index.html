@@ -55,11 +55,13 @@
     transform: translate(-50%);
     text-align: center;
   }
+
 </style>
 </head>
 <body>
 <h1 id="scoreUI"> SCORE </h1>
 <canvas id="myCanvas"></canvas>
+
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
 
@@ -223,6 +225,13 @@ image.onerror = function() {
 
   function step() {
     // UpdateUI();
+    //footer info
+
+ 
+    ctx.drawImage(image, 0, 256, 64,64, 64, window.innerHeight-(window.innerHeight/6) , 64,64);
+    ctx.drawImage(image, 64, 256, 64,64, window.innerWidth - 128, window.innerHeight-(window.innerHeight/6) , 64,64);
+    ctx.drawImage(image, 171, 256, 16,64, 128, window.innerHeight-(window.innerHeight/6) , window.innerWidth - 256 ,64);
+    //score
     let displayedScore = Number(document.getElementById("scoreUI").textContent)
     if(game.score > displayedScore){
         displayedScore++;
