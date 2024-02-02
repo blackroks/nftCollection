@@ -70,6 +70,8 @@
         constructor(){
             this.score = 0;
             this.multiplayer = 1;
+            this.maxEnergy = 100;
+            this.energy = 100;
         }
         addScore(){
             this.score += Math.round( 1  *  this.multiplayer );
@@ -172,6 +174,7 @@ image.onerror = function() {
       window.Telegram.WebApp.HapticFeedback.selectionChanged()
       isCircleTouched = true;
       drawCircle();
+      game.energy -=1;
       const text = "+1"; // The text to show
      createTextAtPosition(touch.clientX, touch.clientY, text);
      game.addScore()
@@ -222,15 +225,24 @@ image.onerror = function() {
     }, 500);
   });
 
+  let showEnergyBar = () => {
+    ctx.drawImage(image, 0, 256, 64,64,        32, window.innerHeight-(window.innerHeight/6) , 64,64);
+    ctx.drawImage(image, 64, 256, 64,64,      window.innerWidth - 96, window.innerHeight-(window.innerHeight/6) , 64,64);
+    ctx.drawImage(image, 171, 256, 16,64,     96 , window.innerHeight-(window.innerHeight/6) , window.innerWidth - 192 ,64);
+    //dynamic bar
+    let percerageBar = game.energy/game.maxEnergy;
+    let barwidth =  (window.innerWidth - 192)*percerageBar
+    ctx.drawImage(image, 188, 256, 16,64,     96 , window.innerHeight-(window.innerHeight/6) , barwidth ,64);
+  }
+
 
   function step() {
     // UpdateUI();
     //footer info
 
  
-    ctx.drawImage(image, 0, 256, 64,64,        32, window.innerHeight-(window.innerHeight/6) , 64,64);
-    ctx.drawImage(image, 64, 256, 64,64,      window.innerWidth - 96, window.innerHeight-(window.innerHeight/6) , 64,64);
-    ctx.drawImage(image, 171, 256, 16,64,     96 , window.innerHeight-(window.innerHeight/6) , window.innerWidth - 192 ,64);
+    //energy
+    showEnergyBar()
     //score
     let displayedScore = Number(document.getElementById("scoreUI").textContent)
     if(game.score > displayedScore){
