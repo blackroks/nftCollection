@@ -227,18 +227,18 @@ image.onerror = function() {
   });
 
   let showEnergyBar = () => {
-    ctx.drawImage(image, 0, 256, 64,64,        32, window.innerHeight-(window.innerHeight/6) , 64,64);
-    ctx.drawImage(image, 64, 256, 64,64,      window.innerWidth - 96, window.innerHeight-(window.innerHeight/6) , 64,64);
-    ctx.drawImage(image, 171, 256, 16,64,     96 , window.innerHeight-(window.innerHeight/6) , window.innerWidth - 192 ,64);
+    ctx.drawImage(image, 0, 256, 64,64,        32, window.innerHeight-(window.innerHeight/6) , 64,32);
+    ctx.drawImage(image, 64, 256, 64,64,      window.innerWidth - 96, window.innerHeight-(window.innerHeight/6) , 64,32);
+    ctx.drawImage(image, 171, 256, 16,64,     96 , window.innerHeight-(window.innerHeight/6) , window.innerWidth - 192 ,32);
     //dynamic bar
     let percerageBar = game.energy/game.maxEnergy;
     let barwidth =  (window.innerWidth - 192)*percerageBar
     if(percerageBar > 0.7){
-        ctx.drawImage(image, 188, 256, 10,32,     96 , window.innerHeight-(window.innerHeight/6) , barwidth ,64);
+        ctx.drawImage(image, 188, 256, 10,64,     96 , window.innerHeight-(window.innerHeight/6) , barwidth ,32);
     }else if(percerageBar > 0.2){
-        ctx.drawImage(image, 204, 256, 10,32,     96 , window.innerHeight-(window.innerHeight/6) , barwidth ,64);
+        ctx.drawImage(image, 204, 256, 10,64,     96 , window.innerHeight-(window.innerHeight/6) , barwidth ,32);
     }else{
-        ctx.drawImage(image, 220, 256, 10,32,     96 , window.innerHeight-(window.innerHeight/6) , barwidth ,64);
+        ctx.drawImage(image, 220, 256, 10,64,     96 , window.innerHeight-(window.innerHeight/6) , barwidth ,32);
     }
     
   }
