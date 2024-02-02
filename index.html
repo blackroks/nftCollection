@@ -122,7 +122,7 @@ image.onerror = function() {
   // Function to draw the circle
   function drawCircle() {
     // Clear the canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, (centerY-(window.innerWidth/3)) + ( (window.innerWidth/3)*2) );
     if(isCircleTouched){
         ctx.drawImage(image,  256,0, 256,256, centerX-(window.innerWidth/3), centerY-(window.innerWidth/3), (window.innerWidth/3)*2, (window.innerWidth/3)*2);
     }else{
