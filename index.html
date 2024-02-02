@@ -64,7 +64,32 @@
 <script>
 
 
+    class GameSystem{
+        constructor(){
+            this.score = 0;
+            this.multiplayer = 1;
+        }
+        addScore(){
+            this.score += Math.round( 1  *  this.multiplayer );
+        }
+    }
 
+    const game = new GameSystem()
+
+//load images
+//coin image
+const imageUrl = 'https://raw.githubusercontent.com/blackroks/nftCollection/main/images/coinpng.png';
+// Create a new image object
+const image = new Image();
+// Set the crossOrigin to anonymous to avoid any cross-origin issues
+image.crossOrigin = 'anonymous';
+// Set the source of the image object to the provided URL
+image.src = imageUrl;
+// Handle any errors that occur during the loading of the image
+image.onerror = function() {
+    console.error('There was an error loading the image.');
+};
+//prepare main canvas
   var canvas = document.getElementById('myCanvas');
   var ctx = canvas.getContext('2d');
   var centerX, centerY, radius = window.innerWidth/3; // Circle properties
@@ -90,36 +115,15 @@
     drawCircle();
   }
 
-  //coin image
-  const imageUrl = 'https://raw.githubusercontent.com/blackroks/nftCollection/main/images/coinpng.png';
-// Create a new image object
-const image = new Image();
-// Set the crossOrigin to anonymous to avoid any cross-origin issues
-image.crossOrigin = 'anonymous';
-// Set the source of the image object to the provided URL
-image.src = imageUrl;
-// Handle any errors that occur during the loading of the image
-image.onerror = function() {
-    console.error('There was an error loading the image.');
-};
-
   // Function to draw the circle
   function drawCircle() {
     // Clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // ctx.beginPath();
-    // ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-    // ctx.fillStyle = isCircleTouched ? "rgba(0, 0, 0, 0.5)" : 'white'; // Change color based on touch
-    // ctx.fill();
-    // ctx.lineWidth = 5;
-    // ctx.strokeStyle = '#003300';
-    // ctx.stroke();
     if(isCircleTouched){
         ctx.drawImage(image,  256,0, 256,256, centerX-(window.innerWidth/3), centerY-(window.innerWidth/3), (window.innerWidth/3)*2, (window.innerWidth/3)*2);
     }else{
         ctx.drawImage(image, 0, 0, 256,256, centerX-(window.innerWidth/3), centerY-(window.innerWidth/3), (window.innerWidth/3)*2, (window.innerWidth/3)*2);
     }
-
   }
 
   // Function to check if the touch point is inside the circle
@@ -128,41 +132,7 @@ image.onerror = function() {
     var dy = touchY - centerY;
     return dx * dx + dy * dy <= radius * radius;
   }
- 
-  // Event listener for touchstart
-  canvas.addEventListener('touchstart', function(event) {
-    var touch = event.touches[0];
-    if (isInsideCircle(touch.clientX, touch.clientY)) {
-      window.Telegram.WebApp.HapticFeedback.selectionChanged()
-      isCircleTouched = true;
-      drawCircle();
-      const text = "+1"; // The text to show
-     createTextAtPosition(touch.clientX, touch.clientY, text);
-    }
-  }, { passive: false });
 
-  let lastTouchEnd = 0;
-
-  // Event listener for touchend
-  canvas.addEventListener('touchend', function(event) {
-    isCircleTouched = false;
-    drawCircle();
-
-    //prevent double tap zoom
-    const now = (new Date()).getTime();
-    if (now - lastTouchEnd <= 300) {
-      event.preventDefault();
-    }
-    lastTouchEnd = now;
-  }, { passive: false });
-
-
-
-  // Resize the canvas to fill the screen when the window is resized
-  window.addEventListener('resize', resizeCanvas, false);
-
-  // Resize the canvas to fill the screen when the orientation changes
-  window.addEventListener('orientationchange', resizeCanvas, false);
 
  // Function to create the text and animate it
  function createTextAtPosition(x, y, text) {
@@ -190,10 +160,46 @@ image.onerror = function() {
     }, 500);
   }
 
+
+  //EVENT LISTENERS
+ 
+  // Event listener for touchstart
+  canvas.addEventListener('touchstart', function(event) {
+    var touch = event.touches[0];
+    if (isInsideCircle(touch.clientX, touch.clientY)) {
+      window.Telegram.WebApp.HapticFeedback.selectionChanged()
+      isCircleTouched = true;
+      drawCircle();
+      const text = "+1"; // The text to show
+     createTextAtPosition(touch.clientX, touch.clientY, text);
+     game.addScore()
+    }
+  }, { passive: false });
+
+  let lastTouchEnd = 0;
+
+  // Event listener for touchend
+  canvas.addEventListener('touchend', function(event) {
+    isCircleTouched = false;
+    drawCircle();
+
+    //prevent double tap zoom
+    const now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+      event.preventDefault();
+    }
+    lastTouchEnd = now;
+  }, { passive: false });
+
+  // Resize the canvas to fill the screen when the window is resized
+  window.addEventListener('resize', resizeCanvas, false);
+
+  // Resize the canvas to fill the screen when the orientation changes
+  window.addEventListener('orientationchange', resizeCanvas, false);
+
   document.addEventListener('contextmenu', function(event) {
     event.preventDefault();
   });
-
 
     // Prevent scrolling on touch devices
     document.addEventListener('touchmove', function(event) {
@@ -207,13 +213,26 @@ image.onerror = function() {
   resizeCanvas();
     //let introtext = "d3clicker.engine "+ window.Telegram.WebApp.platform + " v." + window.Telegram.WebApp.version
    // document.getElementById("text").textContent = introtext
-
    // isVersionAtLeast(6.1)
    window.Telegram.WebApp.ready()
   setTimeout(() => {
     window.Telegram.WebApp.expand()
     }, 500);
   });
+
+
+  function step() {
+    // UpdateUI();
+    let displayedScore = Number(document.getElementById("scoreUI").textContent)
+    if(game.score > displayedScore){
+        displayedScore++;
+        document.getElementById("scoreUI").textContent = Math.round(displayedScore);
+    }
+    window.requestAnimationFrame(step);
+  }
+
+  window.requestAnimationFrame(step);
+
 
 </script>
 </body>
