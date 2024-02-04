@@ -314,9 +314,13 @@ image.onerror = function() {
   });
 
     // Prevent scrolling on touch devices
-//     document.addEventListener('touchmove', function(event) {
-//     event.preventDefault();
-//   }, { passive: false });
+    document.addEventListener('touchmove', function(event) {
+      if(modal.style.display == "block"){
+
+       }else{
+        event.preventDefault();
+       } 
+  }, { passive: false });
 
   // Initial call to set up the canvas
   addEventListener("load", (event) => {
