@@ -401,10 +401,10 @@ image.onerror = function() {
   button.innerHTML = `<img src="${imageSrc}" class="icon" alt="Icon"> ${text}`;
   button.className = isActive ? "modal-button" : "modal-button deactivated";
   document.querySelector(".modal-body").appendChild(button);
-  a.innerHTML = `This is very good button ${text}`;
-
+ 
   var discription = document.createElement("a");
-
+  discription.innerHTML = `This is very good button ${text}`;
+  document.querySelector(".modal-body").appendChild(discription);
 }
     
     // Example usage:
