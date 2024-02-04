@@ -163,7 +163,7 @@
       <p>Buy upgrades</p>
       <!-- Buttons will be added here -->
     </div>
-    <div class="modal-body"></div>
+    <div class="modal-body">
     <p>Detailes about level ups etc.</p>
     </div>
   </div>
@@ -329,6 +329,7 @@ image.onerror = function() {
     //let introtext = "d3clicker.engine "+ window.Telegram.WebApp.platform + " v." + window.Telegram.WebApp.version
    // document.getElementById("text").textContent = introtext
    // isVersionAtLeast(6.1)
+   window.Telegram.WebApp.BackButton.hide()
    window.Telegram.WebApp.ready()
   setTimeout(() => {
     window.Telegram.WebApp.expand()
