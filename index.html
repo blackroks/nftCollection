@@ -76,9 +76,12 @@
       cursor: not-allowed;
     }
   
-    .modal-button .icon {
-      margin-right: 8px;
-    }
+    .modal-button img.icon {
+    margin-right: 8px;
+    vertical-align: middle;
+    width: 24px; /* Example size, adjust as needed */
+    height: 24px; /* Example size, adjust as needed */
+  }
   
     .modal-header {
       background-color: #5cb85c;
@@ -160,7 +163,9 @@
       <p>Buy upgrades</p>
       <!-- Buttons will be added here -->
     </div>
+    <div class="modal-body"></div>
     <p>Detailes about level ups etc.</p>
+    </div>
   </div>
 
 </div>
@@ -171,8 +176,6 @@
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
-
-
     class GameSystem{
         constructor(){
             this.score = 0;
@@ -392,7 +395,7 @@ image.onerror = function() {
     btn.onclick = function() {
         window.Telegram.WebApp.BackButton.show()
         window.Telegram.WebApp.BackButton.onClick(closeModal)
-      modal.style.display = "block";
+        modal.style.display = "block";
     }
     
  
@@ -401,18 +404,18 @@ image.onerror = function() {
         modal.style.display = "none";
     }
     // Function to add a button to the modal
-    function addButton(iconClass, text, isActive) {
-      var button = document.createElement("button");
-      button.innerHTML = `<span class="icon ${iconClass}"></span> ${text}`;
-      button.className = isActive ? "modal-button" : "modal-button deactivated";
-      document.querySelector(".modal-body").appendChild(button);
-    }
+    function addButton(imageSrc, text, isActive) {
+  var button = document.createElement("button");
+  button.innerHTML = `<img src="${imageSrc}" class="icon" alt="Icon"> ${text}`;
+  button.className = isActive ? "modal-button" : "modal-button deactivated";
+  document.querySelector(".modal-body").appendChild(button);
+}
     
     // Example usage:
-    addButton("icon-class", "Profitability", true);
-    addButton("icon-class", "Energy Limit", true);
-    addButton("icon-class", "Energy Recharge", true);
-    addButton("icon-class", "Mining", false);
+    addButton("https://via.placeholder.com/12", "Profitability", true);
+    addButton("https://via.placeholder.com/22", "Energy Limit", true);
+    addButton("https://via.placeholder.com/32", "Energy Recharge", true);
+    addButton("https://via.placeholder.com/42", "Mining", false);
     
     </script>
     
