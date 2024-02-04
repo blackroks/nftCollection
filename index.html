@@ -148,11 +148,11 @@
       <h2>Wallet:</h2>
     </div>
     <div class="modal-body">
-      <p>Buy upgrades</p>
+      <h5>Buy upgrades</h5>
       <!-- Buttons will be added here -->
     </div>
     <div class="modal-body">
-    <p>Detailes about level ups etc.</p>
+    <h5>Detailes about level ups etc.</h5>
     </div>
   </div>
 
@@ -387,10 +387,15 @@ image.onerror = function() {
     
     let openModal = () => {
         
-        modal.innerHTML = ''
+       // modal.innerHTML = ''
         window.Telegram.WebApp.BackButton.show()
         window.Telegram.WebApp.BackButton.onClick(closeModal)
         modal.style.display = "block";
+         // Example usage:
+         addButton("https://via.placeholder.com/12", "Profitability", true);
+                     addButton("https://via.placeholder.com/22", "Energy Limit", true);
+    addButton("https://via.placeholder.com/32", "Energy Recharge", true);
+    addButton("https://via.placeholder.com/42", "Mining", false);
     }
  
     let closeModal = () => {
@@ -410,11 +415,7 @@ image.onerror = function() {
 }
     
    
-                     // Example usage:
-                     addButton("https://via.placeholder.com/12", "Profitability", true);
-                     addButton("https://via.placeholder.com/22", "Energy Limit", true);
-    addButton("https://via.placeholder.com/32", "Energy Recharge", true);
-    addButton("https://via.placeholder.com/42", "Mining", false);
+                    
 
     </script>
     
