@@ -16,7 +16,7 @@
       top: 0;
       width: 100%; /* Full width */
       height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
+      overflow-x: hidden; /* Enable scroll if needed */
       background-color: rgb(0,0,0); /* Fallback color */
       background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     }
@@ -315,11 +315,12 @@ image.onerror = function() {
 
     // Prevent scrolling on touch devices
     document.addEventListener('touchmove', function(event) {
-      if ( modal.style.display == "block" ){
+        if ( modal.style.display == "block" ){
 
-       }else{
-        
-       } 
+}else{
+ //event.preventDefault();
+} 
+
 
   }, { passive: false });
 
