@@ -55,10 +55,76 @@
     transform: translate(-50%);
     text-align: center;
   }
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
 
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* The Button (could be used for active/deactivated states) */
+.button {
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.active {
+  background-color: green;
+}
+
+.deactivated {
+  background-color: red;
+}
 </style>
 </head>
 <body>
+    <!-- Trigger/Open The Modal -->
+<button id="myBtn">Open Modal</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p id="modalText">Some text in the Modal..</p>
+    <button id="modalButton" class="button deactivated">Button</button>
+  </div>
+
+</div>
 <h1 id="scoreUI"> SCORE </h1>
 <canvas id="myCanvas"></canvas>
 
@@ -166,9 +232,15 @@ image.onerror = function() {
 
 
   //EVENT LISTENERS
- 
+  function handleTouchStart(event) {
+    if (event.touches.length > 1) {
+      // Prevent the default multi-touch actions if more than one touch is detected
+      event.preventDefault();
+    }
+  }
   // Event listener for touchstart
   canvas.addEventListener('touchstart', function(event) {
+    handleTouchStart();
     var touch = event.touches[0];
     if (isInsideCircle(touch.clientX, touch.clientY)) {
         if(game.energy < 1)return;
@@ -273,6 +345,61 @@ image.onerror = function() {
 
 
 </script>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // Get the button inside the modal
+    var modalButton = document.getElementById("modalButton");
+    
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+    
+    // Function to toggle button active/deactivated state
+    function toggleButtonState() {
+      if (modalButton.classList.contains('deactivated')) {
+        modalButton.classList.remove('deactivated');
+        modalButton.classList.add('active');
+        modalButton.textContent = 'Active Button';
+      } else {
+        modalButton.classList.remove('active');
+        modalButton.classList.add('deactivated');
+        modalButton.textContent = 'Deactivated Button';
+      }
+    }
+    
+    // Add event listener to modal button to toggle state
+    modalButton.addEventListener('click', toggleButtonState);
+    
+    // Function to update modal text
+    function updateModalText(text) {
+      document.getElementById('modalText').textContent = text;
+    }
+    
+    // Example usage: updateModalText('New information text here.');
+    </script>
+    
 </body>
 </html>
 
