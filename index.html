@@ -240,7 +240,6 @@ image.onerror = function() {
   }
   // Event listener for touchstart
   canvas.addEventListener('touchstart', function(event) {
-    handleTouchStart();
     var touch = event.touches[0];
     if (isInsideCircle(touch.clientX, touch.clientY)) {
         if(game.energy < 1)return;
@@ -251,6 +250,7 @@ image.onerror = function() {
       const text = "+1"; // The text to show
      createTextAtPosition(touch.clientX, touch.clientY, text);
      game.addScore()
+     handleTouchStart();
     }
   }, { passive: false });
 
