@@ -144,7 +144,7 @@
   <!-- Modal content -->
   <div class="modal-content">
     <div class="modal-header">
-      <h2>Clicker shop:</h2>
+      <h2>Wallet:</h2>
     </div>
     <div class="modal-body">
       <p>Buy upgrades</p>
@@ -381,11 +381,15 @@ image.onerror = function() {
    
     // When the user clicks the button, open the modal 
     btn.onclick = function() {
+        openModal();
+    }
+    
+    let openModal = () => {
+        addButton("https://via.placeholder.com/12", "Profitability", true);
         window.Telegram.WebApp.BackButton.show()
         window.Telegram.WebApp.BackButton.onClick(closeModal)
         modal.style.display = "block";
     }
-    
  
     let closeModal = () => {
         window.Telegram.WebApp.BackButton.hide()
@@ -397,6 +401,10 @@ image.onerror = function() {
   button.innerHTML = `<img src="${imageSrc}" class="icon" alt="Icon"> ${text}`;
   button.className = isActive ? "modal-button" : "modal-button deactivated";
   document.querySelector(".modal-body").appendChild(button);
+  a.innerHTML = `This is very good button ${text}`;
+
+  var discription = document.createElement("a");
+
 }
     
     // Example usage:
