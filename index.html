@@ -19,6 +19,7 @@
       overflow: auto; /* Enable scroll if needed */
       background-color: rgb(0,0,0); /* Fallback color */
       background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      overflow: auto;
     }
   
     /* Modal Content */
@@ -385,7 +386,14 @@ image.onerror = function() {
     }
     
     let openModal = () => {
-        addButton("https://via.placeholder.com/12", "Profitability", true);
+        
+        modal.innerHTML = ''
+         // Example usage:
+    addButton("https://via.placeholder.com/12", "Profitability", true);
+    addButton("https://via.placeholder.com/22", "Energy Limit", true);
+    addButton("https://via.placeholder.com/32", "Energy Recharge", true);
+    addButton("https://via.placeholder.com/42", "Mining", false);
+
         window.Telegram.WebApp.BackButton.show()
         window.Telegram.WebApp.BackButton.onClick(closeModal)
         modal.style.display = "block";
@@ -407,11 +415,7 @@ image.onerror = function() {
   document.querySelector(".modal-body").appendChild(discription);
 }
     
-    // Example usage:
-    addButton("https://via.placeholder.com/12", "Profitability", true);
-    addButton("https://via.placeholder.com/22", "Energy Limit", true);
-    addButton("https://via.placeholder.com/32", "Energy Recharge", true);
-    addButton("https://via.placeholder.com/42", "Mining", false);
+   
     
     </script>
     
