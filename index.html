@@ -188,12 +188,18 @@
         height: 100px;
     }
     .ios-button::after {
-        content: '>';
-        position: absolute;
-        right: 20px;
-        font-size: 1.5rem;
-        color: #ccc;
-    }
+    content: '>';
+    position: absolute;
+    right: 20px;
+    font-size: 1.5rem;
+    color: #ccc;
+    /* Centering using flexbox */
+    display: flex;
+    align-items: center;
+    height: 100%; /* Make the pseudo-element take full height of the button */
+}
+
+    
     .content {
         padding: 1rem;
     }
