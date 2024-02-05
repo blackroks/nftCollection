@@ -396,7 +396,8 @@ image.onerror = function() {
     }
     
     let openModal = () => {
-        
+        var modalContent = document.querySelector('.modal-content');
+         modalContent.scrollTop = 0;
         document.querySelector(".modal-body").innerHTML = ''
         window.Telegram.WebApp.BackButton.show()
         window.Telegram.WebApp.BackButton.onClick(closeModal)
