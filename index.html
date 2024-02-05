@@ -463,6 +463,10 @@ image.onerror = function() {
     }
     
     let openModal = () => {
+        Telegram.WebApp.MainButton.setParams({
+                text      : '<= Back',
+                is_visible: true
+            }).onClick(closeModal);
         var modalContent = document.querySelector('.modal-content');
          modalContent.scrollTop = 0;
         document.querySelector(".modal-body").innerHTML = ''
@@ -485,6 +489,10 @@ image.onerror = function() {
     let closeModal = () => {
         window.Telegram.WebApp.BackButton.hide()
         modal.style.display = "none";
+        Telegram.WebApp.MainButton.setParams({
+                text      : 'SHOP',
+                is_visible: true
+            }).onClick(openModal);
     }
     // Function to add a button to the modal
     function addButton(imageSrc, text, isActive) {
