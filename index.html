@@ -482,18 +482,14 @@ image.onerror = function() {
          addButton("https://via.placeholder.com/42", "Mining", false);
 
 
-         Telegram.WebApp.MainButton.setParams({
-            is_active: false
-            })
+         Telegram.WebApp.MainButton.disable()
 
     }
  
     let closeModal = () => {
         window.Telegram.WebApp.BackButton.hide()
         modal.style.display = "none";
-        Telegram.WebApp.MainButton.setParams({
-                is_active: true
-            })
+        Telegram.WebApp.MainButton.enable()
     }
     // Function to add a button to the modal
     function addButton(imageSrc, text, isActive) {
