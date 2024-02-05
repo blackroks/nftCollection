@@ -545,6 +545,10 @@ image.onerror = function() {
    window.requestAnimationFrame(step);
    window.Telegram.WebApp.BackButton.hide()
    window.Telegram.WebApp.enableClosingConfirmation()
+   Telegram.WebApp.MainButton.setParams({
+                text      : 'SHOP',
+                is_visible: true
+            }).onClick(openModal);
    window.Telegram.WebApp.ready()
   
 //    window.Telegram.WebApp.PopupParams.title = "Testing"
