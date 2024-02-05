@@ -2,465 +2,79 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
-<title>Full-Screen Canvas with Circle</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iOS Style HTML Page</title>
 <style>
-
-  .button-container {
-    position: absolute;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-    background-color: #f2f2f2; /* Light grey background */
-    bottom: 0;
-  }
-  .button-container button {
-    width: 60px; /* Square buttons */
-    height: 60px;
-    border: none;
-    background-color: #4CAF50; /* Green background */
-    color: white;
-    font-size: 16px;
-    border-radius: 5px; /* Optional: for rounded corners */
-  }
-    /* The Modal (background) */
-    .modal {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%;
-      overflow-y: auto; /* Allows vertical scrolling */
-  overflow-x: hidden; /* Prevents horizontal scrolling */
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f2f2f7;
     }
-  
-    /* Modal Content */
-    .modal-content {
-      position: relative;
-      background-color: #fefefe;
-      margin: auto;
-      padding: 0;
-      border: 1px solid #888;
-      width: 100%;
-      min-height: 100%; /* Ensures that the content does not exceed the modal's height */
-  overflow-y: auto; /* Allows the content itself to scroll if needed */
-      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-      animation-name: animatetop;
-      animation-duration: 0.4s
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+        padding: 1rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
-  
-    /* Add Animation */
-    @keyframes animatetop {
-      from {top: -300px; opacity: 0}
-      to {top: 0; opacity: 1}
+    .navbar h1 {
+        font-size: 1rem;
+        color: #007aff;
     }
-
-    /* The button styles */
-    .modal-button {
-      display: block;
-      margin: 10px;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      background-color: #605985;
-      color: white;
-      text-align: center;
-      font-size: 16px;
-      cursor: pointer;
+    .button {
+        background-color: #007aff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        margin: 10px;
+        border-radius: 14px;
+        font-size: 1rem;
     }
-  
-    .modal-button.deactivated {
-      background-color: #747474;
-      cursor: not-allowed;
+    .content {
+        padding: 1rem;
     }
-  
-    .modal-button img.icon {
-    margin-right: 8px;
-    vertical-align: middle;
-    width: 24px; /* Example size, adjust as needed */
-    height: 24px; /* Example size, adjust as needed */
-  }
-  
-    .modal-header {
-      background-color: #655cb8;
-      color: white;
-      padding: 10px 20px;
-      border-bottom: 1px solid #ddd;
+    .horizontal-scroll {
+        display: flex;
+        overflow-x: auto;
+        padding: 1rem 0;
     }
-    .start-body {
-        padding-left: 20px;
-        padding-right: 20px;
-    
+    .card {
+        flex: 0 0 auto;
+        width: 80%;
+        margin-right: 1rem;
+        background: #fff;
+        padding: 1rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
     }
-    .modal-body {padding: 20px;}
-    .info-body {padding: 20px;}
-  
-  </style>
-<style>
-        /* Define the custom font using @font-face */
-        @font-face {
-        font-family: 'EgyptFont';
-        src: url('https://github.com/blackroks/nftCollection/raw/main/images/egypt.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-    }
-
-    /* Apply the custom font to the body or specific elements */
-
-  body, html {
-    font-family: 'EgyptFont', sans-serif;
-    margin: 0;
-    padding: 0;
-    overflow: hidden; /* Prevents scrollbars from appearing */
-    touch-action: none; /* Prevents touch scrolling on supported browsers */
-    position: fixed; /* Prevents scrolling on iOS devices */
-    width: 100%;
-    height: 100%;
-    -webkit-user-select: none; /* Safari 3.1+ */
-  -moz-user-select: none; /* Firefox 2+ */
-  -ms-user-select: none; /* IE 10+ */
-  user-select: none; /* Standard syntax */
-  }
-  #myCanvas {
-    background-color: #092f46;
-    display: block; /* Removes the default margin */
-  }
-  #text{
-    color: rgb(21, 21, 21);
-    position: absolute;
-  }
-  .fade-text {
-    position: absolute;
-    pointer-events: none;
-    transition: opacity 0.5s, transform 0.5s;
-    opacity: 1;
-    font-size: 30px;
-    color: rgb(203, 185, 185);
-    font-weight: bold;
-  }
-  #scoreUI{
-    font-size: 60px;
-    color: rgb(238, 239, 252);
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    text-align: center;
-  }
-
 </style>
 </head>
 <body>
 
-
-
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <div class="modal-header">
-      <h2>Wallet:</h2>
-    </div>
-    <div class="start-body">
-        <h5>Buy upgrades</h5>
-        <!-- Buttons will be added here -->
-      </div>
-    <div class="modal-body">
-      <!-- Buttons will be added here -->
-    </div>
-    <div class="info-body">
-    <h5>Detailes about level ups etc.</h5>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    <!-- panels will be added here -->
-    </div>
-  </div>
-
+<div class="navbar">
+    <h1>App Title</h1>
+    <button class="button">Button</button>
 </div>
 
+<div class="content">
+    <p>This is some text inside the main content area. It's styled to look like iOS text.</p>
+    <button class="button">Another Button</button>
+</div>
 
-<h1 id="scoreUI"> SCORE </h1>
-<canvas id="myCanvas"></canvas>
-
-<div class="button-container">
-    <button>RATING</button>
-    <button>LEVEL</button>
-    <button id="myBtn">UPGRADE</button>
-  </div>
-
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script>
-    class GameSystem{
-        constructor(){
-            this.score = 0;
-            this.multiplayer = 1;
-            this.maxEnergy = 100;
-            this.energy = 100;
-        }
-        addScore(){
-            this.score += Math.round( 1  *  this.multiplayer );
-        }
-    }
-
-    const game = new GameSystem()
-
-//load images
-//coin image
-const imageUrl = 'https://raw.githubusercontent.com/blackroks/nftCollection/main/images/coinpng.png';
-// Create a new image object
-const image = new Image();
-// Set the crossOrigin to anonymous to avoid any cross-origin issues
-image.crossOrigin = 'anonymous';
-// Set the source of the image object to the provided URL
-image.src = imageUrl;
-// Handle any errors that occur during the loading of the image
-image.onerror = function() {
-    console.error('There was an error loading the image.');
-};
-//prepare main canvas
-  var canvas = document.getElementById('myCanvas');
-  var ctx = canvas.getContext('2d');
-  var centerX, centerY, radius = window.innerWidth/3; // Circle properties
-  var isCircleTouched = false; // State to track if the circle is touched
-
-  // Function to resize the canvas to fill the browser window
-  function resizeCanvas() {
-    var width = window.innerWidth;
-    var height = window.innerHeight;
-
-    // Use visualViewport API if available for mobile browsers
-    if (window.visualViewport) {
-      width = window.visualViewport.width;
-      height = window.visualViewport.height;
-    }
-
-    canvas.width = width;
-    canvas.height = height;
-
-    centerX = canvas.width / 2;
-    centerY = canvas.height / 2;
-
-    drawCircle();
-  }
-
-  // Function to draw the circle
-  function drawCircle() {
-    // Clear the canvas
-    ctx.clearRect(0, 0, canvas.width, (centerY-(window.innerWidth/3)) + ( (window.innerWidth/3)*2) );
-    if(isCircleTouched){
-        ctx.drawImage(image,  256,0, 256,256, centerX-(window.innerWidth/3), centerY-(window.innerWidth/3), (window.innerWidth/3)*2, (window.innerWidth/3)*2);
-    }else{
-        ctx.drawImage(image, 0, 0, 256,256, centerX-(window.innerWidth/3), centerY-(window.innerWidth/3), (window.innerWidth/3)*2, (window.innerWidth/3)*2);
-    }
-  }
-
-  // Function to check if the touch point is inside the circle
-  function isInsideCircle(touchX, touchY) {
-    var dx = touchX - centerX;
-    var dy = touchY - centerY;
-    return dx * dx + dy * dy <= radius * radius;
-  }
-
-
- // Function to create the text and animate it
- function createTextAtPosition(x, y, text) {
-    const floatingText = document.createElement('div');
-    floatingText.textContent = text;
-    floatingText.classList.add('fade-text');
-    let randx = Math.floor(Math.random()*60)
-    randx = Math.round(20-randx)
-    x = x + randx
-    floatingText.style.left = `${x}px`;
-    floatingText.style.top = `${y}px`;
-
-    // Append the text to the body
-    document.body.appendChild(floatingText);
-
-    // Start the animation
-    setTimeout(() => {
-      floatingText.style.opacity = '0';
-      floatingText.style.transform = 'translateY(-200px)';
-    }, 0);
-
-    // Remove the element after the animation is done
-    setTimeout(() => {
-      floatingText.remove();
-    }, 500);
-  }
-
-
-  //EVENT LISTENERS
-  // Event listener for touchstart
-  canvas.addEventListener('touchstart', function(event) {
-    var touch = event.touches[0];
-    if (isInsideCircle(touch.clientX, touch.clientY)) {
-        if(game.energy < 1)return;
-      window.Telegram.WebApp.HapticFeedback.selectionChanged()
-      isCircleTouched = true;
-      drawCircle();
-      game.energy -=1;
-      const text = "+1"; // The text to show
-     createTextAtPosition(touch.clientX, touch.clientY, text);
-     game.addScore()
-    }
-  }, { passive: false });
-
-  let lastTouchEnd = 0;
-
-  // Event listener for touchend
-  canvas.addEventListener('touchend', function(event) {
-    isCircleTouched = false;
-    drawCircle();
-
-    //prevent double tap zoom
-    const now = (new Date()).getTime();
-    if (now - lastTouchEnd <= 300) {
-      event.preventDefault();
-    }
-    lastTouchEnd = now;
-  }, { passive: false });
-
-  // Resize the canvas to fill the screen when the window is resized
-  window.addEventListener('resize', resizeCanvas, false);
-
-  // Resize the canvas to fill the screen when the orientation changes
-  window.addEventListener('orientationchange', resizeCanvas, false);
-
-  document.addEventListener('contextmenu', function(event) {
-    event.preventDefault();
-  });
-
-    // Prevent scrolling on touch devices
-    document.addEventListener('touchmove', function(event) {
-        if ( modal.style.display == "block" ){
-}else{
- event.preventDefault();
-} 
-
-
-  }, { passive: false });
-
-
-
-  let showEnergyBar = () => {
-    ctx.drawImage(image, 0, 256, 64,64,        32, window.innerHeight-(window.innerHeight/6) , 64,32);
-    ctx.drawImage(image, 64, 256, 64,64,      window.innerWidth - 96, window.innerHeight-(window.innerHeight/6) , 64,32);
-    ctx.drawImage(image, 171, 256, 16,64,     96 , window.innerHeight-(window.innerHeight/6) , window.innerWidth - 192 ,32);
-    //dynamic bar
-    let percerageBar = game.energy/game.maxEnergy;
-    let barwidth =  (window.innerWidth - 192)*percerageBar
-    if(percerageBar > 0.7){
-        ctx.drawImage(image, 188, 256, 10,64,     96 , window.innerHeight-(window.innerHeight/6) , barwidth ,32);
-    }else if(percerageBar > 0.2){
-        ctx.drawImage(image, 204, 256, 10,64,     96 , window.innerHeight-(window.innerHeight/6) , barwidth ,32);
-    }else{
-        ctx.drawImage(image, 220, 256, 10,64,     96 , window.innerHeight-(window.innerHeight/6) , barwidth ,32);
-    }
-    
-  }
-
-</script>
-
-<script>
-    // Get the modal
-    var modal = document.getElementById("myModal");
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
-    // When the user clicks the button, open the modal 
-    btn.onclick = function() {
-        openModal();
-    }
-    
-    let openModal = () => {
-        var modalContent = document.querySelector('.modal-content');
-         modalContent.scrollTop = 0;
-        document.querySelector(".modal-body").innerHTML = ''
-        window.Telegram.WebApp.BackButton.show()
-        window.Telegram.WebApp.BackButton.onClick(closeModal)
-        modal.style.display = "block";
-         // Example usage:
-         addButton("https://via.placeholder.com/12", "Profitability", true);
-         addButton("https://via.placeholder.com/22", "Energy Limit", true);
-         addButton("https://via.placeholder.com/32", "Energy Recharge", true);
-         addButton("https://via.placeholder.com/42", "Mining", false);
-    }
- 
-    let closeModal = () => {
-        window.Telegram.WebApp.BackButton.hide()
-        modal.style.display = "none";
-    }
-    // Function to add a button to the modal
-    function addButton(imageSrc, text, isActive) {
-  var button = document.createElement("button");
-  button.innerHTML = `<img src="${imageSrc}" class="icon" alt="Icon"> ${text}`;
-  button.className = isActive ? "modal-button" : "modal-button deactivated";
-  document.querySelector(".modal-body").appendChild(button);
- 
-  var discription = document.createElement("a");
-  discription.innerHTML = `This is very good button ${text}`;
-  document.querySelector(".modal-body").appendChild(discription);
-}
-    
-   
-                    
-
-    </script>
-    
-    <script>
-
-        //loops etc
-
-  setInterval(() => {
-    
-    if(game.energy < game.maxEnergy){
-        game.energy = Math.round(game.energy+1)
-    }
-    
-    }, 1000);
-
-  function step() {
-    // UpdateUI();
-    //footer info
-
-    //energy
-    showEnergyBar()
-    //score
-    let displayedScore = Number(document.getElementById("scoreUI").textContent)
-    if(game.score > displayedScore){
-        displayedScore++;
-        document.getElementById("scoreUI").textContent = Math.round(displayedScore);
-    }else{
-        document.getElementById("scoreUI").textContent = Math.round(game.score); 
-    }
-    window.requestAnimationFrame(step);
-  }
-
-  
-
-    // Initial call to set up the canvas
-    addEventListener("load", (event) => {
-    //viewportHeight
-    // window.Telegram.WebApp.HapticFeedback
-  resizeCanvas();
-    //let introtext = "d3clicker.engine "+ window.Telegram.WebApp.platform + " v." + window.Telegram.WebApp.version
-   // document.getElementById("text").textContent = introtext
-   // isVersionAtLeast(6.1)
-   window.requestAnimationFrame(step);
-   window.Telegram.WebApp.BackButton.hide()
-   window.Telegram.WebApp.ready()
-  setTimeout(() => {
-    window.Telegram.WebApp.expand()
-    }, 500);
-  });
-
-    </script>
+<div class="horizontal-scroll">
+    <div class="card">
+        <p>Item 1</p>
+    </div>
+    <div class="card">
+        <p>Item 2</p>
+    </div>
+    <div class="card">
+        <p>Item 3</p>
+    </div>
+    <!-- Add more cards as needed -->
+</div>
 
 </body>
 </html>
-
