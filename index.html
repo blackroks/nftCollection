@@ -539,13 +539,14 @@ image.onerror = function() {
    window.requestAnimationFrame(step);
    window.Telegram.WebApp.BackButton.hide()
    window.Telegram.WebApp.ready()
-   window.Telegram.WebApp.showConfirm("message"[openModal])
+  
 //    window.Telegram.WebApp.PopupParams.title = "Testing"
 //    window.Telegram.WebApp.PopupParams.message = "This is testing"
 //    window.Telegram.WebApp.showPopup(params[, callback])
    
   setTimeout(() => {
     window.Telegram.WebApp.expand()
+    window.Telegram.WebApp.showConfirm("message"[openModal])
     }, 500);
   });
 
