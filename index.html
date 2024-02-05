@@ -23,14 +23,25 @@
         font-size: 1rem;
         color: #007aff;
     }
-    .button {
-        background-color: #007aff;
-        color: #fff;
+    .ios-button {
+        display: block;
+        background-color: #fff;
+        color: #000;
+        text-align: left;
+        padding: 10px;
+        margin: 10px 0;
         border: none;
-        padding: 10px 20px;
-        margin: 10px;
-        border-radius: 14px;
+        width: 100%;
         font-size: 1rem;
+        position: relative;
+        border-bottom: 1px solid #ccc;
+    }
+    .ios-button::after {
+        content: '>';
+        position: absolute;
+        right: 20px;
+        font-size: 1.5rem;
+        color: #ccc;
     }
     .content {
         padding: 1rem;
@@ -57,12 +68,12 @@
 
 <div class="navbar">
     <h1>App Title</h1>
-    <button class="button">Button</button>
 </div>
 
 <div class="content">
-    <p>This is some text inside the main content area. It's styled to look like iOS text.</p>
-    <button class="button">Another Button</button>
+    <button class="ios-button">Button with Chevron</button>
+    <button class="ios-button">Another Button with Chevron</button>
+    <!-- Add more buttons as needed -->
 </div>
 
 <div class="horizontal-scroll">
