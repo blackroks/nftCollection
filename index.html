@@ -483,16 +483,17 @@ image.onerror = function() {
 
 
          Telegram.WebApp.MainButton.setParams({
-                text      : 'back',
-                is_visible: true
-            }).onClick(closeModal);
-   window.Telegram.WebApp.ready()
+                is_visible: false
+            })
 
     }
  
     let closeModal = () => {
         window.Telegram.WebApp.BackButton.hide()
         modal.style.display = "none";
+        Telegram.WebApp.MainButton.setParams({
+                is_visible: true
+            })
     }
     // Function to add a button to the modal
     function addButton(imageSrc, text, isActive) {
