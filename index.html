@@ -323,20 +323,7 @@ image.onerror = function() {
 
   }, { passive: false });
 
-  // Initial call to set up the canvas
-  addEventListener("load", (event) => {
-    //viewportHeight
-    // window.Telegram.WebApp.HapticFeedback
-  resizeCanvas();
-    //let introtext = "d3clicker.engine "+ window.Telegram.WebApp.platform + " v." + window.Telegram.WebApp.version
-   // document.getElementById("text").textContent = introtext
-   // isVersionAtLeast(6.1)
-   window.Telegram.WebApp.BackButton.hide()
-   window.Telegram.WebApp.ready()
-  setTimeout(() => {
-    window.Telegram.WebApp.expand()
-    }, 500);
-  });
+
 
   let showEnergyBar = () => {
     ctx.drawImage(image, 0, 256, 64,64,        32, window.innerHeight-(window.innerHeight/6) , 64,32);
@@ -354,34 +341,6 @@ image.onerror = function() {
     }
     
   }
-
-  setInterval(() => {
-    
-    if(game.energy < game.maxEnergy){
-        game.energy = Math.round(game.energy+1)
-    }
-    
-    }, 1000);
-
-  function step() {
-    // UpdateUI();
-    //footer info
-
-    //energy
-    showEnergyBar()
-    //score
-    let displayedScore = Number(document.getElementById("scoreUI").textContent)
-    if(game.score > displayedScore){
-        displayedScore++;
-        document.getElementById("scoreUI").textContent = Math.round(displayedScore);
-    }else{
-        document.getElementById("scoreUI").textContent = Math.round(game.score); 
-    }
-    window.requestAnimationFrame(step);
-  }
-
-  window.requestAnimationFrame(step);
-
 
 </script>
 
@@ -426,10 +385,58 @@ image.onerror = function() {
 }
     
    
-                    
-
+            
     </script>
     
+    <script>
+
+        //loops etc
+
+  setInterval(() => {
+    
+    if(game.energy < game.maxEnergy){
+        game.energy = Math.round(game.energy+1)
+    }
+    
+    }, 1000);
+
+  function step() {
+    // UpdateUI();
+    //footer info
+
+    //energy
+    showEnergyBar()
+    //score
+    let displayedScore = Number(document.getElementById("scoreUI").textContent)
+    if(game.score > displayedScore){
+        displayedScore++;
+        document.getElementById("scoreUI").textContent = Math.round(displayedScore);
+    }else{
+        document.getElementById("scoreUI").textContent = Math.round(game.score); 
+    }
+    window.requestAnimationFrame(step);
+  }
+
+  
+
+    // Initial call to set up the canvas
+    addEventListener("load", (event) => {
+    //viewportHeight
+    // window.Telegram.WebApp.HapticFeedback
+  resizeCanvas();
+    //let introtext = "d3clicker.engine "+ window.Telegram.WebApp.platform + " v." + window.Telegram.WebApp.version
+   // document.getElementById("text").textContent = introtext
+   // isVersionAtLeast(6.1)
+   window.requestAnimationFrame(step);
+   window.Telegram.WebApp.BackButton.hide()
+   window.Telegram.WebApp.ready()
+  setTimeout(() => {
+    window.Telegram.WebApp.expand()
+    }, 500);
+  });
+
+    </script>
+
 </body>
 </html>
 
