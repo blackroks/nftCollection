@@ -480,6 +480,14 @@ image.onerror = function() {
 
          addButton("https://via.placeholder.com/32", "Energy Recharge", true);
          addButton("https://via.placeholder.com/42", "Mining", false);
+
+
+         Telegram.WebApp.MainButton.setParams({
+                text      : 'back',
+                is_visible: true
+            }).onClick(closeModal);
+   window.Telegram.WebApp.ready()
+
     }
  
     let closeModal = () => {
