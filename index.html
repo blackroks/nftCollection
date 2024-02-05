@@ -463,10 +463,6 @@ image.onerror = function() {
     }
     
     let openModal = () => {
-        Telegram.WebApp.MainButton.setParams({
-                text      : '<= Back',
-                is_visible: true
-            }).onClick(closeModal);
         var modalContent = document.querySelector('.modal-content');
          modalContent.scrollTop = 0;
         document.querySelector(".modal-body").innerHTML = ''
@@ -477,22 +473,29 @@ image.onerror = function() {
          addButton("https://via.placeholder.com/12", "Profitability", true);
          addButton("https://via.placeholder.com/22", "Energy Limit", true);
 
-         Telegram.WebApp.showConfirm("Are you sure?");
+         //Telegram.WebApp.showConfirm("Are you sure?");
         // window.Telegram.WebApp.showAlert("message"[openModal])
         //  window.Telegram.WebApp.showConfirm("message",[openModal])
 
 
          addButton("https://via.placeholder.com/32", "Energy Recharge", true);
          addButton("https://via.placeholder.com/42", "Mining", false);
+
+
+
+         Telegram.WebApp.MainButton.setParams({
+                text      : '<= Back',
+                is_visible: true
+            }).onClick(closeModal);
     }
  
     let closeModal = () => {
         window.Telegram.WebApp.BackButton.hide()
         modal.style.display = "none";
-        Telegram.WebApp.MainButton.setParams({
-                text      : 'SHOP',
-                is_visible: true
-            }).onClick(openModal);
+        // Telegram.WebApp.MainButton.setParams({
+        //         text      : 'SHOP',
+        //         is_visible: true
+        //     }).onClick(openModal);
     }
     // Function to add a button to the modal
     function addButton(imageSrc, text, isActive) {
