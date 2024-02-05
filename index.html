@@ -472,6 +472,12 @@ image.onerror = function() {
          // Example usage:
          addButton("https://via.placeholder.com/12", "Profitability", true);
          addButton("https://via.placeholder.com/22", "Energy Limit", true);
+
+
+         window.Telegram.WebApp.showAlert("message",[callback])
+         window.Telegram.WebApp.showConfirm("message"[openModal])
+
+
          addButton("https://via.placeholder.com/32", "Energy Recharge", true);
          addButton("https://via.placeholder.com/42", "Mining", false);
     }
@@ -538,6 +544,7 @@ image.onerror = function() {
    // isVersionAtLeast(6.1)
    window.requestAnimationFrame(step);
    window.Telegram.WebApp.BackButton.hide()
+   window.Telegram.WebApp.enableClosingConfirmation()
    window.Telegram.WebApp.ready()
   
 //    window.Telegram.WebApp.PopupParams.title = "Testing"
@@ -546,7 +553,6 @@ image.onerror = function() {
    
   setTimeout(() => {
     window.Telegram.WebApp.expand()
-    window.Telegram.WebApp.showConfirm("message"[openModal])
     }, 500);
   });
 
