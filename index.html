@@ -315,9 +315,9 @@ image.onerror = function() {
     // Prevent scrolling on touch devices
     document.addEventListener('touchmove', function(event) {
         if ( modal.style.display == "block" ){
-
+            event.preventDefault();
 }else{
- //event.preventDefault();
+ event.preventDefault();
 } 
 
 
@@ -367,7 +367,6 @@ image.onerror = function() {
     // UpdateUI();
     //footer info
 
- 
     //energy
     showEnergyBar()
     //score
