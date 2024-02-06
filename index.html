@@ -231,24 +231,6 @@
             <h1>App Title</h1>
         </div>
         
-        <div class="content">
-            <button class="ios-button">Button with Chevron</button>
-            <button class="ios-button">Another Button with Chevron,Another Button with Chevron,Another Button with Chevron,Another Button with Chevron,Another Button with Chevron</button>
-            <!-- Add more buttons as needed -->
-        </div>
-        
-        <div class="horizontal-scroll">
-            <div class="card">
-                <p>Item 1</p>
-            </div>
-            <div class="card">
-                <p>Item 2</p>
-            </div>
-            <div class="card">
-                <p>Item 3</p>
-            </div>
-            <!-- Add more cards as needed -->
-        </div>
         </div> 
     <div class="modal-header">
       <h2>Wallet:</h2>
@@ -257,6 +239,24 @@
         <h5>Buy upgrades</h5>
         <!-- Buttons will be added here -->
       </div>
+      <div class="content">
+        <button class="ios-button">Button with Chevron</button>
+        <button class="ios-button">Another Button with Chevron,Another Button with Chevron,Another Button with Chevron,Another Button with Chevron,Another Button with Chevron</button>
+        <!-- Add more buttons as needed -->
+    </div>
+    
+    <div class="horizontal-scroll">
+        <div class="card">
+            <p>Item 1</p>
+        </div>
+        <div class="card">
+            <p>Item 2</p>
+        </div>
+        <div class="card">
+            <p>Item 3</p>
+        </div>
+        <!-- Add more cards as needed -->
+    </div>
     <div class="modal-body">
       <!-- Buttons will be added here -->
     </div>
@@ -273,11 +273,11 @@
 <h1 id="scoreUI"> SCORE </h1>
 <canvas id="myCanvas"></canvas>
 
-<div class="button-container">
+<!-- <div class="button-container">
     <button>RATING</button>
     <button>LEVEL</button>
     <button id="myBtn">UPGRADE</button>
-  </div>
+  </div> -->
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
@@ -481,7 +481,7 @@ image.onerror = function() {
          addButton("https://via.placeholder.com/32", "Energy Recharge", true);
          addButton("https://via.placeholder.com/42", "Mining", false);
 
-
+ 
          Telegram.WebApp.MainButton.disable()
 
     }
