@@ -187,6 +187,22 @@
         border-radius: 10px;
         height: 100px;
     }
+    .ios-button.deactivated {
+        display: block;
+        background-color: #fff;
+        color: #000;
+        text-align: left;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        width: 100%;
+        font-size: 1rem;
+        position: relative;
+        border-bottom: 1px solid #ccc;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        height: 100px;
+    }
     .ios-button::after {
         content: '>';
         position: absolute;
@@ -495,7 +511,7 @@ image.onerror = function() {
     function addButton(imageSrc, text, isActive) {
   var button = document.createElement("button");
   button.innerHTML = `<img src="${imageSrc}" class="icon" alt="Icon"> ${text}`;
-  button.className = isActive ? "modal-button" : "modal-button deactivated";
+  button.className = isActive ? ".ios-button" : ".ios-button deactivated";
   document.querySelector(".modal-body").appendChild(button);
  
   var discription = document.createElement("a");
