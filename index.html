@@ -511,9 +511,10 @@ image.onerror = function() {
     // Function to add a button to the modal
     function addButton(imageSrc, text, isActive) {
   var button = document.createElement("button");
-  button.innerHTML = `<img src="${imageSrc}" class="icon" alt="Icon"> ${text}`;
+//   button.innerHTML = `<img src="${imageSrc}" class="icon" alt="Icon"> ${text}`;
+button.innerHTML = "${text}"
   button.className = isActive ? ".ios-button" : ".ios-button deactivated";
-  document.querySelector(".modal-body").appendChild(button);
+  document.querySelector(".content").appendChild(button);
  
   var discription = document.createElement("a");
   discription.innerHTML = `This is very good button ${text}`;
