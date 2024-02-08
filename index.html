@@ -630,6 +630,10 @@ image.onerror = function() {
                 text      : 'SHOPY',
                 is_visible: true
             }).onClick(openModal);
+            mainButton.color = Telegram.WebApp.themeParams.button_color
+        mainButton.textColor = Telegram.WebApp.themeParams.button_text_color
+        mainButton.text = "SHOPY"
+        Telegram.WebApp.MainButton.enable()
    window.Telegram.WebApp.ready()
   
 //    window.Telegram.WebApp.PopupParams.title = "Testing"
