@@ -260,7 +260,10 @@
         <!-- Buttons will be added here -->
       </div>
       <div class="content" id="upgradeButtons">
-
+        <button class="ios-button" id="_profitability" onclick="upgrades.upgradeProfitability()"></button>
+        <button class="ios-button" id="_energyCapacity" onclick="upgrades.upgradeEnergy()"></button>
+        <button class="ios-button" id="_energyRegen" onclick="upgrades.upgradeRegen()"></button>
+        <button class="ios-button" id="_mining" onclick="upgrades.upgradeMining()"></button>
     </div>
     <div class="start-body">
     <h5>Level up info</h5>
@@ -300,6 +303,52 @@
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
+
+
+class Upgrades{
+        constructor(){
+            this.upgrades = [];
+            this.energyLvl = 0;
+            this.energyRegen = 0;
+            this.profitability = 0;
+            this.mining = 0;
+        }
+        upgradeProfitability(){
+            this.profitability = Math.round(this.profitability + 1)
+        }
+        upgradeEnergy(){
+            this.energyLvl = Math.round( this.energyLvl + 1)
+        }
+        upgradeRegen(){
+            this.energyRegen = Math.round( this.energyRegen + 1)
+        }
+        upgradeMining(){
+            this.mining = Math.round(this.mining + 1 )
+        }
+        updateButtons(){
+            document.getElementById("_profitability").textContent = "Profitability lvl : "+ this.profitability
+            document.getElementById("_energyCapacity").textContent = "Energy lvl : "+ this.energyLvl
+            document.getElementById("_energyRegen").textContent = "Regeneration lvl : "+ this.energyRegen
+            document.getElementById("_mining").textContent = "Mining lvl : "+ this.mining
+
+
+            // addButton("https://via.placeholder.com/12", "Profitability: " + this.profitability, true);
+            // addButton("https://via.placeholder.com/22", "Energy Limit: "+ this.energyLvl, true);
+            // addButton("https://via.placeholder.com/32", "Energy Recharge: "+ this.energyRecharge, true);
+            // addButton("https://via.placeholder.com/42", "Mining: "+ this.mining , false);
+        }
+//         addButton(imageSrc, text, isActive){
+//         upgrades.text = 0
+//          var button = document.createElement("button");
+//          button.innerHTML = `<img src="${imageSrc}" class="icon" alt="Icon"> ${text}`;
+//          button.className = "ios-button" 
+//          document.getElementById("upgradeButtons").appendChild(button)
+// }
+    }
+
+    var upgrades = new Upgrades();
+
+
     class GameSystem{
         constructor(){
             this.score = 0;
@@ -502,39 +551,25 @@ image.onerror = function() {
         window.Telegram.WebApp.BackButton.onClick(closeModal)
         modal.style.display = "block";
          // Example usage:
-         addButton("https://via.placeholder.com/12", "Profitability", true);
-         addButton("https://via.placeholder.com/22", "Energy Limit", true);
 
        //  Telegram.WebApp.showConfirm("Are you sure?");
         // window.Telegram.WebApp.showAlert("message"[openModal])
         //  window.Telegram.WebApp.showConfirm("message",[openModal])
 
 
-         addButton("https://via.placeholder.com/32", "Energy Recharge", true);
-         addButton("https://via.placeholder.com/42", "Mining", false);
-
+    upgrades.updateButtons();
  
          //Telegram.WebApp.MainButton.disable()
         mainButton.setText = "hello world"
     }
  
+
     let closeModal = () => {
         window.Telegram.WebApp.BackButton.hide()
         modal.style.display = "none";
         Telegram.WebApp.MainButton.enable()
     }
-    // Function to add a button to the modal
-    function addButton(imageSrc, text, isActive) {
-  var button = document.createElement("button");
-     button.innerHTML = `<img src="${imageSrc}" class="icon" alt="Icon"> ${text}`;
-    button.className = "ios-button" 
-    document.getElementById("upgradeButtons").appendChild(button)
-//   document.querySelector(".content").appendChild(button);
- 
-//   var discription = document.createElement("a");
-//   discription.innerHTML = `This is very good button ${text}`;
-//   document.querySelector(".modal-body").appendChild(discription);
-}
+
     
    
                     
