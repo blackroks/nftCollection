@@ -622,8 +622,8 @@ image.onerror = function() {
    window.requestAnimationFrame(step);
    window.Telegram.WebApp.BackButton.hide()
    window.Telegram.WebApp.enableClosingConfirmation()
-   mainButton = Telegram.WebApp.MainButton.setParams({
-                text      : 'SHOP',
+   Telegram.WebApp.MainButton.setParams({
+                text      : 'SHOPY',
                 is_visible: true
             }).onClick(openModal);
    window.Telegram.WebApp.ready()
