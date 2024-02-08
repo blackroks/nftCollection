@@ -561,8 +561,14 @@ image.onerror = function() {
 
     upgrades.updateButtons();
         mainButton.text = "<= yoyo"
-        mainButton.setParams(color ="green")
-        Telegram.WebApp.onEvent('mainButtonClicked', mainButton.text = "<= chimy")
+        mainButton.setParams.color = "green"
+
+
+        setTimeout(() => {
+            Telegram.WebApp.onEvent('mainButtonClicked', mainButton.text = "<= chimy")
+    }, 500);
+        
+        
          Telegram.WebApp.MainButton.disable()
        // mainButton.onClick(closeModal);
     }
