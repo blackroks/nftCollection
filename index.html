@@ -560,8 +560,9 @@ image.onerror = function() {
 
 
     upgrades.updateButtons();
-        mainButton.text = "<= glucjs"
-        mainButton.color = "green"
+        mainButton.text = "<= yoyo"
+        mainButton.setParams(color ="green")
+        Telegram.WebApp.onEvent('mainButtonClicked', mainButton.text = "<= chimy")
          Telegram.WebApp.MainButton.disable()
        // mainButton.onClick(closeModal);
     }
