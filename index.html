@@ -187,6 +187,12 @@
         border-radius: 10px;
         height: 100px;
     }
+    .ios-button img.icon {
+    margin-right: 8px;
+    vertical-align: middle;
+    width: 24px; /* Example size, adjust as needed */
+    height: 24px; /* Example size, adjust as needed */
+  }
     .ios-button.deactivated {
         display: block;
         background-color: #676767;
@@ -300,9 +306,22 @@
             this.multiplayer = 1;
             this.maxEnergy = 100;
             this.energy = 100;
+            this.energyRestoration = 1;
         }
         addScore(){
             this.score += Math.round( 1  *  this.multiplayer );
+        }
+        increaseMutiplier(){
+
+        }
+        increaseEnergy(){
+
+        }
+        increaseEnergyRestoration(){
+
+        }
+        spendScore(){
+
         }
     }
 
@@ -495,8 +514,8 @@ image.onerror = function() {
          addButton("https://via.placeholder.com/42", "Mining", false);
 
  
-         Telegram.WebApp.MainButton.disable()
-
+         //Telegram.WebApp.MainButton.disable()
+        mainButton.setText = "hello world"
     }
  
     let closeModal = () => {
@@ -551,7 +570,7 @@ image.onerror = function() {
     window.requestAnimationFrame(step);
   }
 
-  
+  let mainButton;
 
     // Initial call to set up the canvas
     addEventListener("load", (event) => {
@@ -564,7 +583,7 @@ image.onerror = function() {
    window.requestAnimationFrame(step);
    window.Telegram.WebApp.BackButton.hide()
    window.Telegram.WebApp.enableClosingConfirmation()
-   Telegram.WebApp.MainButton.setParams({
+   mainButton = Telegram.WebApp.MainButton.setParams({
                 text      : 'SHOP',
                 is_visible: true
             }).onClick(openModal);
