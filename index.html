@@ -560,11 +560,7 @@ image.onerror = function() {
 
 
     upgrades.updateButtons();
-        mainButton.text = "<= yoyo"
         mainButton.color = Telegram.WebApp.themeParams.button_text_color
-
-
-        
          Telegram.WebApp.MainButton.disable()
        // mainButton.onClick(closeModal);
     }
@@ -573,6 +569,7 @@ image.onerror = function() {
     let closeModal = () => {
         Telegram.WebApp.BackButton.hide()
         modal.style.display = "none";
+        mainButton.color = Telegram.WebApp.themeParams.button_color
         Telegram.WebApp.MainButton.enable()
     }
 
