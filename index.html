@@ -189,8 +189,8 @@
     }
     .ios-button.deactivated {
         display: block;
-        background-color: #fff;
-        color: #000;
+        background-color: #676767;
+        color: #c9c9c9;
         text-align: left;
         padding: 10px;
         margin: 10px 0;
@@ -198,8 +198,6 @@
         width: 100%;
         font-size: 1rem;
         position: relative;
-        border-bottom: 1px solid #ccc;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         border-radius: 10px;
         height: 100px;
     }
@@ -243,33 +241,31 @@
   <!-- Modal content -->
   <div class="modal-content">
     <div id="iosbar">
-        <div class="navbar">
+        <!-- <div class="navbar">
             <h1>App Title</h1>
-        </div>
-        
+        </div> -->
+        <div class="modal-header">
+            <h2>Wallet:</h2>
+          </div>
         </div> 
-    <div class="modal-header">
-      <h2>Wallet:</h2>
-    </div>
+   
     <div class="start-body">
         <h5>Buy upgrades</h5>
         <!-- Buttons will be added here -->
       </div>
       <div class="content" id="upgradeButtons">
-        <button class="ios-button.deactivated">Button with Chevron</button>
-        <button class="ios-button">Another Button with Chevronn</button>
-        <!-- Add more buttons as needed -->
-        <div class="modal-body">
-            <!-- Buttons will be added here -->
-          </div>
+
     </div>
-    
+    <div class="start-body">
+    <h5>Level up info</h5>
+    </div>
     <div class="horizontal-scroll">
+       
         <div class="card">
             <p>Item 1</p>
         </div>
         <div class="card">
-            <p>Item 2</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
         <div class="card">
             <p>Item 3</p>
@@ -511,10 +507,9 @@ image.onerror = function() {
     // Function to add a button to the modal
     function addButton(imageSrc, text, isActive) {
   var button = document.createElement("button");
-//   button.innerHTML = `<img src="${imageSrc}" class="icon" alt="Icon"> ${text}`;
-    button.innerHTML = "test button"
-    button.className = ".ios-button" 
-    document.getElementById("buttonUpgrades").appendChild(button)
+     button.innerHTML = `<img src="${imageSrc}" class="icon" alt="Icon"> ${text}`;
+    button.className = "ios-button" 
+    document.getElementById("upgradeButtons").appendChild(button)
 //   document.querySelector(".content").appendChild(button);
  
 //   var discription = document.createElement("a");
