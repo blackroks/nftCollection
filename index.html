@@ -315,15 +315,19 @@ class Upgrades{
         }
         upgradeProfitability(){
             this.profitability = Math.round(this.profitability + 1)
+            updateButtons()
         }
         upgradeEnergy(){
             this.energyLvl = Math.round( this.energyLvl + 1)
+            updateButtons()
         }
         upgradeRegen(){
             this.energyRegen = Math.round( this.energyRegen + 1)
+            updateButtons()
         }
         upgradeMining(){
             this.mining = Math.round(this.mining + 1 )
+            updateButtons()
         }
         updateButtons(){
             document.getElementById("_profitability").textContent = "Profitability lvl : "+ this.profitability
@@ -560,7 +564,7 @@ image.onerror = function() {
     upgrades.updateButtons();
  
          //Telegram.WebApp.MainButton.disable()
-        mainButton.setText = "hello world"
+        mainButton.onClick(closeModal);
     }
  
 
