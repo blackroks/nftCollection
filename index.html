@@ -154,10 +154,6 @@
     text-align: center;
   }
 
-</style>
-
-
-<style>
 
 .navbar {
         display: flex;
@@ -251,7 +247,7 @@
             <h1>App Title</h1>
         </div> -->
         <div class="modal-header">
-            <h2>Wallet:</h2>
+            <h2>Wallet: <a id="_wallet"></a></h2>
           </div>
         </div> 
    
@@ -331,6 +327,7 @@ class Upgrades{
             this.updateButtons()
         }
         updateButtons(){
+            document.getElementById("_wallet").textContent = game.score + "$"
             document.getElementById("_profitability").textContent = "Profitability lvl : "+ this.profitability
             document.getElementById("_energyCapacity").textContent = "Energy lvl : "+ this.energyLvl
             document.getElementById("_energyRegen").textContent = "Regeneration lvl : "+ this.energyRegen
@@ -563,7 +560,7 @@ image.onerror = function() {
 
 
     upgrades.updateButtons();
- 
+        mainButton.text = "hahaha"
          Telegram.WebApp.MainButton.disable()
        // mainButton.onClick(closeModal);
     }
@@ -623,7 +620,7 @@ image.onerror = function() {
    window.requestAnimationFrame(step);
    window.Telegram.WebApp.BackButton.hide()
    window.Telegram.WebApp.enableClosingConfirmation()
-   Telegram.WebApp.MainButton.setParams({
+   mainButton = Telegram.WebApp.MainButton.setParams({
                 text      : 'SHOPY',
                 is_visible: true
             }).onClick(openModal);
