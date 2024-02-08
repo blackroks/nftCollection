@@ -561,11 +561,10 @@ image.onerror = function() {
         //  window.Telegram.WebApp.showConfirm("message",[openModal])
 
 
-    
+    upgrades.updateButtons();
  
-        Telegram.WebApp.MainButton.disable()
-        upgrades.updateButtons();
-        //mainButton.onClick(closeModal());
+         //Telegram.WebApp.MainButton.disable()
+        mainButton.onClick(closeModal);
     }
  
 
