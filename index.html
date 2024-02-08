@@ -314,6 +314,7 @@ class Upgrades{
             this.mining = 0;
         }
         upgradeProfitability(){
+            Telegram.WebApp.showConfirm("Are you sure?");
             this.profitability = Math.round(this.profitability + 1)
             this.updateButtons()
         }
@@ -563,13 +564,13 @@ image.onerror = function() {
 
     upgrades.updateButtons();
  
-         //Telegram.WebApp.MainButton.disable()
-        mainButton.onClick(closeModal);
+         Telegram.WebApp.MainButton.disable()
+       // mainButton.onClick(closeModal);
     }
  
 
     let closeModal = () => {
-        window.Telegram.WebApp.BackButton.hide()
+        Telegram.WebApp.BackButton.hide()
         modal.style.display = "none";
         Telegram.WebApp.MainButton.enable()
     }
