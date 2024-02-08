@@ -560,7 +560,8 @@ image.onerror = function() {
 
 
     upgrades.updateButtons();
-        mainButton.text = "hahaha"
+        mainButton.text = "<= Back"
+        mainButton.onClick = closeModal();
          Telegram.WebApp.MainButton.disable()
        // mainButton.onClick(closeModal);
     }
