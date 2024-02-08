@@ -168,6 +168,7 @@
         color: #007aff;
     }
     .ios-button {
+        font-family: 'EgyptFont', sans-serif;
         display: block;
         background-color: #fff;
         color: #000;
@@ -213,6 +214,7 @@
     }
     
     .content {
+        font-family: 'EgyptFont', sans-serif;
         padding: 1rem;
     }
     .horizontal-scroll {
@@ -242,14 +244,11 @@
 <div id="myModal" class="modal">
   <!-- Modal content -->
   <div class="modal-content">
-    <div id="iosbar">
-        <!-- <div class="navbar">
-            <h1>App Title</h1>
-        </div> -->
+    <!-- <div id="iosbar">
         <div class="modal-header">
             <h2>Wallet: <a id="_wallet"></a></h2>
           </div>
-        </div> 
+        </div>  -->
    
     <div class="start-body">
         <h5>Buy upgrades</h5>
@@ -563,7 +562,7 @@ image.onerror = function() {
     upgrades.updateButtons();
         mainButton.color = Telegram.WebApp.themeParams.button_text_color
         mainButton.textColor = Telegram.WebApp.themeParams.button_color
-        mainButton.text = "Lvl " + game.level + ' / ' + game.score + "💰"
+        mainButton.text = "Lvl " + game.level + ' / ' + game.score + "$"
          Telegram.WebApp.MainButton.disable()
        // mainButton.onClick(closeModal);
     }
