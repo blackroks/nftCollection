@@ -563,7 +563,7 @@ image.onerror = function() {
     upgrades.updateButtons();
         mainButton.color = Telegram.WebApp.themeParams.button_text_color
         mainButton.textColor = Telegram.WebApp.themeParams.button_color
-        mainButton.text = "Lvl " + game.level
+        mainButton.text = "Lvl " + game.level + ' / ' + game.score + "💰"
          Telegram.WebApp.MainButton.disable()
        // mainButton.onClick(closeModal);
     }
