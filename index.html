@@ -353,6 +353,7 @@ class Upgrades{
 
     class GameSystem{
         constructor(){
+            this.level = 1;
             this.score = 0;
             this.multiplayer = 1;
             this.maxEnergy = 100;
@@ -561,6 +562,8 @@ image.onerror = function() {
 
     upgrades.updateButtons();
         mainButton.color = Telegram.WebApp.themeParams.button_text_color
+        mainButton.textColor = Telegram.WebApp.themeParams.button_color
+        mainButton.text = "Lvl " + game.level
          Telegram.WebApp.MainButton.disable()
        // mainButton.onClick(closeModal);
     }
@@ -570,6 +573,8 @@ image.onerror = function() {
         Telegram.WebApp.BackButton.hide()
         modal.style.display = "none";
         mainButton.color = Telegram.WebApp.themeParams.button_color
+        mainButton.textColor = Telegram.WebApp.themeParams.button_text_color
+        mainButton.text = "SHOPY"
         Telegram.WebApp.MainButton.enable()
     }
 
