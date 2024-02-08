@@ -255,9 +255,9 @@
         <h5>Buy upgrades</h5>
         <!-- Buttons will be added here -->
       </div>
-      <div class="content">
-        <button class="ios-button">Button with Chevron</button>
-        <button class="ios-button">Another Button with Chevron,Another Button with Chevron,Another Button with Chevron,Another Button with Chevron,Another Button with Chevron</button>
+      <div class="content" id="upgradeButtons">
+        <button class="ios-button.deactivated">Button with Chevron</button>
+        <button class="ios-button">Another Button with Chevronn</button>
         <!-- Add more buttons as needed -->
         <div class="modal-body">
             <!-- Buttons will be added here -->
@@ -482,7 +482,7 @@ image.onerror = function() {
     let openModal = () => {
         var modalContent = document.querySelector('.modal-content');
          modalContent.scrollTop = 0;
-        document.querySelector(".modal-body").innerHTML = ''
+       // document.querySelector(".modal-body").innerHTML = ''
         window.Telegram.WebApp.BackButton.show()
         window.Telegram.WebApp.BackButton.onClick(closeModal)
         modal.style.display = "block";
@@ -512,9 +512,10 @@ image.onerror = function() {
     function addButton(imageSrc, text, isActive) {
   var button = document.createElement("button");
 //   button.innerHTML = `<img src="${imageSrc}" class="icon" alt="Icon"> ${text}`;
-button.innerHTML = text
-  button.className = ".ios-button" 
-  document.querySelector(".content").appendChild(button);
+    button.innerHTML = "test button"
+    button.className = ".ios-button" 
+    document.getElementById("buttonUpgrades").appendChild(button)
+//   document.querySelector(".content").appendChild(button);
  
 //   var discription = document.createElement("a");
 //   discription.innerHTML = `This is very good button ${text}`;
