@@ -214,7 +214,6 @@
     }
     
     .content {
-        font-family: 'EgyptFont', sans-serif;
         padding: 1rem;
     }
     .horizontal-scroll {
@@ -326,7 +325,7 @@ class Upgrades{
             this.updateButtons()
         }
         updateButtons(){
-            document.getElementById("_wallet").textContent = game.score + "$"
+            //document.getElementById("_wallet").textContent = game.score + "$"
             document.getElementById("_profitability").textContent = "Profitability lvl : "+ this.profitability
             document.getElementById("_energyCapacity").textContent = "Energy lvl : "+ this.energyLvl
             document.getElementById("_energyRegen").textContent = "Regeneration lvl : "+ this.energyRegen
