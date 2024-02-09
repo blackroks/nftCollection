@@ -412,6 +412,7 @@ class Upgrades{
         }
         spendScore(x){
             this.score -= Math.round( x );
+            upgrades.updateButtons();
         }
         increaseMutiplier(){
 
@@ -688,6 +689,7 @@ image.onerror = function() {
 //    window.Telegram.WebApp.showPopup(params[, callback])
    
   setTimeout(() => {
+    upgrades.updateButtons();
     window.Telegram.WebApp.expand()
     }, 500);
   });
