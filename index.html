@@ -318,6 +318,7 @@ const energyRegenerationUpgrades = [
 var testCallback = (testbool) => {
     if(testbool){
     if(upgrades.currentUpgrade == "energy"){
+        game.spendScore(energyCapacityUpgrades[ this.energyLvl ].cost)
         upgrades._upgradeEnergy()
     }else if(upgrades.currentUpgrade == "regen"){
         upgrades._upgradeRegen()
@@ -349,6 +350,9 @@ class Upgrades{
             this.updateButtons()
         }
         upgradeEnergy(){
+            if(energyCapacityUpgrades[ this.energyLvl ].cost > game.score){
+                return
+            }
             this.currentUpgrade = "energy"
             Telegram.WebApp.showConfirm("Buy "+energyCapacityUpgrades[ this.energyLvl ].name + " for " + energyCapacityUpgrades[ this.energyLvl ].cost + "$?",testCallback);
         }
@@ -371,8 +375,8 @@ class Upgrades{
         updateButtons(){
             //document.getElementById("_wallet").textContent = game.score + "$"
             document.getElementById("_profitability").textContent = "Profitability lvl : "+ this.profitability
-            document.getElementById("_energyCapacity").textContent = "Energy lvl : "+ energyCapacityUpgrades[ this.energyLvl ].name + " " + energyCapacityUpgrades[ this.energyLvl ].cost + "$"
-            document.getElementById("_energyRegen").textContent = "Regeneration lvl : "+ this.energyRegen
+            document.getElementById("_energyCapacity").textContent = "🔋 : "+ energyCapacityUpgrades[ this.energyLvl ].name + " " + energyCapacityUpgrades[ this.energyLvl ].cost + "$"
+            document.getElementById("_energyRegen").textContent = "⚡ : "+ energyRegenerationUpgrades[ this.energyRegen ].name + " for " + energyRegenerationUpgrades[ this.energyRegen ].cost + "$"
             document.getElementById("_mining").textContent = "Mining lvl : "+ this.mining
 
 
@@ -404,6 +408,9 @@ class Upgrades{
         }
         addScore(){
             this.score += Math.round( 1  *  this.multiplayer );
+        }
+        spendScore(x){
+            this.score -= Math.round( x );
         }
         increaseMutiplier(){
 
