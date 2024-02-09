@@ -528,6 +528,19 @@ image.onerror = function() {
 
 
   //EVENT LISTENERS
+  document.getElementById("gifOverlay").addEventListener('touchstart', function(event) {
+    var touch = event.touches[0];
+    if (isInsideCircle(touch.clientX, touch.clientY)) {
+        if(game.energy < 1)return;
+      window.Telegram.WebApp.HapticFeedback.selectionChanged()
+      isCircleTouched = true;
+      drawCircle();
+      game.energy -=1;
+      const text = "+1"; // The text to show
+     createTextAtPosition(touch.clientX, touch.clientY, text);
+     game.addScore()
+    }
+  }, { passive: false });
   // Event listener for touchstart
   canvas.addEventListener('touchstart', function(event) {
     var touch = event.touches[0];
