@@ -352,7 +352,6 @@ class Upgrades{
             if(energyCapacityUpgrades[ this.energyLvl ].cost > game.score){
                 return
             }
-            mainButton.text = "SYUKA"
             this.currentUpgrade = "energy"
             Telegram.WebApp.showConfirm("Buy "+energyCapacityUpgrades[ this.energyLvl ].name + " for " + energyCapacityUpgrades[ this.energyLvl ].cost + "$?",testCallback);
         }
@@ -363,10 +362,14 @@ class Upgrades{
             
         }
         upgradeRegen(){
+            if(energyRegenerationUpgrades[ this.energyRegen ].cost > game.score){
+                return
+            }
             this.currentUpgrade = "regen"
             Telegram.WebApp.showConfirm("Buy "+energyRegenerationUpgrades[ this.energyRegen ].name + " for " + energyRegenerationUpgrades[ this.energyRegen ].cost + "$?",testCallback);
         }
         _upgradeRegen(){
+            game.spendScore(energyRegenerationUpgrades[ this.energyRegen ].cost)
             this.energyRegen = Math.round( this.energyRegen + 1)
             this.updateButtons()
         }
@@ -376,24 +379,12 @@ class Upgrades{
         }
         updateButtons(){
             //document.getElementById("_wallet").textContent = game.score + "$"
-            document.getElementById("_profitability").textContent = "Profitability lvl : "+ this.profitability
+            document.getElementById("_profitability").textContent = "🪙 : "+ this.profitability
             document.getElementById("_energyCapacity").textContent = "🔋 : "+ energyCapacityUpgrades[ this.energyLvl ].name + " " + energyCapacityUpgrades[ this.energyLvl ].cost + "$"
             document.getElementById("_energyRegen").textContent = "⚡ : "+ energyRegenerationUpgrades[ this.energyRegen ].name + " for " + energyRegenerationUpgrades[ this.energyRegen ].cost + "$"
-            document.getElementById("_mining").textContent = "Mining lvl : "+ this.mining
-
-
-            // addButton("https://via.placeholder.com/12", "Profitability: " + this.profitability, true);
-            // addButton("https://via.placeholder.com/22", "Energy Limit: "+ this.energyLvl, true);
-            // addButton("https://via.placeholder.com/32", "Energy Recharge: "+ this.energyRecharge, true);
-            // addButton("https://via.placeholder.com/42", "Mining: "+ this.mining , false);
+            document.getElementById("_mining").textContent = "⛏️ : "+ this.mining
+            mainButton.text = "Lvl " + game.level + ' / ' + game.score + "$"
         }
-//         addButton(imageSrc, text, isActive){
-//         upgrades.text = 0
-//          var button = document.createElement("button");
-//          button.innerHTML = `<img src="${imageSrc}" class="icon" alt="Icon"> ${text}`;
-//          button.className = "ios-button" 
-//          document.getElementById("upgradeButtons").appendChild(button)
-// }
     }
 
     var upgrades = new Upgrades();
@@ -612,7 +603,6 @@ image.onerror = function() {
     upgrades.updateButtons();
         mainButton.color = Telegram.WebApp.themeParams.button_text_color
         mainButton.textColor = Telegram.WebApp.themeParams.button_color
-        mainButton.text = "Lvl " + game.level + ' / ' + game.score + "$"
          Telegram.WebApp.MainButton.disable()
        // mainButton.onClick(closeModal);
     }
