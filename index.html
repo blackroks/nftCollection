@@ -322,10 +322,11 @@ class Upgrades{
             this.energyRegen = 0;
             this.profitability = 0;
             this.mining = 0;
+            this.maxLevels = 6;
             this.pricesArray = []
         }
         upgradeProfitability(){
-            Telegram.WebApp.showConfirm("Are you sure?");
+            Telegram.WebApp.showConfirm("Are you sure?",closeModal);
             this.profitability = Math.round(this.profitability + 1)
             this.updateButtons()
         }
