@@ -297,7 +297,23 @@
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
+const energyCapacityUpgrades = [
+  { name: "Small Battery Pack", increase: 10, cost: 100 },
+  { name: "Medium Battery Pack", increase: 25, cost: 250 },
+  { name: "Large Battery Pack", increase: 50, cost: 500 },
+  { name: "High-Capacity Battery", increase: 100, cost: 1000 },
+  { name: "Industrial Battery", increase: 250, cost: 2500 },
+  { name: "Quantum Battery", increase: 500, cost: 5000 }
+];
 
+const energyRegenerationUpgrades = [
+  { name: "Potato generator", increase: 1, cost: 100 },
+  { name: "Wind Turbine", increase: 1, cost: 300 },
+  { name: "Solar Panels", increase: 3, cost: 750 },
+  { name: "Hydroelectric Dam", increase: 10, cost: 1500 },
+  { name: "Nuclear Reactor", increase: 25, cost: 3750 },
+  { name: "Fusion Reactor", increase: 50, cost: 7500 }
+];
 
 class Upgrades{
         constructor(){
@@ -306,6 +322,7 @@ class Upgrades{
             this.energyRegen = 0;
             this.profitability = 0;
             this.mining = 0;
+            this.pricesArray = []
         }
         upgradeProfitability(){
             Telegram.WebApp.showConfirm("Are you sure?");
@@ -313,6 +330,7 @@ class Upgrades{
             this.updateButtons()
         }
         upgradeEnergy(){
+            Telegram.WebApp.showConfirm("Buy "+energyCapacityUpgrades[ this.energyLvl ].name + " for " + energyCapacityUpgrades[ this.energyLvl ].cost + "$?");
             this.energyLvl = Math.round( this.energyLvl + 1)
             this.updateButtons()
         }
@@ -327,7 +345,7 @@ class Upgrades{
         updateButtons(){
             //document.getElementById("_wallet").textContent = game.score + "$"
             document.getElementById("_profitability").textContent = "Profitability lvl : "+ this.profitability
-            document.getElementById("_energyCapacity").textContent = "Energy lvl : "+ this.energyLvl
+            document.getElementById("_energyCapacity").textContent = "Energy lvl : "+ energyCapacityUpgrades[ this.energyLvl ].name + " " + energyCapacityUpgrades[ this.energyLvl ].cost + "$"
             document.getElementById("_energyRegen").textContent = "Regeneration lvl : "+ this.energyRegen
             document.getElementById("_mining").textContent = "Mining lvl : "+ this.mining
 
