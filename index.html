@@ -316,14 +316,15 @@ const energyRegenerationUpgrades = [
 ];
 
 var testCallback = (testbool) => {
-
-    if(testbool){
-        document.getElementById("_energyCapacity").textContent = "CLICKED YES"
-    }else{
-        document.getElementById("_energyCapacity").textContent = "CLICKED NO"
+    if(upgrades.currentUpgrade == "energy"){
+        upgrades._upgradeEnergy()
+    }else if(upgrades.currentUpgrade == "regen"){
+        upgrades._upgradeRegen()
+    }else if(upgrades.currentUpgrade == "profit"){
+        upgrades._upgradeProfitability()
+    }else if(upgrades.currentUpgrade == "mining"){
+        upgrades._upgradeMining()
     }
-    
-
 }
 
 class Upgrades{
@@ -335,18 +336,29 @@ class Upgrades{
             this.mining = 0;
             this.maxLevels = 6;
             this.pricesArray = []
+            this.currentUpgrade;
         }
         upgradeProfitability(){
-            Telegram.WebApp.showConfirm("Are you sure?",testCallback);
+            this.currentUpgrade = "profit"
+            Telegram.WebApp.showConfirm("Buy "+energyCapacityUpgrades[ this.energyLvl ].name + " for " + energyCapacityUpgrades[ this.energyLvl ].cost + "$?",testCallback);
+        }
+        _upgradeProfitability(){
             this.profitability = Math.round(this.profitability + 1)
             this.updateButtons()
         }
         upgradeEnergy(){
-            Telegram.WebApp.showConfirm("Buy "+energyCapacityUpgrades[ this.energyLvl ].name + " for " + energyCapacityUpgrades[ this.energyLvl ].cost + "$?");
+            this.currentUpgrade = "energy"
+            Telegram.WebApp.showConfirm("Buy "+energyCapacityUpgrades[ this.energyLvl ].name + " for " + energyCapacityUpgrades[ this.energyLvl ].cost + "$?",testCallback);
+        }
+        _upgradeEnergy(){
             this.energyLvl = Math.round( this.energyLvl + 1)
             this.updateButtons()
         }
         upgradeRegen(){
+            this.currentUpgrade = "regen"
+            Telegram.WebApp.showConfirm("Buy "+energyRegenerationUpgrades[ this.energyRegen ].name + " for " + energyRegenerationUpgrades[ this.energyRegen ].cost + "$?",testCallback);
+        }
+        _upgradeRegen(){
             this.energyRegen = Math.round( this.energyRegen + 1)
             this.updateButtons()
         }
