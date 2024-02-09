@@ -318,7 +318,6 @@ const energyRegenerationUpgrades = [
 var testCallback = (testbool) => {
     if(testbool){
     if(upgrades.currentUpgrade == "energy"){
-        game.spendScore(energyCapacityUpgrades[ this.energyLvl ].cost)
         upgrades._upgradeEnergy()
     }else if(upgrades.currentUpgrade == "regen"){
         upgrades._upgradeRegen()
@@ -357,8 +356,10 @@ class Upgrades{
             Telegram.WebApp.showConfirm("Buy "+energyCapacityUpgrades[ this.energyLvl ].name + " for " + energyCapacityUpgrades[ this.energyLvl ].cost + "$?",testCallback);
         }
         _upgradeEnergy(){
+            game.spendScore(energyCapacityUpgrades[this.energyLvl].cost)
             this.energyLvl = Math.round( this.energyLvl + 1)
             this.updateButtons()
+            
         }
         upgradeRegen(){
             this.currentUpgrade = "regen"
