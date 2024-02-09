@@ -316,6 +316,7 @@ const energyRegenerationUpgrades = [
 ];
 
 var testCallback = (testbool) => {
+    if(testbool){
     if(upgrades.currentUpgrade == "energy"){
         upgrades._upgradeEnergy()
     }else if(upgrades.currentUpgrade == "regen"){
@@ -325,6 +326,7 @@ var testCallback = (testbool) => {
     }else if(upgrades.currentUpgrade == "mining"){
         upgrades._upgradeMining()
     }
+}
 }
 
 class Upgrades{
