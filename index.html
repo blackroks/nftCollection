@@ -315,6 +315,17 @@ const energyRegenerationUpgrades = [
   { name: "Fusion Reactor", increase: 50, cost: 7500 }
 ];
 
+var testCallback = (testbool) => {
+
+    if(testbool){
+        document.getElementById("_energyCapacity").textContent = "CLICKED YES"
+    }else{
+        document.getElementById("_energyCapacity").textContent = "CLICKED NO"
+    }
+    
+
+}
+
 class Upgrades{
         constructor(){
             this.upgrades = [];
@@ -326,7 +337,7 @@ class Upgrades{
             this.pricesArray = []
         }
         upgradeProfitability(){
-            Telegram.WebApp.showConfirm("Are you sure?",closeModal);
+            Telegram.WebApp.showConfirm("Are you sure?",testCallback);
             this.profitability = Math.round(this.profitability + 1)
             this.updateButtons()
         }
