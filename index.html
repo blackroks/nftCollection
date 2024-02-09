@@ -241,7 +241,7 @@
     left: 0;
     height: 100%;
     width: 100%;
-    background: url('https://raw.githubusercontent.com/blackroks/nftCollection/main/images/spark.gif') center center no-repeat;
+    background: url('https://raw.githubusercontent.com/blackroks/nftCollection/main/images/party.gif') center center no-repeat;
     background-size: cover;
     display: none;
     opacity: 0;
@@ -541,6 +541,20 @@ image.onerror = function() {
      game.addScore()
     }
   }, { passive: false });
+
+  document.getElementById("gifOverlay").addEventListener('touchend', function(event) {
+    isCircleTouched = false;
+    drawCircle();
+
+    //prevent double tap zoom
+    const now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+      event.preventDefault();
+    }
+    lastTouchEnd = now;
+  }, { passive: false });
+
+
   // Event listener for touchstart
   canvas.addEventListener('touchstart', function(event) {
     var touch = event.touches[0];
