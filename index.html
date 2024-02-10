@@ -253,7 +253,6 @@
 <body>
 
 
-
 <!-- The Modal -->
 <div id="myModal" class="modal">
   <!-- Modal content -->
@@ -304,11 +303,11 @@
 <h1 id="scoreUI"> SCORE </h1>
 <canvas id="myCanvas"></canvas>
 
-<!-- <div class="button-container">
-    <button>RATING</button>
-    <button>LEVEL</button>
-    <button id="myBtn">UPGRADE</button>
-  </div> -->
+<div class="button-container">
+    <button>?</button>
+    <button>?</button>
+    <button>?</button>
+  </div>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
@@ -596,7 +595,7 @@ canvas.addEventListener('touchend', function(event) {
 window.addEventListener('resize', resizeCanvas, false);
 
 // Resize the canvas to fill the screen when the orientation changes
-window.addEventListener('orientationchange', resizeCanvas, false);
+//window.addEventListener('orientationchange', resizeCanvas, false);
 
 document.addEventListener('contextmenu', function(event) {
     event.preventDefault();
@@ -636,34 +635,25 @@ let showEnergyBar = () => {
 <script>
     // Get the modal
     var modal = document.getElementById("myModal");
-    // Get the button that opens the modal
-    // var btn = document.getElementById("myBtn");
-    // // When the user clicks the button, open the modal 
-    // btn.onclick = function() {
-    //     openModal();
-    // }
-    
+ 
     let openModal = () => {
         var modalContent = document.querySelector('.modal-content');
-         modalContent.scrollTop = 0;
-       // document.querySelector(".modal-body").innerHTML = ''
+        modalContent.scrollTop = 0;
+        // document.querySelector(".modal-body").innerHTML = ''
         window.Telegram.WebApp.BackButton.show()
         window.Telegram.WebApp.BackButton.onClick(closeModal)
         modal.style.display = "block";
-         // Example usage:
-
-       //  Telegram.WebApp.showConfirm("Are you sure?");
+        // Example usage:
+        //  Telegram.WebApp.showConfirm("Are you sure?");
         // window.Telegram.WebApp.showAlert("message"[openModal])
         //  window.Telegram.WebApp.showConfirm("message",[openModal])
-
-
-    upgrades.updateButtons();
+        upgrades.updateButtons();
         mainButton.color = Telegram.WebApp.themeParams.button_text_color
         mainButton.textColor = Telegram.WebApp.themeParams.button_color
-         Telegram.WebApp.MainButton.disable()
-       // mainButton.onClick(closeModal);
+        Telegram.WebApp.MainButton.disable()
+        // mainButton.onClick(closeModal);
     }
- 
+
 
     let closeModal = () => {
         Telegram.WebApp.BackButton.hide()
@@ -672,76 +662,62 @@ let showEnergyBar = () => {
         mainButton.textColor = Telegram.WebApp.themeParams.button_text_color
         mainButton.text = "SHOPY"
         Telegram.WebApp.MainButton.enable()
-    }
-
-    
-   
-                    
+    }            
 
     </script>
     
     <script>
+setInterval(() => {
+if (game.energy < game.maxEnergy) {
+    game.energy = Math.round(game.energy + 1)
+}
+}, 1000);
 
-        //loops etc
+function step() {
+//energy
+showEnergyBar()
+//score
+let displayedScore = Number(document.getElementById("scoreUI").textContent)
+if (game.score > displayedScore) {
+    displayedScore++;
+    document.getElementById("scoreUI").textContent = Math.round(displayedScore);
+} else {
+    document.getElementById("scoreUI").textContent = Math.round(game.score);
+}
+window.requestAnimationFrame(step);
+}
 
-  setInterval(() => {
-    
-    if(game.energy < game.maxEnergy){
-        game.energy = Math.round(game.energy+1)
-    }
-    
-    }, 1000);
+let mainButton;
 
-  function step() {
-    // UpdateUI();
-    //footer info
+// Initial call to set up the canvas
+addEventListener("load", (event) => {
+//viewportHeight
+// window.Telegram.WebApp.HapticFeedback
+resizeCanvas();
+//let introtext = "d3clicker.engine "+ window.Telegram.WebApp.platform + " v." + window.Telegram.WebApp.version
+// document.getElementById("text").textContent = introtext
+// isVersionAtLeast(6.1)
+window.requestAnimationFrame(step);
+window.Telegram.WebApp.BackButton.hide()
+window.Telegram.WebApp.enableClosingConfirmation()
+mainButton = Telegram.WebApp.MainButton.setParams({
+    text: 'SHOPY',
+    is_visible: true
+}).onClick(openModal);
+Telegram.WebApp.MainButton.enable()
+window.Telegram.WebApp.ready()
 
-    //energy
-    showEnergyBar()
-    //score
-    let displayedScore = Number(document.getElementById("scoreUI").textContent)
-    if(game.score > displayedScore){
-        displayedScore++;
-        document.getElementById("scoreUI").textContent = Math.round(displayedScore);
-    }else{
-        document.getElementById("scoreUI").textContent = Math.round(game.score); 
-    }
-    window.requestAnimationFrame(step);
-  }
-
-  let mainButton;
-
-    // Initial call to set up the canvas
-    addEventListener("load", (event) => {
-    //viewportHeight
-    // window.Telegram.WebApp.HapticFeedback
-  resizeCanvas();
-    //let introtext = "d3clicker.engine "+ window.Telegram.WebApp.platform + " v." + window.Telegram.WebApp.version
-   // document.getElementById("text").textContent = introtext
-   // isVersionAtLeast(6.1)
-   window.requestAnimationFrame(step);
-   window.Telegram.WebApp.BackButton.hide()
-   window.Telegram.WebApp.enableClosingConfirmation()
-   mainButton = Telegram.WebApp.MainButton.setParams({
-                text      : 'SHOPY',
-                is_visible: true
-            }).onClick(openModal);
-            mainButton.color = Telegram.WebApp.themeParams.button_color
-        mainButton.textColor = Telegram.WebApp.themeParams.button_text_color
-        mainButton.text = "SHOPY"
-        Telegram.WebApp.MainButton.enable()
-   window.Telegram.WebApp.ready()
-  
 //    window.Telegram.WebApp.PopupParams.title = "Testing"
 //    window.Telegram.WebApp.PopupParams.message = "This is testing"
 //    window.Telegram.WebApp.showPopup(params[, callback])
-   
-  setTimeout(() => {
-    upgrades.updateButtons();
-    window.Telegram.WebApp.expand()
-    }, 500);
-  });
 
+setTimeout(() => {
+    mainButton.color = Telegram.WebApp.themeParams.button_color
+    mainButton.textColor = Telegram.WebApp.themeParams.button_text_color
+    mainButton.text = "SHOPY"
+    window.Telegram.WebApp.expand()
+}, 500);
+});
     </script>
 
 </body>
