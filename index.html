@@ -461,23 +461,23 @@ class GameSystem {
         upgrades.updateButtons();
     }
     showGif() {
-        var overlay = document.getElementById('gifOverlay');
-        overlay.style.display = 'block';
-        setTimeout(function() {
-            overlay.style.opacity = 1;
-        }, 10); // Start the fade-in effect almost immediately
+        
+        // overlay.style.display = 'block';
+        // setTimeout(function() {
+        //     overlay.style.opacity = 1;
+        // }, 10); // Start the fade-in effect almost immediately
 
-        setTimeout(function() {
-            overlay.style.opacity = 0;
-            setTimeout(function() {
-                overlay.style.display = 'none';
-            }, 1000); // Wait for fade-out to finish before hiding the element
-        }, 5000); // 5 seconds until fade-out starts
+        // setTimeout(function() {
+        //     overlay.style.opacity = 0;
+        //     setTimeout(function() {
+        //         overlay.style.display = 'none';
+        //     }, 1000); // Wait for fade-out to finish before hiding the element
+        // }, 5000); // 5 seconds until fade-out starts
     }
 }
 
 const game = new GameSystem()
-
+var overlay = document.getElementById('gifOverlay');
 
 class VisualFlare{
     constructor(){
@@ -485,11 +485,35 @@ class VisualFlare{
         this.secondsBeenPressing = 0;
         this.secondsTillFirstFlare = 5;
         this.secondsTillSecondFlare = 60;
+        this.firstFlareShow = false;
     }
     update(){
 
         let change = globalTime - this.lastPressed;
-                
+        if(change > 1000){
+            //hide gif
+            this.firstFlareShow = false;
+            setTimeout(function() {
+            overlay.style.opacity = 0;
+            setTimeout(function() {
+                overlay.style.display = 'none';
+            }, 100); // Wait for fade-out to finish before hiding the element
+        }, 1000); // 5 seconds until fade-out starts
+
+        }else{
+            if(this.firstFlareShow){
+
+            }else{
+                this.firstFlareShow = true;
+                overlay.style.display = 'block';
+        setTimeout(function() {
+            overlay.style.opacity = 1;
+        }, 10); // Start the fade-in effect almost immediately
+            }
+            //if showing do nothing 
+
+            //if not showing - show
+        }
 
 
     }
