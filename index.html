@@ -241,7 +241,7 @@
     left: 0;
     height: 100%;
     width: 100%;
-    background: url('https://raw.githubusercontent.com/blackroks/nftCollection/main/images/spark2.gif') center center no-repeat;
+    background: url('https://raw.githubusercontent.com/blackroks/nftCollection/main/images/spark1.gif') center center no-repeat;
     background-size: cover;
     display: none;
     opacity: 0;
@@ -443,6 +443,7 @@ class GameSystem {
         }
     }
     released(event) {
+        visuals.clicked();
         isCircleTouched = false;
         drawCircle();
         //prevent double tap zoom
@@ -476,6 +477,35 @@ class GameSystem {
 }
 
 const game = new GameSystem()
+
+
+class VisualFlare{
+    constructor(){
+        this.lastPressed = 0;
+        this.secondsBeenPressing = 0;
+        this.secondsTillFirstFlare = 5;
+        this.secondsTillSecondFlare = 60;
+    }
+    update(){
+
+        let change = globalTime - this.lastPressed;
+                
+
+
+    }
+    clicked(){
+        this.lastPressed = Date.now();
+    }
+    resetTimer(){
+
+    }
+    startFirstFlare(){
+
+    }
+}
+
+const visuals = new VisualFlare()
+
 
 //load images
 //coin image
@@ -669,10 +699,15 @@ let showEnergyBar = () => {
     </script>
     
     <script>
+//game loop
+var globalTime = Date.now();
 setInterval(() => {
+    globalTime = Date.now();
+
 if (game.energy < game.maxEnergy) {
     game.energy = Math.round(game.energy + 1)
 }
+    visuals.update();
 }, 1000);
 
 function step() {
