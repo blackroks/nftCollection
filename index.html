@@ -462,17 +462,17 @@ class GameSystem {
     }
     showGif() {
         
-        // overlay.style.display = 'block';
-        // setTimeout(function() {
-        //     overlay.style.opacity = 1;
-        // }, 10); // Start the fade-in effect almost immediately
+        overlay.style.display = 'block';
+        setTimeout(function() {
+            overlay.style.opacity = 1;
+        }, 10); // Start the fade-in effect almost immediately
 
-        // setTimeout(function() {
-        //     overlay.style.opacity = 0;
-        //     setTimeout(function() {
-        //         overlay.style.display = 'none';
-        //     }, 1000); // Wait for fade-out to finish before hiding the element
-        // }, 5000); // 5 seconds until fade-out starts
+        setTimeout(function() {
+            overlay.style.opacity = 0;
+            setTimeout(function() {
+                overlay.style.display = 'none';
+            }, 1000); // Wait for fade-out to finish before hiding the element
+        }, 5000); // 5 seconds until fade-out starts
     }
 }
 
@@ -488,7 +488,7 @@ class VisualFlare{
         this.firstFlareShow = false;
     }
     update(){
-
+        return;
         let change = globalTime - this.lastPressed;
         if(change > 1000){
             //hide gif
