@@ -21,10 +21,13 @@
     width: 60px; /* Square buttons */
     height: 60px;
     border: none;
-    background-size: contain;
     color: white;
     font-size: 16px;
     border-radius: 5px; /* Optional: for rounded corners */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-size: 100% 100%; /* Scale the image to be as large as possible, aspect ratio is preserved */
+  background: url(https://raw.githubusercontent.com/blackroks/nftCollection/main/images/miner.gif);
+  background-position: center; /* Center the image within the button */
   }
     /* The Modal (background) */
     .modal {
@@ -308,7 +311,7 @@
 <div class="button-container" id="buttonsMainPageUI">
     <button><img src="https://raw.githubusercontent.com/blackroks/nftCollection/main/images/miner.gif" alt=""></button>
     <button>?</button>
-    <button style="background: url(https://raw.githubusercontent.com/blackroks/nftCollection/main/images/miner.gif)" >?</button>
+    <button >?</button>
   </div> 
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
