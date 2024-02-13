@@ -309,7 +309,7 @@
     <button>?</button>
     <button>?</button>
     <button>?</button>
-  </div>
+  </div> 
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
@@ -741,9 +741,9 @@ showEnergyBar()
 let displayedScore = Number(document.getElementById("scoreUI").textContent)
 if (game.score > displayedScore) {
     displayedScore++;
-    document.getElementById("scoreUI").textContent = Math.round(displayedScore);
+    document.getElementById("scoreUI").textContent = Math.round(displayedScore) + "💨";
 } else {
-    document.getElementById("scoreUI").textContent = Math.round(game.score);
+    document.getElementById("scoreUI").textContent = Math.round(game.score) + "💨";
 }
 window.requestAnimationFrame(step);
 }
