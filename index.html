@@ -21,7 +21,7 @@
     width: 60px; /* Square buttons */
     height: 60px;
     border: none;
-    background-color: #4CAF50; /* Green background */
+    background-size: contain;
     color: white;
     font-size: 16px;
     border-radius: 5px; /* Optional: for rounded corners */
@@ -305,10 +305,10 @@
 <h1 id="scoreUI"> SCORE </h1>
 <canvas id="myCanvas"></canvas>
 
-<div class="button-container">
+<div class="button-container" id="buttonsMainPageUI">
     <button><img src="https://raw.githubusercontent.com/blackroks/nftCollection/main/images/miner.gif" alt=""></button>
     <button>?</button>
-    <button>?</button>
+    <button style="background: url(https://raw.githubusercontent.com/blackroks/nftCollection/main/images/miner.gif)" >?</button>
   </div> 
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -671,18 +671,19 @@ document.addEventListener('touchmove', function(event) {
 
 
 let showEnergyBar = () => {
-    ctx.drawImage(image, 0, 256, 64, 64, 32, window.innerHeight - (window.innerHeight / 6), 64, 32);
-    ctx.drawImage(image, 64, 256, 64, 64, window.innerWidth - 96, window.innerHeight - (window.innerHeight / 6), 64, 32);
-    ctx.drawImage(image, 171, 256, 16, 64, 96, window.innerHeight - (window.innerHeight / 6), window.innerWidth - 192, 32);
+
+    ctx.drawImage(image, 0, 256, 64, 64, 32, document.getElementById("buttonsMainPageUI").getBoundingClientRect().top - 50, 64, 32);
+    ctx.drawImage(image, 64, 256, 64, 64, window.innerWidth - 96, document.getElementById("buttonsMainPageUI").getBoundingClientRect().top - 50, 64, 32);
+    ctx.drawImage(image, 171, 256, 16, 64, 96, document.getElementById("buttonsMainPageUI").getBoundingClientRect().top - 50, window.innerWidth - 192, 32);
     //dynamic bar
     let percerageBar = game.energy / game.maxEnergy;
     let barwidth = (window.innerWidth - 192) * percerageBar
     if (percerageBar > 0.7) {
-        ctx.drawImage(image, 188, 256, 10, 64, 96, window.innerHeight - (window.innerHeight / 6), barwidth, 32);
+        ctx.drawImage(image, 188, 256, 10, 64, 96,document.getElementById("buttonsMainPageUI").getBoundingClientRect().top - 50, barwidth, 32);
     } else if (percerageBar > 0.2) {
-        ctx.drawImage(image, 204, 256, 10, 64, 96, window.innerHeight - (window.innerHeight / 6), barwidth, 32);
+        ctx.drawImage(image, 204, 256, 10, 64, 96, document.getElementById("buttonsMainPageUI").getBoundingClientRect().top - 50, barwidth, 32);
     } else {
-        ctx.drawImage(image, 220, 256, 10, 64, 96, window.innerHeight - (window.innerHeight / 6), barwidth, 32);
+        ctx.drawImage(image, 220, 256, 10, 64, 96, document.getElementById("buttonsMainPageUI").getBoundingClientRect().top - 50, barwidth, 32);
     }
 
 }
