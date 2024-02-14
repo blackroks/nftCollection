@@ -256,12 +256,13 @@
     position: absolute;
     top: -50px; /* Initial position above the top */
     left: 50%; /* Centered by default, will be randomized */
-    width: 50px;
-    height: 50px;
-    background-color: #3498db;
+    width: 80px;
+    height: 80px;
     border: none;
     cursor: pointer;
     transition: opacity 2s;
+    background: url('https://raw.githubusercontent.com/blackroks/nftCollection/main/images/bonusimg.png') center center no-repeat;
+    background-size: contain;
   }
 </style>
 </head>
@@ -321,10 +322,9 @@
 <canvas id="myCanvas"></canvas>
 
 <div class="button-container" id="buttonsMainPageUI">
+    <!-- <img src="https://raw.githubusercontent.com/blackroks/nftCollection/main/images/miner.gif" alt="">
     <img src="https://raw.githubusercontent.com/blackroks/nftCollection/main/images/miner.gif" alt="">
-    <img src="https://raw.githubusercontent.com/blackroks/nftCollection/main/images/miner.gif" alt="">
-    <img src="https://raw.githubusercontent.com/blackroks/nftCollection/main/images/miner.gif" alt="">
-    
+    <img src="https://raw.githubusercontent.com/blackroks/nftCollection/main/images/miner.gif" alt=""> -->
   </div> 
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -348,7 +348,7 @@
     const fallInterval = setInterval(() => {
       topPosition += 1;
       button.style.top = topPosition + 'px';
-
+     //   button.style.background = "url('https://raw.githubusercontent.com/blackroks/nftCollection/main/images/miner.gif') center center no-repeat;"
       // If the button goes below the bottom, remove it
       if (topPosition > window.innerHeight) {
         clearInterval(fallInterval);
@@ -727,18 +727,18 @@ document.addEventListener('touchmove', function(event) {
 
 let showEnergyBar = () => {
     ctx.clearRect(0,0, canvas.width, document.getElementById("scoreUI").getBoundingClientRect().top);
-    ctx.drawImage(image, 0, 256, 64, 64, 32,20, 64, 50);
-    ctx.drawImage(image, 64, 256, 64, 64, window.innerWidth - 96,  20, 64, 50);
-    ctx.drawImage(image, 171, 256, 16, 64, 96,  20, window.innerWidth - 192, 50);
+    ctx.drawImage(image, 0, 256, 64, 64, 32,10, 64, 50);
+    ctx.drawImage(image, 64, 256, 64, 64, window.innerWidth - 96,  10, 64, 50);
+    ctx.drawImage(image, 171, 256, 16, 64, 96,  10, window.innerWidth - 192, 50);
     //dynamic bar
     let percerageBar = game.energy / game.maxEnergy;
     let barwidth = (window.innerWidth - 192) * percerageBar
     if (percerageBar > 0.7) {
-        ctx.drawImage(image, 188, 256, 10, 64, 96, 20, barwidth, 50);
+        ctx.drawImage(image, 188, 256, 10, 64, 96, 10, barwidth, 50);
     } else if (percerageBar > 0.2) {
-        ctx.drawImage(image, 204, 256, 10, 64, 96, 20, barwidth, 50);
+        ctx.drawImage(image, 204, 256, 10, 64, 96, 10, barwidth, 50);
     } else {
-        ctx.drawImage(image, 220, 256, 10, 64, 96, 20, barwidth, 50);
+        ctx.drawImage(image, 220, 256, 10, 64, 96, 10, barwidth, 50);
     }
 
 }
