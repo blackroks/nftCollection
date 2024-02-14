@@ -727,18 +727,18 @@ document.addEventListener('touchmove', function(event) {
 
 let showEnergyBar = () => {
     ctx.clearRect(0,0, canvas.width, document.getElementById("scoreUI").getBoundingClientRect().top);
-    ctx.drawImage(image, 0, 256, 64, 64, 32, document.getElementById("scoreUI").getBoundingClientRect().top - 20, 64, 50);
-    ctx.drawImage(image, 64, 256, 64, 64, window.innerWidth - 96, document.getElementById("scoreUI").getBoundingClientRect().top - 20, 64, 50);
-    ctx.drawImage(image, 171, 256, 16, 64, 96, document.getElementById("scoreUI").getBoundingClientRect().top - 50, window.innerWidth - 192, 50);
+    ctx.drawImage(image, 0, 256, 64, 64, 32,20, 64, 50);
+    ctx.drawImage(image, 64, 256, 64, 64, window.innerWidth - 96,  20, 64, 50);
+    ctx.drawImage(image, 171, 256, 16, 64, 96,  20, window.innerWidth - 192, 50);
     //dynamic bar
     let percerageBar = game.energy / game.maxEnergy;
     let barwidth = (window.innerWidth - 192) * percerageBar
     if (percerageBar > 0.7) {
-        ctx.drawImage(image, 188, 256, 10, 64, 96,document.getElementById("scoreUI").getBoundingClientRect().top - 20, barwidth, 50);
+        ctx.drawImage(image, 188, 256, 10, 64, 96, 20, barwidth, 50);
     } else if (percerageBar > 0.2) {
-        ctx.drawImage(image, 204, 256, 10, 64, 96, document.getElementById("scoreUI").getBoundingClientRect().top - 20, barwidth, 50);
+        ctx.drawImage(image, 204, 256, 10, 64, 96, 20, barwidth, 50);
     } else {
-        ctx.drawImage(image, 220, 256, 10, 64, 96, document.getElementById("scoreUI").getBoundingClientRect().top - 20, barwidth, 50);
+        ctx.drawImage(image, 220, 256, 10, 64, 96, 20, barwidth, 50);
     }
 
 }
@@ -812,6 +812,7 @@ let mainButton;
 
 // Initial call to set up the canvas
 addEventListener("load", (event) => {
+    document.getElementById("scoreUI").style.marginTop = "70px"
 //viewportHeight
 // window.Telegram.WebApp.HapticFeedback
 resizeCanvas();
