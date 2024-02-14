@@ -736,8 +736,8 @@ document.addEventListener('touchmove', function(event) {
 
 let showEnergyBar = () => {
     ctx.clearRect(0,0, canvas.width, document.getElementById("scoreUI").getBoundingClientRect().top);
-    ctx.drawImage(image, 0, 256, 64, 64, 32,10, 64, 50);
-    ctx.drawImage(image, 64, 256, 64, 64, window.innerWidth - 96,  10, 64, 50);
+    ctx.drawImage(image, 0, 256, 64, 64, 10,10, 64, 50);
+    ctx.drawImage(image, 64, 256, 64, 64, window.innerWidth - 74,  10, 64, 50);
     ctx.drawImage(image, 171, 256, 16, 64, 96,  10, window.innerWidth - 192, 50);
     //dynamic bar
     let percerageBar = game.energy / game.maxEnergy;
