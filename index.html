@@ -362,6 +362,7 @@
       clearInterval(fallInterval); // Stop the falling animation
       button.style.opacity = 0; // Fade out the button
       console.log('Button clicked!');
+      window.Telegram.WebApp.HapticFeedback.impactOccurred("light")
       setTimeout(() => button.remove(), 2000); // Remove the button after it fades out
     };
   }
@@ -516,8 +517,13 @@ class GameSystem {
         this.score -= Math.round(x);
         upgrades.updateButtons();
     }
+    showBottomGif(){
+
+    }
+    hideGif(){
+
+    }
     showGif() {
-        
         overlay.style.display = 'block';
         setTimeout(function() {
             overlay.style.opacity = 1;
