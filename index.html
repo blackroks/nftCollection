@@ -298,7 +298,7 @@
 <body>
 
 <div id="UIenergyBar">100/100</div>
-<div id="UIenergyBarEmpty">energy</div>
+<div id="UIenergyBarEmpty">⚡</div>
 <!-- <div id="UIexpBar">0/100</div> -->
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -411,21 +411,26 @@
     }, 10); // Adjust the speed of falling by changing the interval
 
     // Add click event to the button
-    button.onclick = function() {
+    button.onclick = function(event) {
+        var touch = event.touches[0];
+        const text = "BONUS"; // The text to show
+        createTextAtPosition(touch.clientX, touch.clientY, text);
 
-      
       clearInterval(fallInterval); // Stop the falling animation
       button.style.opacity = 0; // Fade out the button
       console.log('Button clicked! bonus:' + button.src);
       window.Telegram.WebApp.HapticFeedback.impactOccurred("light")
       addBonus(button.src)
+      button.src = "none"
       setTimeout(() => button.remove(), 2000); // Remove the button after it fades out
     };
   }
 
 
   var addBonus = (type) => {
-
+    if(type == "none"){
+        return;
+    }
     if(type == "bonus1"){
         //multyplier
         game.multiplayer += 1;
@@ -562,6 +567,7 @@ class GameSystem {
     }
     drainEnergy(energy){
         game.energy -= energy;
+        if(this.energy < 0)this.energy = 0;
     }
     clicked(event, gif) {
         var touch = event.touches[0];
@@ -893,7 +899,7 @@ let showEnergyBar = () => {
         modal.style.display = "none";
         mainButton.color = Telegram.WebApp.themeParams.button_color
         mainButton.textColor = Telegram.WebApp.themeParams.button_text_color
-        mainButton.text = "SHOPY"
+        mainButton.text = "PUMP SHOP"
         Telegram.WebApp.MainButton.enable()
     }            
 
@@ -944,7 +950,7 @@ window.requestAnimationFrame(step);
 window.Telegram.WebApp.BackButton.hide()
 window.Telegram.WebApp.enableClosingConfirmation()
 mainButton = Telegram.WebApp.MainButton.setParams({
-    text: 'SHOPY',
+    text: 'PUMP SHOP',
     is_visible: true
 }).onClick(openModal);
 Telegram.WebApp.MainButton.enable()
@@ -957,7 +963,7 @@ window.Telegram.WebApp.ready()
 setTimeout(() => {
     mainButton.color = Telegram.WebApp.themeParams.button_color
     mainButton.textColor = Telegram.WebApp.themeParams.button_text_color
-    mainButton.text = "SHOPY"
+    mainButton.text = "PUMP SHOP"
     window.Telegram.WebApp.expand()
 }, 500);
 });
