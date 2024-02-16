@@ -761,7 +761,7 @@ function isInsideCircle(touchX, touchY) {
 
 
 // Function to create the text and animate it
-function createTextAtPosition(x, y, text) {
+function createTextAtPosition(x, y, text,speed) {
     const floatingText = document.createElement('div');
     floatingText.textContent = text;
     floatingText.classList.add('fade-text');
@@ -773,11 +773,16 @@ function createTextAtPosition(x, y, text) {
 
     // Append the text to the body
     document.body.appendChild(floatingText);
-
+    let speed;
+    if(speed == undefined){
+        speed = 'translateY(-200px)'
+    }else{
+        speed = 'translateY(-100px)'
+    }
     // Start the animation
     setTimeout(() => {
         floatingText.style.opacity = '0';
-        floatingText.style.transform = 'translateY(-200px)';
+        floatingText.style.transform = speed;
     }, 0);
 
     // Remove the element after the animation is done
