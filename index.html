@@ -2,145 +2,984 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tinder-like Interface</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<title>Full-Screen Canvas with Circle</title>
+
 <style>
 
-body {
-  margin: 0;
-}
-
-.x-hand {
-  color:#000;
-  font-size:4em;
-  height:100px;
-  left:calc(50% - 22px);
-  opacity:.8;
-  position:absolute;
-  top:calc(50% - 5px);
-  transform-origin:bottom;
-  width:100px;
-}
-
-.x-swipe-msg{
-  position: absolute;
-  top: calc(50% - 30px);
-  left : 40%;
-  font-family:'Verdana';
-  font-weight : bold;
-}
-.x-swipe-indicator {
-  position: absolute;
-  top: calc(50% - 60px);
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 5px dotted transparent;
-  animation: swipe-animation 2s linear infinite; 
-}
-
-@keyframes swipe-animation {
-  0% {
-    left: 10px;
-    border-color: #bbb;
-  }
-  50% {
-    left: 400px;
-  }
-  100% {
-    left: 10px;
-  }
-}
-
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f7f7f7;
-  }
-  .card {
-    width: 300px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    overflow: hidden;
-  }
-  .card img {
+    #UIenergyBar{
+        background-color: rgb(236, 217, 44);
+        position: absolute;
+        /* height: 10px; */
+        /* width: 80%; */
+        text-align: center;
+        border-radius: 3px; /* Optional: for rounded corners */
+        color: blue;
+        z-index: 2;
+    }
+    #UIenergyBarEmpty{
+        background-color: rgb(72, 81, 104);
+        position: absolute;
+        /* height: 10px; */
+        /* width: 80%; */
+        text-align: center;
+        border-radius: 3px; /* Optional: for rounded corners */
+        color: blue;
+        z-index: 1;
+    }
+    #UIexpBar{
+        background-color: #655cb8;
+        position: absolute;
+        height: 5px;
+        /* width: 30%; */
+        border-radius: 2px; /* Optional: for rounded corners */
+    }
+  .button-container {
+    position: absolute;
     width: 100%;
-    display: block;
-  }
-  .card-info {
-    padding: 20px;
-    background-color: white;
-  }
-  .card-info h3 {
-    margin: 0;
-    padding-bottom: 10px;
-  }
-  .card-info p {
-    font-size: 14px;
-    color: #666;
-    margin: 0;
-  }
-  .buttons {
     display: flex;
     justify-content: space-around;
-    margin-top: 20px;
+    padding: 10px 0;
+    background-color: transparent; /* Light grey background */
+    bottom: 0;
   }
-  .button {
+  .button-container button {
+    width: 60px; /* Square buttons */
+    height: 60px;
     border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 16px;
     color: white;
-    background-color: #ff4081;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px; /* Optional: for rounded corners */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-size: 100% 100%; /* Scale the image to be as large as possible, aspect ratio is preserved */
+  background: url(https://raw.githubusercontent.com/blackroks/nftCollection/main/images/miner.gif);
+  background-position: center; /* Center the image within the button */
   }
-  .button.no {
-    background-color: #ccc;
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%;
+      overflow-y: auto; /* Allows vertical scrolling */
+  overflow-x: hidden; /* Prevents horizontal scrolling */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+  
+    /* Modal Content */
+    .modal-content {
+      position: relative;
+      background-color: #fefefe;
+      margin: auto;
+      padding: 0;
+      border: 1px solid #888;
+      width: 100%;
+      min-height: 100%; /* Ensures that the content does not exceed the modal's height */
+  overflow-y: auto; /* Allows the content itself to scroll if needed */
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+      animation-name: animatetop;
+      animation-duration: 0.4s
+    }
+  
+    /* Add Animation */
+    @keyframes animatetop {
+      from {top: -300px; opacity: 0}
+      to {top: 0; opacity: 1}
+    }
+
+    /* The button styles */
+    .modal-button {
+      display: block;
+      margin: 10px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #605985;
+      color: white;
+      text-align: center;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  
+    .modal-button.deactivated {
+      background-color: #747474;
+      cursor: not-allowed;
+    }
+  
+    .modal-button img.icon {
+    margin-right: 8px;
+    vertical-align: middle;
+    width: 24px; /* Example size, adjust as needed */
+    height: 24px; /* Example size, adjust as needed */
+  }
+  
+    .modal-header {
+      background-color: #655cb8;
+      color: white;
+      padding: 10px 20px;
+      border-bottom: 1px solid #ddd;
+    }
+    .start-body {
+        padding-left: 20px;
+        padding-right: 20px;
+    
+    }
+    .modal-body {padding: 20px;}
+    .info-body {padding: 20px;}
+  
+  </style>
+<style>
+        /* Define the custom font using @font-face */
+        @font-face {
+        font-family: 'EgyptFont';
+        src: url('https://github.com/blackroks/nftCollection/raw/main/images/egypt.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    /* Apply the custom font to the body or specific elements */
+
+  body, html {
+    font-family: 'EgyptFont', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevents scrollbars from appearing */
+    touch-action: none; /* Prevents touch scrolling on supported browsers */
+    position: fixed; /* Prevents scrolling on iOS devices */
+    width: 100%;
+    height: 100%;
+    -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none; /* Standard syntax */
+  }
+  #myCanvas {
+    /* background-color: #092f46; */
+    background-image: radial-gradient(circle,#143f5b, #010c13);
+    display: block; /* Removes the default margin */
+  }
+  #text{
+    color: rgb(21, 21, 21);
+    position: absolute;
+  }
+  .fade-text {
+    position: absolute;
+    pointer-events: none;
+    transition: opacity 0.5s, transform 0.5s;
+    opacity: 1;
+    font-size: 30px;
+    color: rgb(203, 185, 185);
+    font-weight: bold;
+    z-index: 100;
+  }
+  #scoreUI{
+    font-size: 60px;
+    color: rgb(238, 239, 252);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    text-align: center;
+  }
+
+
+.navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+        padding: 1rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .navbar h1 {
+        font-size: 1rem;
+        color: #007aff;
+    }
+    .ios-button {
+        font-family: 'EgyptFont', sans-serif;
+        display: block;
+        background-color: #fff;
+        color: #000;
+        text-align: left;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        width: 100%;
+        font-size: 1rem;
+        position: relative;
+        border-bottom: 1px solid #ccc;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        height: 100px;
+    }
+    .ios-button img.icon {
+    margin-right: 8px;
+    vertical-align: middle;
+    width: 24px; /* Example size, adjust as needed */
+    height: 24px; /* Example size, adjust as needed */
+  }
+    .ios-button.deactivated {
+        display: block;
+        background-color: #676767;
+        color: #c9c9c9;
+        text-align: left;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        width: 100%;
+        font-size: 1rem;
+        position: relative;
+        border-radius: 10px;
+        height: 100px;
+    }
+    .ios-button::after {
+        content: '>';
+        position: absolute;
+        right: 20px;
+        font-size: 20px;
+        color: #ccc;
+        bottom:40px;
+    }
+    
+    .content {
+        padding: 1rem;
+    }
+    .horizontal-scroll {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding: 1rem 0;
+    }
+    .card {
+        flex: 0 0 auto;
+        width: 80%;
+        margin-right: 1rem;
+        background: #fff;
+        padding: 1rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        scroll-snap-align: start;
+    }
+
+</style>
+<style>
+      .gif-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: url('https://raw.githubusercontent.com/blackroks/nftCollection/main/images/spark1.gif') center center no-repeat;
+    background-size: cover;
+    display: none;
+    opacity: 0;
+    z-index: 1000; /* Ensure it's above other content */
+    transition: opacity 1s ease-in-out;
+  }
+
+  #fallingButton {
+    position: absolute;
+    top: -50px; /* Initial position above the top */
+    left: 50%; /* Centered by default, will be randomized */
+    width: 80px;
+    height: 80px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 2s;
+    background: url('https://raw.githubusercontent.com/blackroks/nftCollection/main/images/bonusimg.png') center center no-repeat;
+    background-size: contain;
+    z-index: 9;
   }
 </style>
 </head>
 <body>
-    <div>
-        <div>
-          <span class="x-swipe-indicator">
-          <i class="x-hand fa fa-hand-pointer-o"></i>
-          </span>
-        </div>
-        <div class="x-swipe-msg">Swipe</div>
-        <div>
 
-<div class="card">
-  <img src="https://via.placeholder.com/300x300" alt="Profile Image">
-  <div class="card-info">
-    <h3>Name</h3>
-    <p>Description text goes here...</p>
+<div id="UIenergyBar">100/100</div>
+<div id="UIenergyBarEmpty">energy</div>
+<!-- <div id="UIexpBar">0/100</div> -->
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <!-- <div id="iosbar">
+        <div class="modal-header">
+            <h2>Wallet: <a id="_wallet"></a></h2>
+          </div>
+        </div>  -->
+   
+    <div class="start-body">
+        <h5>Buy upgrades</h5>
+        <!-- Buttons will be added here -->
+      </div>
+      <div class="content" id="upgradeButtons">
+        <button class="ios-button" id="_profitability" onclick="upgrades.upgradeProfitability()"></button>
+        <button class="ios-button" id="_energyCapacity" onclick="upgrades.upgradeEnergy()"></button>
+        <button class="ios-button" id="_energyRegen" onclick="upgrades.upgradeRegen()"></button>
+        <button class="ios-button" id="_mining" onclick="upgrades.upgradeMining()"></button>
+    </div>
+    <div class="start-body">
+    <h5>Level up info</h5>
+    </div>
+    <div class="horizontal-scroll">
+       
+        <div class="card">
+            <p>Item 1</p>
+        </div>
+        <div class="card">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="card">
+            <p>Item 3</p>
+        </div>
+        <!-- Add more cards as needed -->
+    </div>
+   
+    <div class="info-body">
+    <h5>Detailes about level ups etc.</h5>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <!-- panels will be added here -->
+    </div>
   </div>
-  <div class="buttons">
-    <button class="button no" onclick="decline()">NO</button>
-    <button class="button yes" onclick="match()">YES</button>
-  </div>
+
 </div>
 
+<div class="gif-overlay" id="gifOverlay">
+    
+</div>
+<h1 id="scoreUI"> SCORE </h1>
+<canvas id="myCanvas"></canvas>
+
+<div class="button-container" id="buttonsMainPageUI">
+    <!-- <img src="https://raw.githubusercontent.com/blackroks/nftCollection/main/images/miner.gif" alt="">
+    <img src="https://raw.githubusercontent.com/blackroks/nftCollection/main/images/miner.gif" alt="">
+    <img src="https://raw.githubusercontent.com/blackroks/nftCollection/main/images/miner.gif" alt=""> -->
+  </div> 
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
-function match() {
-  alert('Match!');
-  // Here you would handle the "match" action, such as updating the UI or fetching the next profile
+
+  // Function to generate a random horizontal position
+  function getRandomHorizontalPosition() {
+    const maxPosition = window.innerWidth - 50; // 50 is the width of the button
+    return Math.floor(Math.random() * maxPosition) + 'px';
+  }
+
+  let slowMo = false
+  // Function to create and animate the falling button
+  function createFallingButton() {
+    const button = document.createElement('button');
+    button.id = 'fallingButton';
+    button.style.left = getRandomHorizontalPosition();
+    document.body.appendChild(button);
+
+    let randBonus = Math.round(Math.random()*2)
+        let bonusType;
+        if(randBonus == 0){
+            bonusType =  "url('https://raw.githubusercontent.com/blackroks/nftCollection/main/images/bonusimg.png') center center no-repeat"
+            button.src = "bonus1"
+        }else if(randBonus == 1){
+            bonusType =  "url('https://raw.githubusercontent.com/blackroks/nftCollection/main/images/energybonusimg.png') center center no-repeat"
+            button.src = "bonus2"
+        }else{
+            bonusType =  "url('https://raw.githubusercontent.com/blackroks/nftCollection/main/images/deadbonusimg.png') center center no-repeat"
+            button.src = "bonus3"
+        }
+
+      button.style.background = bonusType;
+      button.style.backgroundSize = "contain";
+
+    // Animate the button falling
+    
+    let topPosition = -50; // Start above the top of the page
+    const fallInterval = setInterval(() => {
+        if(slowMo){
+           topPosition += 0.5;
+        }else{
+            topPosition += 2;
+        }
+     
+      button.style.top = topPosition + 'px';
+     //   button.style.background = "url('https://raw.githubusercontent.com/blackroks/nftCollection/main/images/miner.gif') center center no-repeat;"
+      // If the button goes below the bottom, remove it
+      if (topPosition > window.innerHeight) {
+        clearInterval(fallInterval);
+        button.remove();
+      }
+    }, 10); // Adjust the speed of falling by changing the interval
+
+    // Add click event to the button
+    button.onclick = function(event) {
+      clearInterval(fallInterval); // Stop the falling animation
+      button.style.opacity = 0; // Fade out the button
+      console.log('Button clicked! bonus:' + button.src);
+      window.Telegram.WebApp.HapticFeedback.impactOccurred("light")
+      addBonus(button.src,button.getBoundingClientRect().x, button.getBoundingClientRect().y)
+      button.src = "none"
+      setTimeout(() => button.remove(), 2000); // Remove the button after it fades out
+    };
+  }
+
+
+  var addBonus = (type,x,y) => {
+    
+    if(type == "none"){
+        return;
+    }
+    if(type == "bonus1"){
+        const text = "BONUS"; // The text to show
+        createTextAtPosition(x,y, text,100);
+        //multyplier
+        game.multiplayer += 1;
+        setTimeout(() => {
+            game.multiplayer -= 1;
+        }, 10000); // Remove the button after it fades out
+    }else if(type == "bonus2"){
+        //energy
+        const text = "ENERGY"; // The text to show
+        createTextAtPosition(x,y, text,100);
+        game.energy += 50;
+        if(game.energy > game.maxEnergy){
+            game.energy = game.maxEnergy;
+        }
+    }else if(type == "bonus3"){
+        const text = "DEBUFF"; // The text to show
+        createTextAtPosition(x,y, text,100);
+        //dead bonus
+        slowMo = true;
+        game.multiplayer -= 0.5;
+        setTimeout(() => {
+            slowMo = false;
+            game.multiplayer += 0.5;
+        }, 10000); // Remove the button after it fades out
+    }
+
+  }
+
+
+</script>
+<script>
+const energyCapacityUpgrades = [
+  { name: "Small Battery Pack", increase: 10, cost: 100 },
+  { name: "Medium Battery Pack", increase: 25, cost: 250 },
+  { name: "Large Battery Pack", increase: 50, cost: 500 },
+  { name: "High-Capacity Battery", increase: 100, cost: 1000 },
+  { name: "Industrial Battery", increase: 250, cost: 2500 },
+  { name: "Quantum Battery", increase: 500, cost: 5000 }
+];
+
+const energyRegenerationUpgrades = [
+  { name: "Potato generator", increase: 1, cost: 100 },
+  { name: "Wind Turbine", increase: 1, cost: 300 },
+  { name: "Solar Panels", increase: 3, cost: 750 },
+  { name: "Hydroelectric Dam", increase: 10, cost: 1500 },
+  { name: "Nuclear Reactor", increase: 25, cost: 3750 },
+  { name: "Fusion Reactor", increase: 50, cost: 7500 }
+];
+
+var testCallback = (testbool) => {
+    if (testbool) {
+        if (upgrades.currentUpgrade == "energy") {
+            upgrades._upgradeEnergy()
+        } else if (upgrades.currentUpgrade == "regen") {
+            upgrades._upgradeRegen()
+        } else if (upgrades.currentUpgrade == "profit") {
+            upgrades._upgradeProfitability()
+        } else if (upgrades.currentUpgrade == "mining") {
+            upgrades._upgradeMining()
+        }
+    }
 }
 
-function decline() {
-  alert('Declined!');
-  // Here you would handle the "decline" action, such as updating the UI or fetching the next profile
+class Upgrades {
+    constructor() {
+        this.upgrades = [];
+        this.energyLvl = 0;
+        this.energyRegen = 0;
+        this.profitability = 0;
+        this.mining = 0;
+        this.maxLevels = 6;
+        this.pricesArray = []
+        this.currentUpgrade;
+    }
+    upgradeProfitability() {
+        this.currentUpgrade = "profit"
+        Telegram.WebApp.showConfirm("Buy " + energyCapacityUpgrades[this.energyLvl].name + " for " + energyCapacityUpgrades[this.energyLvl].cost + "$?", testCallback);
+    }
+    _upgradeProfitability() {
+        this.profitability = Math.round(this.profitability + 1)
+        this.updateButtons()
+    }
+    upgradeEnergy() {
+        if (energyCapacityUpgrades[this.energyLvl].cost > game.score) {
+            return
+        }
+        this.currentUpgrade = "energy"
+        Telegram.WebApp.showConfirm("Buy " + energyCapacityUpgrades[this.energyLvl].name + " for " + energyCapacityUpgrades[this.energyLvl].cost + "$?", testCallback);
+    }
+    _upgradeEnergy() {
+        game.spendScore(energyCapacityUpgrades[this.energyLvl].cost)
+        this.energyLvl = Math.round(this.energyLvl + 1)
+        this.updateButtons()
+
+    }
+    upgradeRegen() {
+        if (energyRegenerationUpgrades[this.energyRegen].cost > game.score) {
+            return
+        }
+        this.currentUpgrade = "regen"
+        Telegram.WebApp.showConfirm("Buy " + energyRegenerationUpgrades[this.energyRegen].name + " for " + energyRegenerationUpgrades[this.energyRegen].cost + "$?", testCallback);
+    }
+    _upgradeRegen() {
+        game.spendScore(energyRegenerationUpgrades[this.energyRegen].cost)
+        this.energyRegen = Math.round(this.energyRegen + 1)
+        this.updateButtons()
+    }
+    upgradeMining() {
+        this.mining = Math.round(this.mining + 1)
+        this.updateButtons()
+    }
+    updateButtons() {
+        //document.getElementById("_wallet").textContent = game.score + "$"
+        document.getElementById("_profitability").textContent = "🪙 : " + this.profitability
+        document.getElementById("_energyCapacity").textContent = "🔋 : " + energyCapacityUpgrades[this.energyLvl].name + " " + energyCapacityUpgrades[this.energyLvl].cost + "$"
+        document.getElementById("_energyRegen").textContent = "⚡ : " + energyRegenerationUpgrades[this.energyRegen].name + " for " + energyRegenerationUpgrades[this.energyRegen].cost + "$"
+        document.getElementById("_mining").textContent = "⛏️ : " + this.mining
+        mainButton.text = "Lvl " + game.level + ' / ' + game.score + "$"
+    }
+}
+
+var upgrades = new Upgrades();
+
+
+class GameSystem {
+    constructor() {
+        this.level = 1;
+        this.score = 0;
+        this.multiplayer = 1;
+        this.maxEnergy = 100;
+        this.energy = 100;
+        this.energyRestoration = 1;
+    }
+    addScore(score) {
+        this.score += Math.round(1 * this.multiplayer);
+    }
+    drainEnergy(energy){
+        game.energy -= energy;
+        if(this.energy < 0)this.energy = 0;
+    }
+    clicked(event, gif) {
+        var touch = event.touches[0];
+        if (isInsideCircle(touch.clientX, touch.clientY)) {
+            if (game.energy < 1) return;
+            window.Telegram.WebApp.HapticFeedback.selectionChanged()
+            isCircleTouched = true;
+            drawCircle();
+
+            let multiplayerAdd = 1 * this.multiplayer;
+            if(this.multiplayer < 1){
+                this.drainEnergy(1)
+            }else{
+                let multiplayerDrain = 1 * this.multiplayer;
+                this.drainEnergy(multiplayerDrain)
+            }
+            
+            const text = "+" + multiplayerAdd; // The text to show
+            createTextAtPosition(touch.clientX, touch.clientY, text);
+            game.addScore()
+            visuals.clicked();
+           // if(gif == undefined)this.showGif()
+        }
+       
+    }
+    clickedGif(event) {
+        this.clicked(event,true)
+        // var touch = event.touches[0];
+        // if (isInsideCircle(touch.clientX, touch.clientY)) {
+        //     if (game.energy < 1) return;
+        //     window.Telegram.WebApp.HapticFeedback.selectionChanged()
+        //     isCircleTouched = true;
+        //     drawCircle();
+        //     game.energy -= 1;
+        //     const text = "+1"; // The text to show
+        //     createTextAtPosition(touch.clientX, touch.clientY, text);
+        //     game.addScore()
+        // }
+    }
+    released(event) {
+        visuals.clicked();
+        isCircleTouched = false;
+        drawCircle();
+        //prevent double tap zoom
+        const now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+        }
+        lastTouchEnd = now;
+    }
+    spendScore(x) {
+        this.score -= Math.round(x);
+        upgrades.updateButtons();
+    }
+    showBottomGif(){
+
+    }
+    hideGif(){
+
+    }
+    showGif() {
+        overlay.style.display = 'block';
+        setTimeout(function() {
+            overlay.style.opacity = 1;
+        }, 10); // Start the fade-in effect almost immediately
+
+        setTimeout(function() {
+            overlay.style.opacity = 0;
+            setTimeout(function() {
+                overlay.style.display = 'none';
+            }, 1000); // Wait for fade-out to finish before hiding the element
+        }, 5000); // 5 seconds until fade-out starts
+    }
+}
+
+const game = new GameSystem()
+var overlay = document.getElementById('gifOverlay');
+
+class VisualFlare{
+    constructor(){
+        this.lastPressed = 0;
+        this.secondsBeenPressing = 0;
+        this.secondsTillFirstFlare = 5;
+        this.secondsTillSecondFlare = 60;
+        this.firstFlareShow = false;
+    }
+    update(){
+        //return;
+        let change = globalTime - this.lastPressed;
+        console.log(change)
+        if(change > 5000){
+            //hide gif
+            this.firstFlareShow = false;
+            setTimeout(function() {
+            overlay.style.opacity = 0;
+            setTimeout(function() {
+                overlay.style.display = 'none';
+            }, 100); // Wait for fade-out to finish before hiding the element
+        }, 1000); // 5 seconds until fade-out starts
+
+        }else{
+            if(this.firstFlareShow){
+
+            }else{
+                this.firstFlareShow = true;
+                overlay.style.display = 'block';
+        setTimeout(function() {
+            overlay.style.opacity = 1;
+        }, 10); // Start the fade-in effect almost immediately
+            }
+            //if showing do nothing 
+
+            //if not showing - show
+            createTextAtPosition(250,250,"CLICKING LONGER")
+        }
+
+
+    }
+    clicked(){
+        this.lastPressed = Date.now();
+    }
+    resetTimer(){
+
+    }
+    startFirstFlare(){
+
+    }
+}
+
+const visuals = new VisualFlare()
+
+
+//load images
+//coin image
+const imageUrl = 'https://raw.githubusercontent.com/blackroks/nftCollection/main/images/coinpng.png';
+// Create a new image object
+const image = new Image();
+// Set the crossOrigin to anonymous to avoid any cross-origin issues
+image.crossOrigin = 'anonymous';
+// Set the source of the image object to the provided URL
+image.src = imageUrl;
+// Handle any errors that occur during the loading of the image
+image.onerror = function() {
+    console.error('There was an error loading the image.');
+};
+//prepare main canvas
+var canvas = document.getElementById('myCanvas');
+var ctx = canvas.getContext('2d');
+var centerX, centerY, radius = window.innerWidth / 3; // Circle properties
+var isCircleTouched = false; // State to track if the circle is touched
+
+// Function to resize the canvas to fill the browser window
+function resizeCanvas() {
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+
+    // Use visualViewport API if available for mobile browsers
+    if (window.visualViewport) {
+        width = window.visualViewport.width;
+        height = window.visualViewport.height;
+    }
+
+    canvas.width = width;
+    canvas.height = height;
+
+    centerX = canvas.width / 2;
+    centerY = canvas.height / 2;
+
+    drawCircle();
+}
+
+let circlePaddingY = 100;
+
+// Function to draw the circle
+function drawCircle() {
+    // Clear the canvas
+    ctx.clearRect(0, 0, canvas.width, (centerY - (window.innerWidth / 3)) + ((window.innerWidth / 3) * 2));
+    if (isCircleTouched) {
+        ctx.drawImage(image, 256, 0, 256, 256, centerX - (window.innerWidth / 3), circlePaddingY+(centerY - (window.innerWidth / 3)), (window.innerWidth / 3) * 2, (window.innerWidth / 3) * 2);
+    } else {
+        ctx.drawImage(image, 0, 0, 256, 256, centerX - (window.innerWidth / 3), circlePaddingY+( centerY - (window.innerWidth / 3)), (window.innerWidth / 3) * 2, (window.innerWidth / 3) * 2);
+    }
+}
+
+// Function to check if the touch point is inside the circle
+function isInsideCircle(touchX, touchY) {
+    var dx = touchX - centerX;
+    var dy = touchY - (circlePaddingY+centerY);
+    return dx * dx + dy * dy <= radius * radius;
+}
+
+
+// Function to create the text and animate it
+function createTextAtPosition(x, y, text,speed) {
+    const floatingText = document.createElement('div');
+    floatingText.textContent = text;
+    floatingText.classList.add('fade-text');
+    let randx = Math.floor(Math.random() * 60)
+    randx = Math.round(20 - randx)
+    x = x + randx
+    floatingText.style.left = `${x}px`;
+    floatingText.style.top = `${y}px`;
+
+    // Append the text to the body
+    document.body.appendChild(floatingText);
+    if(speed == undefined){
+        speed = 'translateY(-200px)'
+    }else{
+        speed = 'translateY(20px)'
+    }
+    // Start the animation
+    setTimeout(() => {
+        floatingText.style.opacity = '0';
+        floatingText.style.transform = speed;
+    }, 0);
+
+    // Remove the element after the animation is done
+    setTimeout(() => {
+        floatingText.remove();
+    }, 500);
+}
+
+
+let lastTouchEnd = 0;
+
+//EVENT LISTENERS
+document.getElementById("gifOverlay").addEventListener('touchstart', function(event) {
+    game.clickedGif(event)
+}, {
+    passive: false
+});
+
+// Event listener for touchstart
+canvas.addEventListener('touchstart', function(event) {
+    game.clicked(event);
+}, {
+    passive: false
+});
+
+
+document.getElementById("gifOverlay").addEventListener('touchend', function(event) {
+    game.released(event)
+}, {
+    passive: false
+});
+
+// Event listener for touchend
+canvas.addEventListener('touchend', function(event) {
+    game.released(event)
+}, {
+    passive: false
+});
+
+
+// Resize the canvas to fill the screen when the window is resized
+window.addEventListener('resize', resizeCanvas, false);
+
+// Resize the canvas to fill the screen when the orientation changes
+//window.addEventListener('orientationchange', resizeCanvas, false);
+
+document.addEventListener('contextmenu', function(event) {
+    event.preventDefault();
+});
+
+// Prevent scrolling on touch devices
+document.addEventListener('touchmove', function(event) {
+    if (modal.style.display == "block") {} else {
+        event.preventDefault();
+    }
+
+
+}, {
+    passive: false
+});
+
+
+
+let showEnergyBar = () => {
+    ctx.clearRect(0,0, canvas.width, document.getElementById("scoreUI").getBoundingClientRect().top);
+    ctx.drawImage(image, 0, 256, 64, 64, 10,10, 64, 50);
+    ctx.drawImage(image, 64, 256, 64, 64, window.innerWidth - 74,  10, 64, 50);
+    ctx.drawImage(image, 171, 256, 16, 64, 74,  10, window.innerWidth - 144, 50);
+    //dynamic bar
+    let percerageBar = game.energy / game.maxEnergy;
+
+    document.getElementById("UIenergyBar").textContent = game.energy + "/" + game.maxEnergy
+    document.getElementById("UIenergyBar").style.top = "22px"
+    document.getElementById("UIenergyBar").style.left = "68px"
+    document.getElementById("UIenergyBar").style.width =(percerageBar * (window.innerWidth - 114))+"px"
+
+    document.getElementById("UIenergyBarEmpty").style.top = "22px"
+    document.getElementById("UIenergyBarEmpty").style.left = "68px"
+    document.getElementById("UIenergyBarEmpty").style.width = (window.innerWidth - 114)+"px"
+    document.getElementById("UIenergyBarEmpty").style.height = document.getElementById("UIenergyBar").style.height
+    
+    // document.getElementById("UIexpBar").style.top = "38px"
+    // document.getElementById("UIexpBar").style.left = "68px"
+    // document.getElementById("UIexpBar").style.width = (window.innerWidth - 144)+"px"
+
+
+    // let barwidth = (window.innerWidth - 192) * percerageBar
+    // if (percerageBar > 0.7) {
+    //     ctx.drawImage(image, 188, 256, 10, 64, 96, 10, barwidth, 50);
+    // } else if (percerageBar > 0.2) {
+    //     ctx.drawImage(image, 204, 256, 10, 64, 96, 10, barwidth, 50);
+    // } else {
+    //     ctx.drawImage(image, 220, 256, 10, 64, 96, 10, barwidth, 50);
+    // }
+
 }
 </script>
 
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+ 
+    let openModal = () => {
+        var modalContent = document.querySelector('.modal-content');
+        modalContent.scrollTop = 0;
+        // document.querySelector(".modal-body").innerHTML = ''
+        window.Telegram.WebApp.BackButton.show()
+        window.Telegram.WebApp.BackButton.onClick(closeModal)
+        modal.style.display = "block";
+        // Example usage:
+        //  Telegram.WebApp.showConfirm("Are you sure?");
+        // window.Telegram.WebApp.showAlert("message"[openModal])
+        //  window.Telegram.WebApp.showConfirm("message",[openModal])
+        upgrades.updateButtons();
+        mainButton.color = Telegram.WebApp.themeParams.button_text_color
+        mainButton.textColor = Telegram.WebApp.themeParams.button_color
+        Telegram.WebApp.MainButton.disable()
+        // mainButton.onClick(closeModal);
+    }
+
+
+    let closeModal = () => {
+        Telegram.WebApp.BackButton.hide()
+        modal.style.display = "none";
+        mainButton.color = Telegram.WebApp.themeParams.button_color
+        mainButton.textColor = Telegram.WebApp.themeParams.button_text_color
+        mainButton.text = "PUMP SHOP"
+        Telegram.WebApp.MainButton.enable()
+    }            
+
+    </script>
+    
+    <script>
+//game loop
+var globalTime = Date.now();
+setInterval(() => {
+    globalTime = Date.now();
+
+    if(Math.random() < 0.1){
+        createFallingButton();
+    }
+
+if (game.energy < game.maxEnergy) {
+    game.energy = Math.round(game.energy + 1)
+}
+    visuals.update();
+}, 1000);
+
+function step() {
+//energy
+showEnergyBar()
+//score
+let displayedScore = Number(document.getElementById("scoreUI").textContent)
+if (game.score > displayedScore) {
+    displayedScore++;
+    document.getElementById("scoreUI").textContent = Math.round(displayedScore) + "💨";
+} else {
+    document.getElementById("scoreUI").textContent = Math.round(game.score) + "💨";
+}
+window.requestAnimationFrame(step);
+}
+
+let mainButton;
+
+// Initial call to set up the canvas
+addEventListener("load", (event) => {
+    document.getElementById("scoreUI").style.marginTop = "70px"
+//viewportHeight
+// window.Telegram.WebApp.HapticFeedback
+resizeCanvas();
+//let introtext = "d3clicker.engine "+ window.Telegram.WebApp.platform + " v." + window.Telegram.WebApp.version
+// document.getElementById("text").textContent = introtext
+// isVersionAtLeast(6.1)
+window.requestAnimationFrame(step);
+window.Telegram.WebApp.BackButton.hide()
+window.Telegram.WebApp.enableClosingConfirmation()
+mainButton = Telegram.WebApp.MainButton.setParams({
+    text: 'PUMP SHOP',
+    is_visible: true
+}).onClick(openModal);
+Telegram.WebApp.MainButton.enable()
+window.Telegram.WebApp.ready()
+
+//    window.Telegram.WebApp.PopupParams.title = "Testing"
+//    window.Telegram.WebApp.PopupParams.message = "This is testing"
+//    window.Telegram.WebApp.showPopup(params[, callback])
+
+setTimeout(() => {
+    mainButton.color = Telegram.WebApp.themeParams.button_color
+    mainButton.textColor = Telegram.WebApp.themeParams.button_text_color
+    mainButton.text = "PUMP SHOP"
+    window.Telegram.WebApp.expand()
+}, 500);
+});
+    </script>
+
 </body>
 </html>
+
