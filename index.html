@@ -298,7 +298,7 @@
 <body>
 
 <div id="UIenergyBar">100/100</div>
-<div id="UIenergyBarEmpty">⚡</div>
+<div id="UIenergyBarEmpty"></div>
 <!-- <div id="UIexpBar">0/100</div> -->
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -412,26 +412,25 @@
 
     // Add click event to the button
     button.onclick = function(event) {
-        var touch = event.touches[0];
-        const text = "BONUS"; // The text to show
-        createTextAtPosition(touch.clientX, touch.clientY, text);
-
       clearInterval(fallInterval); // Stop the falling animation
       button.style.opacity = 0; // Fade out the button
       console.log('Button clicked! bonus:' + button.src);
       window.Telegram.WebApp.HapticFeedback.impactOccurred("light")
-      addBonus(button.src)
+      addBonus(button.src,button.getBoundingClientRect().x, button.getBoundingClientRect().y)
       button.src = "none"
       setTimeout(() => button.remove(), 2000); // Remove the button after it fades out
     };
   }
 
 
-  var addBonus = (type) => {
+  var addBonus = (type,x,y) => {
+    
     if(type == "none"){
         return;
     }
     if(type == "bonus1"){
+        const text = "BONUS"; // The text to show
+        createTextAtPosition(x,y, text);
         //multyplier
         game.multiplayer += 1;
         setTimeout(() => {
@@ -439,16 +438,18 @@
         }, 10000); // Remove the button after it fades out
     }else if(type == "bonus2"){
         //energy
+        const text = "ENERGY"; // The text to show
+        createTextAtPosition(x,y, text);
         game.energy += 50;
         if(game.energy > game.maxEnergy){
             game.energy = game.maxEnergy;
         }
     }else if(type == "bonus3"){
-        console.log("DEAD BONUS ", slowMo)
+        const text = "DEBUFF"; // The text to show
+        createTextAtPosition(x,y, text);
         //dead bonus
         slowMo = true;
         game.multiplayer -= 0.5;
-        console.log("DEAD BONUS ", slowMo)
         setTimeout(() => {
             slowMo = false;
             game.multiplayer += 0.5;
@@ -853,6 +854,7 @@ let showEnergyBar = () => {
     document.getElementById("UIenergyBarEmpty").style.top = "22px"
     document.getElementById("UIenergyBarEmpty").style.left = "68px"
     document.getElementById("UIenergyBarEmpty").style.width = (window.innerWidth - 114)+"px"
+    document.getElementById("UIenergyBarEmpty").style.height = document.getElementById("UIenergyBar").style.height
     
     // document.getElementById("UIexpBar").style.top = "38px"
     // document.getElementById("UIexpBar").style.left = "68px"
