@@ -338,7 +338,7 @@
     return Math.floor(Math.random() * maxPosition) + 'px';
   }
 
-
+  let slowMo = false
   // Function to create and animate the falling button
   function createFallingButton() {
     const button = document.createElement('button');
@@ -363,13 +363,13 @@
       button.style.backgroundSize = "contain";
 
     // Animate the button falling
-    let slowMo = false
+    
     let topPosition = -50; // Start above the top of the page
     const fallInterval = setInterval(() => {
         if(slowMo){
-            topPosition += 1;
+           topPosition += 0.5;
         }else{
-            topPosition += 0.5;
+            topPosition += 2;
         }
      
       button.style.top = topPosition + 'px';
@@ -389,6 +389,7 @@
       button.style.opacity = 0; // Fade out the button
       console.log('Button clicked! bonus:' + button.src);
       window.Telegram.WebApp.HapticFeedback.impactOccurred("light")
+      addBonus(button.src)
       setTimeout(() => button.remove(), 2000); // Remove the button after it fades out
     };
   }
@@ -409,9 +410,11 @@
             game.energy = game.maxEnergy;
         }
     }else if(type == "bonus3"){
+        console.log("DEAD BONUS ", slowMo)
         //dead bonus
         slowMo = true;
         game.multiplayer -= 0.5;
+        console.log("DEAD BONUS ", slowMo)
         setTimeout(() => {
             slowMo = false;
             game.multiplayer += 0.5;
@@ -791,17 +794,20 @@ let showEnergyBar = () => {
     ctx.clearRect(0,0, canvas.width, document.getElementById("scoreUI").getBoundingClientRect().top);
     ctx.drawImage(image, 0, 256, 64, 64, 10,10, 64, 50);
     ctx.drawImage(image, 64, 256, 64, 64, window.innerWidth - 74,  10, 64, 50);
-    ctx.drawImage(image, 171, 256, 16, 64, 96,  10, window.innerWidth - 192, 50);
+    ctx.drawImage(image, 171, 256, 16, 64, 74,  10, window.innerWidth - 144, 50);
     //dynamic bar
     let percerageBar = game.energy / game.maxEnergy;
-    let barwidth = (window.innerWidth - 192) * percerageBar
-    if (percerageBar > 0.7) {
-        ctx.drawImage(image, 188, 256, 10, 64, 96, 10, barwidth, 50);
-    } else if (percerageBar > 0.2) {
-        ctx.drawImage(image, 204, 256, 10, 64, 96, 10, barwidth, 50);
-    } else {
-        ctx.drawImage(image, 220, 256, 10, 64, 96, 10, barwidth, 50);
-    }
+
+
+
+    // let barwidth = (window.innerWidth - 192) * percerageBar
+    // if (percerageBar > 0.7) {
+    //     ctx.drawImage(image, 188, 256, 10, 64, 96, 10, barwidth, 50);
+    // } else if (percerageBar > 0.2) {
+    //     ctx.drawImage(image, 204, 256, 10, 64, 96, 10, barwidth, 50);
+    // } else {
+    //     ctx.drawImage(image, 220, 256, 10, 64, 96, 10, barwidth, 50);
+    // }
 
 }
 </script>
