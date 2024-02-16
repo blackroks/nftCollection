@@ -338,6 +338,7 @@
     return Math.floor(Math.random() * maxPosition) + 'px';
   }
 
+
   // Function to create and animate the falling button
   function createFallingButton() {
     const button = document.createElement('button');
@@ -345,10 +346,32 @@
     button.style.left = getRandomHorizontalPosition();
     document.body.appendChild(button);
 
+    let randBonus = Math.round(Math.random()*2)
+        let bonusType;
+        if(randBonus == 0){
+            bonusType =  "url('https://raw.githubusercontent.com/blackroks/nftCollection/main/images/bonusimg.png') center center no-repeat"
+            button.src = "bonus1"
+        }else if(randBonus == 1){
+            bonusType =  "url('https://raw.githubusercontent.com/blackroks/nftCollection/main/images/energybonusimg.png') center center no-repeat"
+            button.src = "bonus2"
+        }else{
+            bonusType =  "url('https://raw.githubusercontent.com/blackroks/nftCollection/main/images/deadbonusimg.png') center center no-repeat"
+            button.src = "bonus3"
+        }
+
+      button.style.background = bonusType;
+      button.style.backgroundSize = "contain";
+
     // Animate the button falling
+    let slowMo = false
     let topPosition = -50; // Start above the top of the page
     const fallInterval = setInterval(() => {
-      topPosition += 1;
+        if(slowMo){
+            topPosition += 1;
+        }else{
+            topPosition += 0.5;
+        }
+     
       button.style.top = topPosition + 'px';
      //   button.style.background = "url('https://raw.githubusercontent.com/blackroks/nftCollection/main/images/miner.gif') center center no-repeat;"
       // If the button goes below the bottom, remove it
@@ -360,12 +383,41 @@
 
     // Add click event to the button
     button.onclick = function() {
+
+      
       clearInterval(fallInterval); // Stop the falling animation
       button.style.opacity = 0; // Fade out the button
-      console.log('Button clicked!');
+      console.log('Button clicked! bonus:' + button.src);
       window.Telegram.WebApp.HapticFeedback.impactOccurred("light")
       setTimeout(() => button.remove(), 2000); // Remove the button after it fades out
     };
+  }
+
+
+  var addBonus = (type) => {
+
+    if(type == "bonus1"){
+        //multyplier
+        game.multiplayer += 1;
+        setTimeout(() => {
+            game.multiplayer -= 1;
+        }, 10000); // Remove the button after it fades out
+    }else if(type == "bonus2"){
+        //energy
+        game.energy += 50;
+        if(game.energy > game.maxEnergy){
+            game.energy = game.maxEnergy;
+        }
+    }else if(type == "bonus3"){
+        //dead bonus
+        slowMo = true;
+        game.multiplayer -= 0.5;
+        setTimeout(() => {
+            slowMo = false;
+            game.multiplayer += 0.5;
+        }, 10000); // Remove the button after it fades out
+    }
+
   }
 
 
