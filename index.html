@@ -8,6 +8,21 @@
 
 <style>
 
+    #UIenergyBar{
+        background-color: yellow;
+        position: absolute;
+        /* height: 10px; */
+        /* width: 80%; */
+        text-align: center;
+        border-radius: 3px; /* Optional: for rounded corners */
+    }
+    #UIexpBar{
+        background-color: #655cb8;
+        position: absolute;
+        height: 5px;
+        /* width: 30%; */
+        border-radius: 2px; /* Optional: for rounded corners */
+    }
   .button-container {
     position: absolute;
     width: 100%;
@@ -270,7 +285,8 @@
 </head>
 <body>
 
-
+<div id="UIenergyBar">100/100</div>
+<div id="UIexpBar">0/100</div>
 <!-- The Modal -->
 <div id="myModal" class="modal">
   <!-- Modal content -->
@@ -798,6 +814,14 @@ let showEnergyBar = () => {
     //dynamic bar
     let percerageBar = game.energy / game.maxEnergy;
 
+    document.getElementById("UIenergyBar").textContent = game.energy + "/" + game.maxEnergy
+    document.getElementById("UIenergyBar").style.top = "22px"
+    document.getElementById("UIenergyBar").style.left = "68px"
+    document.getElementById("UIenergyBar").style.width = (window.innerWidth - 114)+"px"
+    
+    // document.getElementById("UIexpBar").style.top = "38px"
+    // document.getElementById("UIexpBar").style.left = "68px"
+    // document.getElementById("UIexpBar").style.width = (window.innerWidth - 144)+"px"
 
 
     // let barwidth = (window.innerWidth - 192) * percerageBar
