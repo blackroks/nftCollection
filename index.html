@@ -589,8 +589,10 @@ class GameSystem {
             const text = "+" + multiplayerAdd; // The text to show
             createTextAtPosition(touch.clientX, touch.clientY, text);
             game.addScore()
+            visuals.clicked();
+           // if(gif == undefined)this.showGif()
         }
-        if(gif == undefined)this.showGif()
+       
     }
     clickedGif(event) {
         this.clicked(event,true)
@@ -679,6 +681,7 @@ class VisualFlare{
             //if showing do nothing 
 
             //if not showing - show
+            createTextAtPosition(250,250,"CLICKING LONGER")
         }
 
 
