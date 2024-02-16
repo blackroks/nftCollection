@@ -15,6 +15,7 @@
         /* width: 80%; */
         text-align: center;
         border-radius: 3px; /* Optional: for rounded corners */
+        color: blue;
     }
     #UIexpBar{
         background-color: #655cb8;
@@ -544,6 +545,12 @@ class GameSystem {
         this.energy = 100;
         this.energyRestoration = 1;
     }
+    addScore(score) {
+        this.score += Math.round(1 * this.multiplayer);
+    }
+    drainEnergy(energy){
+        game.energy -= energy;
+    }
     clicked(event) {
         var touch = event.touches[0];
         if (isInsideCircle(touch.clientX, touch.clientY)) {
@@ -551,8 +558,16 @@ class GameSystem {
             window.Telegram.WebApp.HapticFeedback.selectionChanged()
             isCircleTouched = true;
             drawCircle();
-            game.energy -= 1;
-            const text = "+1"; // The text to show
+
+            let multiplayerAdd = 1 * this.multiplayer;
+            if(this.multiplayer < 1){
+                this.drainEnergy(1)
+            }else{
+                let multiplayerDrain = 1 * this.multiplayer;
+                this.drainEnergy(multiplayerDrain)
+            }
+            
+            const text = "+" + multiplayerAdd; // The text to show
             createTextAtPosition(touch.clientX, touch.clientY, text);
             game.addScore()
         }
@@ -581,9 +596,6 @@ class GameSystem {
             event.preventDefault();
         }
         lastTouchEnd = now;
-    }
-    addScore() {
-        this.score += Math.round(1 * this.multiplayer);
     }
     spendScore(x) {
         this.score -= Math.round(x);
