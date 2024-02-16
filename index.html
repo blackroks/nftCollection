@@ -430,7 +430,7 @@
     }
     if(type == "bonus1"){
         const text = "BONUS"; // The text to show
-        createTextAtPosition(x,y, text);
+        createTextAtPosition(x,y, text,100);
         //multyplier
         game.multiplayer += 1;
         setTimeout(() => {
@@ -439,14 +439,14 @@
     }else if(type == "bonus2"){
         //energy
         const text = "ENERGY"; // The text to show
-        createTextAtPosition(x,y, text);
+        createTextAtPosition(x,y, text,100);
         game.energy += 50;
         if(game.energy > game.maxEnergy){
             game.energy = game.maxEnergy;
         }
     }else if(type == "bonus3"){
         const text = "DEBUFF"; // The text to show
-        createTextAtPosition(x,y, text);
+        createTextAtPosition(x,y, text,100);
         //dead bonus
         slowMo = true;
         game.multiplayer -= 0.5;
@@ -773,7 +773,6 @@ function createTextAtPosition(x, y, text,speed) {
 
     // Append the text to the body
     document.body.appendChild(floatingText);
-    let speed;
     if(speed == undefined){
         speed = 'translateY(-200px)'
     }else{
