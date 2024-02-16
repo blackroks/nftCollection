@@ -9,13 +9,24 @@
 <style>
 
     #UIenergyBar{
-        background-color: yellow;
+        background-color: rgb(236, 217, 44);
         position: absolute;
         /* height: 10px; */
         /* width: 80%; */
         text-align: center;
         border-radius: 3px; /* Optional: for rounded corners */
         color: blue;
+        z-index: 2;
+    }
+    #UIenergyBarEmpty{
+        background-color: rgb(72, 81, 104);
+        position: absolute;
+        /* height: 10px; */
+        /* width: 80%; */
+        text-align: center;
+        border-radius: 3px; /* Optional: for rounded corners */
+        color: blue;
+        z-index: 1;
     }
     #UIexpBar{
         background-color: #655cb8;
@@ -287,7 +298,8 @@
 <body>
 
 <div id="UIenergyBar">100/100</div>
-<div id="UIexpBar">0/100</div>
+<div id="UIenergyBarEmpty"></div>
+<!-- <div id="UIexpBar">0/100</div> -->
 <!-- The Modal -->
 <div id="myModal" class="modal">
   <!-- Modal content -->
@@ -551,7 +563,7 @@ class GameSystem {
     drainEnergy(energy){
         game.energy -= energy;
     }
-    clicked(event) {
+    clicked(event, gif) {
         var touch = event.touches[0];
         if (isInsideCircle(touch.clientX, touch.clientY)) {
             if (game.energy < 1) return;
@@ -571,20 +583,21 @@ class GameSystem {
             createTextAtPosition(touch.clientX, touch.clientY, text);
             game.addScore()
         }
-        this.showGif()
+        if(gif == undefined)this.showGif()
     }
     clickedGif(event) {
-        var touch = event.touches[0];
-        if (isInsideCircle(touch.clientX, touch.clientY)) {
-            if (game.energy < 1) return;
-            window.Telegram.WebApp.HapticFeedback.selectionChanged()
-            isCircleTouched = true;
-            drawCircle();
-            game.energy -= 1;
-            const text = "+1"; // The text to show
-            createTextAtPosition(touch.clientX, touch.clientY, text);
-            game.addScore()
-        }
+        this.clicked(event,true)
+        // var touch = event.touches[0];
+        // if (isInsideCircle(touch.clientX, touch.clientY)) {
+        //     if (game.energy < 1) return;
+        //     window.Telegram.WebApp.HapticFeedback.selectionChanged()
+        //     isCircleTouched = true;
+        //     drawCircle();
+        //     game.energy -= 1;
+        //     const text = "+1"; // The text to show
+        //     createTextAtPosition(touch.clientX, touch.clientY, text);
+        //     game.addScore()
+        // }
     }
     released(event) {
         visuals.clicked();
@@ -829,7 +842,11 @@ let showEnergyBar = () => {
     document.getElementById("UIenergyBar").textContent = game.energy + "/" + game.maxEnergy
     document.getElementById("UIenergyBar").style.top = "22px"
     document.getElementById("UIenergyBar").style.left = "68px"
-    document.getElementById("UIenergyBar").style.width = (window.innerWidth - 114)+"px"
+    document.getElementById("UIenergyBar").style.width =(percerageBar * (window.innerWidth - 114))+"px"
+
+    document.getElementById("UIenergyBarEmpty").style.top = "22px"
+    document.getElementById("UIenergyBarEmpty").style.left = "68px"
+    document.getElementById("UIenergyBarEmpty").style.width = (window.innerWidth - 114)+"px"
     
     // document.getElementById("UIexpBar").style.top = "38px"
     // document.getElementById("UIexpBar").style.left = "68px"
