@@ -175,6 +175,7 @@
     font-size: 30px;
     color: rgb(203, 185, 185);
     font-weight: bold;
+    z-index: 100;
   }
   #scoreUI{
     font-size: 60px;
@@ -291,7 +292,7 @@
     transition: opacity 2s;
     background: url('https://raw.githubusercontent.com/blackroks/nftCollection/main/images/bonusimg.png') center center no-repeat;
     background-size: contain;
-    z-index: 2000;
+    z-index: 9;
   }
 </style>
 </head>
@@ -656,8 +657,9 @@ class VisualFlare{
         this.firstFlareShow = false;
     }
     update(){
-        return;
+        //return;
         let change = globalTime - this.lastPressed;
+        console.log(change)
         if(change > 1000){
             //hide gif
             this.firstFlareShow = false;
@@ -776,7 +778,7 @@ function createTextAtPosition(x, y, text,speed) {
     if(speed == undefined){
         speed = 'translateY(-200px)'
     }else{
-        speed = 'translateY(-100px)'
+        speed = 'translateY(20px)'
     }
     // Start the animation
     setTimeout(() => {
