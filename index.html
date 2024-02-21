@@ -60,7 +60,7 @@
     .modal {
       display: none; /* Hidden by default */
       position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
+      z-index: 1000; /* Sit on top */
       left: 0;
       top: 0;
       width: 100%; /* Full width */
@@ -277,7 +277,7 @@
     background-size: cover;
     display: none;
     opacity: 0;
-    z-index: 1000; /* Ensure it's above other content */
+    z-index: 50; /* Ensure it's above other content */
     transition: opacity 1s ease-in-out;
   }
 
@@ -292,11 +292,25 @@
     transition: opacity 2s;
     background: url('https://raw.githubusercontent.com/blackroks/nftCollection/main/images/bonusimg.png') center center no-repeat;
     background-size: contain;
-    z-index: 9;
+    z-index: 109;
+  }
+  .centered-text {
+    display: none; /* Initially set to none to hide the text */
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: white;
+    font-size: 22px; /* Adjust size as needed */
+    background-color: black;
+    font-family: Arial, sans-serif; /* Choose your preferred font */
+    z-index: 420;
   }
 </style>
 </head>
 <body>
+    <div id="message" class="centered-text">
+        Mobile devices are more fun!
+      </div>
 
 <div id="UIenergyBar">100/100</div>
 <div id="UIenergyBarEmpty">energy</div>
@@ -316,10 +330,10 @@
         <!-- Buttons will be added here -->
       </div>
       <div class="content" id="upgradeButtons">
-        <button class="ios-button" id="_profitability" onclick="upgrades.upgradeProfitability()"></button>
+        <!-- <button class="ios-button" id="_profitability" onclick="upgrades.upgradeProfitability()"></button> -->
         <button class="ios-button" id="_energyCapacity" onclick="upgrades.upgradeEnergy()"></button>
         <button class="ios-button" id="_energyRegen" onclick="upgrades.upgradeRegen()"></button>
-        <button class="ios-button" id="_mining" onclick="upgrades.upgradeMining()"></button>
+        <!-- <button class="ios-button" id="_mining" onclick="upgrades.upgradeMining()"></button> -->
     </div>
     <div class="start-body">
     <h5>Level up info</h5>
@@ -327,7 +341,7 @@
     <div class="horizontal-scroll">
        
         <div class="card">
-            <p>Item 1</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
         <div class="card">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -416,7 +430,7 @@
       clearInterval(fallInterval); // Stop the falling animation
       button.style.opacity = 0; // Fade out the button
       console.log('Button clicked! bonus:' + button.src);
-      window.Telegram.WebApp.HapticFeedback.impactOccurred("light")
+    
       addBonus(button.src,button.getBoundingClientRect().x, button.getBoundingClientRect().y)
       button.src = "none"
       setTimeout(() => button.remove(), 2000); // Remove the button after it fades out
@@ -429,12 +443,15 @@
     if(type == "none"){
         return;
     }
+    window.Telegram.WebApp.HapticFeedback.impactOccurred("heavy")
     if(type == "bonus1"){
         const text = "BONUS"; // The text to show
         createTextAtPosition(x,y, text,100);
+       // document.getElementById("gifOverlay").style.backgroundImage = "url('https://raw.githubusercontent.com/blackroks/nftCollection/main/images/parrot-party.gif')";
         //multyplier
         game.multiplayer += 1;
         setTimeout(() => {
+         //   document.getElementById("gifOverlay").style.backgroundImage = "url('https://raw.githubusercontent.com/blackroks/nftCollection/main/images/spark1.gif')";
             game.multiplayer -= 1;
         }, 10000); // Remove the button after it fades out
     }else if(type == "bonus2"){
@@ -448,10 +465,12 @@
     }else if(type == "bonus3"){
         const text = "DEBUFF"; // The text to show
         createTextAtPosition(x,y, text,100);
+        document.getElementById("myCanvas").style.backgroundImage = 'radial-gradient(circle, #000000, #292929)';
         //dead bonus
         slowMo = true;
         game.multiplayer -= 0.5;
         setTimeout(() => {
+            document.getElementById("myCanvas").style.backgroundImage = 'radial-gradient(circle,#143f5b, #010c13)'
             slowMo = false;
             game.multiplayer += 0.5;
         }, 10000); // Remove the button after it fades out
@@ -463,21 +482,21 @@
 </script>
 <script>
 const energyCapacityUpgrades = [
-  { name: "Small Battery Pack", increase: 10, cost: 100 },
-  { name: "Medium Battery Pack", increase: 25, cost: 250 },
-  { name: "Large Battery Pack", increase: 50, cost: 500 },
-  { name: "High-Capacity Battery", increase: 100, cost: 1000 },
-  { name: "Industrial Battery", increase: 250, cost: 2500 },
-  { name: "Quantum Battery", increase: 500, cost: 5000 }
+  { name: "Bigger Pump", increase: 10, cost: 100 },
+  { name: "Pump With Abs", increase: 25, cost: 250 },
+  { name: "Mr.Pump", increase: 50, cost: 500 },
+  { name: "Mr.Pumplympia", increase: 100, cost: 1000 },
+  { name: "Industrial Pump", increase: 250, cost: 2500 },
+  { name: "Quantum Pump", increase: 500, cost: 5000 }
 ];
 
 const energyRegenerationUpgrades = [
-  { name: "Potato generator", increase: 1, cost: 100 },
-  { name: "Wind Turbine", increase: 1, cost: 300 },
-  { name: "Solar Panels", increase: 3, cost: 750 },
-  { name: "Hydroelectric Dam", increase: 10, cost: 1500 },
-  { name: "Nuclear Reactor", increase: 25, cost: 3750 },
-  { name: "Fusion Reactor", increase: 50, cost: 7500 }
+  { name: "Longer Hose", increase: 1, cost: 100 },
+  { name: "Hose Turbine", increase: 1, cost: 300 },
+  { name: "Solar Hose", increase: 3, cost: 750 },
+  { name: "Hydroelectric Hose", increase: 10, cost: 1500 },
+  { name: "Nuclear Hose", increase: 25, cost: 3750 },
+  { name: "Hose Reactor", increase: 50, cost: 7500 }
 ];
 
 var testCallback = (testbool) => {
@@ -544,10 +563,10 @@ class Upgrades {
     }
     updateButtons() {
         //document.getElementById("_wallet").textContent = game.score + "$"
-        document.getElementById("_profitability").textContent = "🪙 : " + this.profitability
+       // document.getElementById("_profitability").textContent = "🪙 : " + this.profitability
         document.getElementById("_energyCapacity").textContent = "🔋 : " + energyCapacityUpgrades[this.energyLvl].name + " " + energyCapacityUpgrades[this.energyLvl].cost + "$"
         document.getElementById("_energyRegen").textContent = "⚡ : " + energyRegenerationUpgrades[this.energyRegen].name + " for " + energyRegenerationUpgrades[this.energyRegen].cost + "$"
-        document.getElementById("_mining").textContent = "⛏️ : " + this.mining
+        //document.getElementById("_mining").textContent = "⛏️ : " + this.mining
         mainButton.text = "Lvl " + game.level + ' / ' + game.score + "$"
     }
 }
@@ -560,8 +579,8 @@ class GameSystem {
         this.level = 1;
         this.score = 0;
         this.multiplayer = 1;
-        this.maxEnergy = 100;
-        this.energy = 100;
+        this.maxEnergy = 150;
+        this.energy = 150;
         this.energyRestoration = 1;
     }
     addScore(score) {
@@ -575,7 +594,14 @@ class GameSystem {
         var touch = event.touches[0];
         if (isInsideCircle(touch.clientX, touch.clientY)) {
             if (game.energy < 1) return;
-            window.Telegram.WebApp.HapticFeedback.selectionChanged()
+            visuals.clicked();
+            if(visuals.streak > 3){
+                window.Telegram.WebApp.HapticFeedback.impactOccurred("light")
+            }else{
+                window.Telegram.WebApp.HapticFeedback.selectionChanged()
+            }
+            //window.Telegram.WebApp.HapticFeedback.selectionChanged()
+           // window.Telegram.WebApp.HapticFeedback.impactOccurred("light")
             isCircleTouched = true;
             drawCircle();
 
@@ -590,7 +616,6 @@ class GameSystem {
             const text = "+" + multiplayerAdd; // The text to show
             createTextAtPosition(touch.clientX, touch.clientY, text);
             game.addScore()
-            visuals.clicked();
            // if(gif == undefined)this.showGif()
         }
        
@@ -610,7 +635,6 @@ class GameSystem {
         // }
     }
     released(event) {
-        visuals.clicked();
         isCircleTouched = false;
         drawCircle();
         //prevent double tap zoom
@@ -641,7 +665,7 @@ class GameSystem {
             setTimeout(function() {
                 overlay.style.display = 'none';
             }, 1000); // Wait for fade-out to finish before hiding the element
-        }, 5000); // 5 seconds until fade-out starts
+        }, 3000); // 5 seconds until fade-out starts
     }
 }
 
@@ -655,36 +679,50 @@ class VisualFlare{
         this.secondsTillFirstFlare = 5;
         this.secondsTillSecondFlare = 60;
         this.firstFlareShow = false;
+        this.streak = 0;
     }
     update(){
         //return;
         let change = globalTime - this.lastPressed;
-        console.log(change)
-        if(change > 5000){
-            //hide gif
-            this.firstFlareShow = false;
-            setTimeout(function() {
-            overlay.style.opacity = 0;
-            setTimeout(function() {
-                overlay.style.display = 'none';
-            }, 100); // Wait for fade-out to finish before hiding the element
-        }, 1000); // 5 seconds until fade-out starts
+        //console.log(change)
 
+        if(change < 1000){
+            this.streak++;
         }else{
-            if(this.firstFlareShow){
-
-            }else{
-                this.firstFlareShow = true;
-                overlay.style.display = 'block';
-        setTimeout(function() {
-            overlay.style.opacity = 1;
-        }, 10); // Start the fade-in effect almost immediately
-            }
-            //if showing do nothing 
-
-            //if not showing - show
-            createTextAtPosition(250,250,"CLICKING LONGER")
+            this.streak = 0;
         }
+
+        if(this.streak > 3){
+            //console.log("ACTIVATE GIF")
+            game.showGif()
+        }
+
+
+        // if(change > 5000){
+        //     //hide gif
+        //     this.firstFlareShow = false;
+        //     setTimeout(function() {
+        //     overlay.style.opacity = 0;
+        //     setTimeout(function() {
+        //         overlay.style.display = 'none';
+        //     }, 100); // Wait for fade-out to finish before hiding the element
+        // }, 1000); // 5 seconds until fade-out starts
+
+        // }else{
+        //     if(this.firstFlareShow){
+
+        //     }else{
+        //         this.firstFlareShow = true;
+        //         overlay.style.display = 'block';
+        // setTimeout(function() {
+        //     overlay.style.opacity = 1;
+        // }, 10); // Start the fade-in effect almost immediately
+        //     }
+        //     //if showing do nothing 
+
+        //     //if not showing - show
+        //     createTextAtPosition(250,250,"CLICKING LONGER")
+        // }
 
 
     }
@@ -704,7 +742,7 @@ const visuals = new VisualFlare()
 
 //load images
 //coin image
-const imageUrl = 'https://raw.githubusercontent.com/blackroks/nftCollection/main/images/coinpng.png';
+const imageUrl = 'https://raw.githubusercontent.com/samsonPanzer/teleclickers/main/images/clickerSheet.png';
 // Create a new image object
 const image = new Image();
 // Set the crossOrigin to anonymous to avoid any cross-origin issues
@@ -778,7 +816,7 @@ function createTextAtPosition(x, y, text,speed) {
     if(speed == undefined){
         speed = 'translateY(-200px)'
     }else{
-        speed = 'translateY(20px)'
+        speed = 'translateY(-100px)'
     }
     // Start the animation
     setTimeout(() => {
@@ -920,6 +958,9 @@ let showEnergyBar = () => {
 //game loop
 var globalTime = Date.now();
 setInterval(() => {
+    if(!mobile){
+        return;
+    }
     globalTime = Date.now();
 
     if(Math.random() < 0.1){
@@ -947,9 +988,18 @@ window.requestAnimationFrame(step);
 }
 
 let mainButton;
-
+let mobile = true;
 // Initial call to set up the canvas
 addEventListener("load", (event) => {
+    if (!isMobileDevice()) {
+      document.getElementById('message').style.display = 'flex';
+      setTimeout(() => {
+    window.Telegram.WebApp.expand()
+}, 100);
+mobile = false;
+return;
+    }
+
     document.getElementById("scoreUI").style.marginTop = "70px"
 //viewportHeight
 // window.Telegram.WebApp.HapticFeedback
@@ -978,6 +1028,14 @@ setTimeout(() => {
     window.Telegram.WebApp.expand()
 }, 500);
 });
+
+
+
+function isMobileDevice() {
+    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+  };
+
+
     </script>
 
 </body>
